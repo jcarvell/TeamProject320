@@ -7,10 +7,6 @@ import java.util.Random;
 // still need to implement a model and controller class to have setters and getters. 
 
 public class Game {
-<<<<<<< Updated upstream
-=======
-	
-	
 	public static void main(String[] args) {
 		
 		//EMEMY
@@ -102,7 +98,5 @@ public class Game {
 		}
 			
 	}
-	
->>>>>>> Stashed changes
 
 }
