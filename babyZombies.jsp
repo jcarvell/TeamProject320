@@ -8,26 +8,21 @@
 			color: red;
 		}
 		
-		td.label {
-			text-align: left;
+		.label {
+			text-align: center;
 		}
 		</style>
 	</head>
 
 
 	<body>
-		<c:if test="${! empty errorMessage}">
-			<div class="error">${errorMessage}</div>
-		</c:if>
-	
+
+<h1 class="label">Welcome to the Baby Zombies Game
+</h1>
+
 		<form action="${pageContext.servletContext.contextPath}/game.java" method="post">
 			<table>
-				<tr>
-					<td class="label">Welcome_to_the_Baby_Zombies_Game</td>
-					<td><input type="text" name=start_game" size="20" value="${in}" /></td>
-				</tr>
 
-				
 
 			</table>
 			<input type="Submit" name="submit" value="Start Game">
