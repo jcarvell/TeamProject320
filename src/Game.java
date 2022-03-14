@@ -46,8 +46,8 @@ public class Game {
 				int input = in.nextInt();
 				
 				if(input == 1) {
-					int damageDone = rand.nextInt(maxWeaponDamage[] );
-					int damageTaken = rand.nextInt(maxEnemyDamage[] );
+					int damageDone = Math.random(nextInt(maxWeaponDamage[] ));
+					int damageTaken = Math.random(nextInt(maxEnemyDamage[] ));
 					
 					enemy_Health -= damageDone;
 					playerHealth -= damageTaken;
