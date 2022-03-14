@@ -19,6 +19,9 @@ public class User {
 	public void flight() {
 		
 	}
+	public Item[] getInventory() {
+		return inventory;
+	}
 	
 
 }
