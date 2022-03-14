@@ -35,7 +35,7 @@ public class Game {
 		GAME:
 		while(running) {
 			
-			while(enemy_Health [ ] > 0) {
+			while(enemy_Health[] > 0) {
 				System.out.println("Your Health is: " + playerHealth);
 				System.out.println(enemy[] + "their current health is " + enemy_Health[] );
 				System.out.println("What would you like to do?");
@@ -45,9 +45,9 @@ public class Game {
 				
 				int input = in.nextInt();
 				
-				if(input = 1) {
-					int damageDone = rand.nextInt(maxWeaponDamage[ ] );
-					int damageTaken = rand.nextInt(maxEnemyDamage[ ] );
+				if(input == 1) {
+					int damageDone = rand.nextInt(maxWeaponDamage[] );
+					int damageTaken = rand.nextInt(maxEnemyDamage[] );
 					
 					enemy_Health -= damageDone;
 					playerHealth -= damageTaken;
@@ -60,11 +60,11 @@ public class Game {
 						break; 
 					}
 				}
-				else if(input = 2) {
+				else if(input == 2) {
 					if(numHealthPotions > 0) {
 						playerHealth += potionHealAmount;
-						numHealthPotion -= 1;
-						System.out.println("Your new Health is " + playerHealth + "you now have " + numHealthPotion + " potions.");
+						numHealthPotions -= 1;
+						System.out.println("Your new Health is " + playerHealth + "you now have " + numHealthPotions + " potions.");
 						
 					}
 					else {
@@ -73,7 +73,7 @@ public class Game {
 					}
 					
 				}
-				else if(input = 3) {
+				else if(input == 3) {
 					if(playerSpeed > enemy_Speed[]) {
 						System.out.println("You run away from the enemy. ");
 						continue GAME:;
@@ -90,7 +90,7 @@ public class Game {
 				
 			}
 			System.out.println("You deafeated the enemy!");
-			System.out.println("You currently have " + playerHealth + "health and " + numHealthPotion + " potions.");
+			System.out.println("You currently have " + playerHealth + "health and " + numHealthPotions + " potions.");
 
 			
 		
