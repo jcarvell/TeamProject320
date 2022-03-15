@@ -17,8 +17,7 @@
 
 	<body>
 
-<h1 class="label">Welcome to the Baby Zombies Game
-</h1>
+<h1 class="label">Welcome to the Baby Zombies Game</h1>
 
 		<form action="${pageContext.servletContext.contextPath}/game.java" method="post">
 			<table>
