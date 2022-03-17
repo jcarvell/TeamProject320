@@ -1,8 +1,14 @@
 public class Weapon {
 	
-	private int strengthBuff;
+
+	private int weaponDamage;
 	
 	public Weapon(int x) {
-		strengthBuff=x;
+		weaponDamage =x;
 	}
+	
+	public int getWeaponDamage() {
+		return weaponDamage;
+	}
+	
 }

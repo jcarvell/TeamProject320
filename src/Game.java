@@ -11,7 +11,6 @@ public class Game {
 		//Created enemies are stored in this array of enemies(This can be changed later idk)
 		Enemy[] enemies;
 		
-		
 		//EMEMY
 		String[] enemy = {"No Enemy" ,"Zombie" , "Allegator" , "Baby" , "King Zombie"};
 		int [] enemy_Health = { 0, 50 , 300, 5, 100000 };
@@ -49,6 +48,12 @@ public class Game {
 		
 		GAME:
 		while(running) {
+			
+			//All player changes and options other than combat would be in here. 
+			while (playerHealth > 0 ){
+				
+			}
+			
 			//User still needs to be made, this value should call to user for health int
 			while(enemy_Health [ ] > 0) {
 				System.out.println("Your Health is: " + playerHealth);
@@ -106,12 +111,13 @@ public class Game {
 			}
 			System.out.println("You deafeated the enemy!");
 			System.out.println("You currently have " + playerHealth + "health and " + numHealthPotion + " potions.");
-
+		}
 			
 		
 			
 		}
-			
 	}
+			
+	
 
-}
+
