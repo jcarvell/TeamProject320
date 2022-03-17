@@ -28,7 +28,9 @@ public class Game {
 			Enemy x=new Enemy(enemy_Health[i], enemy_Strength[i], enemy_Speed[i], weaponx);
 			enemies[i]=x;
 		}
-		
+			Random number = new Random();
+			number.nextInt(100);
+			
 		//Weapon information
 		
 		//Rooms still need to be included
@@ -50,10 +52,17 @@ public class Game {
 		while(running) {
 			
 			//All player changes and options other than combat would be in here. 
-			while (playerHealth > 0 ){
+			while (playerHealth > 0 && enemyHealth[ ] < 0 ){
 				
+				Room choice1 = new Room();
+				Room choice2 = new Room();
+				System.out.println("You have two options 1. " + choice1.getName() + "or you can choose 2. " + choice2.getName() );
+				int choice = in.nextInt();
+				
+				
+
 			}
-			
+			Combat:
 			//User still needs to be made, this value should call to user for health int
 			while(enemy_Health [ ] > 0) {
 				System.out.println("Your Health is: " + playerHealth);
