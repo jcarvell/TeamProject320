@@ -48,6 +48,7 @@ public class Game {
 		
 		GAME:
 		while(running) {
+<<<<<<< HEAD
 			
 			//All player changes and options other than combat would be in here. 
 			while (playerHealth > 0 )
@@ -57,6 +58,8 @@ public class Game {
 				
 			}
 			
+=======
+>>>>>>> main
 			//User still needs to be made, this value should call to user for health int
 			while(enemy_Health [ ] > 0) {
 				System.out.println("Your Health is: " + playerHealth);
