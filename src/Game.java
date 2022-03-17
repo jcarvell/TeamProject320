@@ -11,6 +11,7 @@ public class Game {
 		//Created enemies are stored in this array of enemies(This can be changed later idk)
 		Enemy[] enemies;
 		
+		
 		//EMEMY
 		String[] enemy = {"No Enemy" ,"Zombie" , "Allegator" , "Baby" , "King Zombie"};
 		int [] enemy_Health = { 0, 50 , 300, 5, 100000 };
