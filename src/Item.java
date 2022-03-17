@@ -1,9 +1,9 @@
 
 public class Item {
-	String name;
-	String itemType;
-	Weapon w;
-	Potion p;
+	private String name;
+	private  String itemType;
+	private Weapon w;
+	private Potion p;
 	
 	public Item(String nam, String type, int num1,int num2 ){ 
 		//Num2 is only for potions that you want a speed buff on, 

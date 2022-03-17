@@ -1,10 +1,10 @@
 
 public class Enemy {
-	String name;
-	int health;
-	int strength;
+	private String name;
+	private int health;
+	private int strength;
 	int speed;
-	Item item=null;
+	private Item item=null;
 	public Enemy(int hel, int str,int spe,Item i) {
 		health=hel;
 		strength=str;
