@@ -1,5 +1,6 @@
 
 public class RoomReasources {
+	
 	private Item item;
 	
 	private Enemy[] enemyArray;
