@@ -1,23 +1,26 @@
-
 public class User {
-	private int health, strength, speed;
+	private int health, strength, speed, armoryLength, stashLength;
 	
-	private Item[] inventory; 
+	private Weapon[] armory;
+	private Potion[] stash;
 	
 	public User(int a,int b,int c) {
-		a=health;
-		b=strength;
-		c=speed;
+		health = a;
+		strength = b;
+		speed = c;
 	}
 	
 	public void chooseNextRoom() {
 		
-		
 	}
 	
-	public void itemPickup() {
-		
-		
+	public void weaponPickup(Weapon grabbedWeapon) {
+		armoryLength++;
+		armory[armoryLength] = grabbedWeapon;
+	}
+	public void potionPickup(Potion grabbedPotion) {
+		stashLength++;
+		stash[stashLength] = grabbedPotion;
 	}
 	public void fight() {
 		
@@ -26,8 +29,11 @@ public class User {
 	public void flight() {
 		
 	}
-	public Item[] getInventory() {
-		return inventory;
+	public Weapon[] getArmory() {
+		return armory;
+	}
+	public Potion[] getStash() {
+		return stash;
 	}
 	public int getHealth() {
 		return health;
@@ -37,6 +43,12 @@ public class User {
 	}
 	public int getSpeed() {
 		return speed;
+	}
+	public int getArmoryLength() {
+		return armoryLength;
+	}
+	public int getStashLength() {
+		return stashLength;
 	}
 	
 

@@ -18,13 +18,18 @@ public class Weapon {
 		
 	    int upperbound = 4;
 	        //generate random values from 0-5
-	    int random1 = rand.nextInt(upperbound); 
+	    int random1 = rand.nextInt(upperbound - 1) + 1; 
 	    int random2 = rand.nextInt(upperbound);
 	    
 	    name=weaponNames[random1];
-	    strengthBuff=maxWeaponDamage[random2];
-	    
-	    
+	    strengthBuff=maxWeaponDamage[random2];	    
+	}
+	
+	public int getStrengthBuff() {
+		return strengthBuff;
+	}
+	public String getName() {
+		return name;
 	}
 	
 }

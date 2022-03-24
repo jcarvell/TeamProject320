@@ -45,6 +45,9 @@ public class Game {
 		GAME:
 		while(running) {
 			
+<<<<<<< HEAD
+			while(enemy_Health[] > 0) {
+=======
 			//All player changes and options other than combat would be in here. 
 			while (playerHealth > 0 && enemyHealth[ ] < 0 ){
 				
@@ -59,6 +62,7 @@ public class Game {
 			Combat:
 			//User still needs to be made, this value should call to user for health int
 			while(enemy_Health [ ] > 0) {
+>>>>>>> main
 				System.out.println("Your Health is: " + playerHealth);
 				System.out.println(enemy[] + "their current health is " + enemy_Health[] );
 				System.out.println("What would you like to do?");
@@ -113,8 +117,13 @@ public class Game {
 				
 			}
 			System.out.println("You deafeated the enemy!");
+<<<<<<< HEAD
+			System.out.println("You currently have " + playerHealth + "health and " + numHealthPotions + " potions.");
+
+=======
 			System.out.println("You currently have " + playerHealth + "health and " + numHealthPotion + " potions.");
 		}
+>>>>>>> main
 			
 		
 			
