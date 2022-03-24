@@ -21,8 +21,8 @@
 
 		<form action="${pageContext.servletContext.contextPath}/game.java" method="post">
 			<table>
-
-
+	
+	
 			</table>
 			<input type="Submit" name="submit" value="Start Game">
 		</form>
