@@ -8,16 +8,26 @@ import java.util.Random;
 
 public class Game {
 	public static void main(String[] args) {
+		//Created enemies are stored in this array of enemies(This can be changed later idk)
+		Enemy[] enemies;
 		
-		//EMEMY
-		String[] enemy = {"No Enemy" ,"Zombie" , "Allegator" , "Baby" , "King Zombie"};
-		int [] enemy_Health = { 0, 50 , 300, 5, 100000 };
-		int [] maxEnemyDamage = { 0, 10 , 50 , 1, 100 };
-		int [] enemy_Speed = { 0, 5 , 10 , 1, 100 };
 		
+		//EMENY
+		
+		for(int i=0;i<4;i++) {
+			//Creating Item with itemType weapon
+			Weapon weaponx=new Weapon();
+			
+			//Creating enemy-(health,strength,speed,item)
+			Enemy x=new Enemy(weaponx);
+			enemies[i]=x;
+		}
+			Random number = new Random();
+			number.nextInt(100);
+			
 		//Weapon information
-		String[] weapons = { "unarmed" , "Knife", "Machette" , "Handgun" , "Sword" };
-		int [] maxWeaponDamage = { 10, 20 , 50 , 500 , 200};
+		
+		//Rooms still need to be included
 		
 		// Player info
 		int playerHealth = 100;
@@ -35,7 +45,20 @@ public class Game {
 		GAME:
 		while(running) {
 			
-			while(enemy_Health[] > 0) {
+			//All player changes and options other than combat would be in here. 
+			while (playerHealth > 0 && enemyHealth[ ] < 0 ){
+				
+				Room choice1 = new Room();
+				Room choice2 = new Room();
+				System.out.println("You have two options 1. " + choice1.getName() + "or you can choose 2. " + choice2.getName() );
+				int choice = in.nextInt();
+				
+				
+
+			}
+			Combat:
+			//User still needs to be made, this value should call to user for health int
+			while(enemy_Health [ ] > 0) {
 				System.out.println("Your Health is: " + playerHealth);
 				System.out.println(enemy[] + "their current health is " + enemy_Health[] );
 				System.out.println("What would you like to do?");
@@ -90,13 +113,14 @@ public class Game {
 				
 			}
 			System.out.println("You deafeated the enemy!");
-			System.out.println("You currently have " + playerHealth + "health and " + numHealthPotions + " potions.");
-
+			System.out.println("You currently have " + playerHealth + "health and " + numHealthPotion + " potions.");
+		}
 			
 		
 			
 		}
-			
 	}
+			
+	
 
-}
+

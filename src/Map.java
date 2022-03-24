@@ -1,7 +1,7 @@
 public class Map {
 	
 	
-	Room[] roomChoices;
+	private Room[] roomChoices;
 	
 	public Map() {
 		roomChoices[0]=null;
