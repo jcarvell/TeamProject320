@@ -13,7 +13,7 @@ public class Game {
 		
 		
 		//EMENY
-		
+		//Weapon information
 		for(int i=0;i<4;i++) {
 			//Creating Item with itemType weapon
 			Weapon weaponx=new Weapon();
@@ -23,16 +23,13 @@ public class Game {
 		}
 			Random number = new Random();
 			number.nextInt(100);
-			
-		//Weapon information
 		
-		//Rooms still need to be included
 		
-		// Player info
-		int playerHealth = 100;
+		// Player info User(health,strength, speed)
+		
 		int numHealthPotions = 3;
-		int playerSpeed = 10;
-		int potionHealAmount = 30;
+		
+		User user=new User(100,30,10);
 		
 		Scanner in = new Scanner (System.in);
 		boolean running = true;

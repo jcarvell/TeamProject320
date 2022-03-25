@@ -13,11 +13,9 @@ public class RoomResources {
 	
 	private NPCs[] NPCArray;
 	
-	
 	public RoomResources() {
 		
 	}
-	
 	public Potion getPotion() {
 		return potion;
 	}
