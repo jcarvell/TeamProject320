@@ -51,19 +51,19 @@ public class Enemy {
 		return strength;
 	}
 	
-	public String getEnemyName() {
+	public String name() {
 		return name;	
 	}
 	
-	public int getEnemyHealth(){
+	public int health(){
 		return health;
 	}
 	
-	public int getEnemyStrength(){
+	public int strength(){
 		return strength;
 	}
 	
-	public int getEnemySpeed(){
+	public int speed(){
 		return speed; 
 	}
 	

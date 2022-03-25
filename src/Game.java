@@ -1,5 +1,5 @@
  
-
+import java.util.*;
 import java.util.Scanner;
 import java.util.Random;
 
@@ -9,7 +9,7 @@ import java.util.Random;
 public class Game {
 	public static void main(String[] args) {
 		//Created enemies are stored in this array of enemies(This can be changed later idk)
-		Enemy[] enemies;
+		Enemy enemy = new Enemy();
 		
 		
 		//EMENY
@@ -19,8 +19,7 @@ public class Game {
 			Weapon weaponx=new Weapon();
 			
 			//Creating enemy-(health,strength,speed,item)
-			Enemy x=new Enemy(weaponx);
-			enemies[i]=x;
+			Enemy enemy = new Enemy();
 		}
 			Random number = new Random();
 			number.nextInt(100);
@@ -46,10 +45,10 @@ public class Game {
 		while(running) {
 			
 <<<<<<< HEAD
-			while(enemy_Health[] > 0) {
+			while(enemy.health > 0) {
 =======
 			//All player changes and options other than combat would be in here. 
-			while (playerHealth > 0 && enemyHealth[ ] < 0 ){
+			while (playerHealth > 0 && enemy.health > 0 ){
 				
 				Room choice1 = new Room();
 				Room choice2 = new Room();
@@ -61,7 +60,7 @@ public class Game {
 			}
 			Combat:
 			//User still needs to be made, this value should call to user for health int
-			while(enemy_Health [ ] > 0) {
+			while(enemy.health > 0) {
 >>>>>>> main
 				System.out.println("Your Health is: " + playerHealth);
 				System.out.println(enemy[] + "their current health is " + enemy_Health[] );
