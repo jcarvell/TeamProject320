@@ -22,7 +22,7 @@ public class Enemy {
 	}
 	
 	public Enemy() {
-		name = names[RANDOM.nextInt(names.length)]; //gets random enemy from array
+		name = names[RANDOM.nextInt(names.length)]; //gets random enemy from array; might have to subtract 1 idk yet
 		health = enemy_Health[RANDOM.nextInt(enemy_Health.length)];
 		strength = enemy_Strength[RANDOM.nextInt(enemy_Strength.length)];
 		speed = enemy_Speed[RANDOM.nextInt(enemy_Speed.length)];
@@ -51,19 +51,19 @@ public class Enemy {
 		return strength;
 	}
 	
-	public String getEnemyName() {
+	public String name() {
 		return name;	
 	}
 	
-	public int getEnemyHealth(){
+	public int health(){
 		return health;
 	}
 	
-	public int getEnemyStrength(){
+	public int strength(){
 		return strength;
 	}
 	
-	public int getEnemySpeed(){
+	public int speed(){
 		return speed; 
 	}
 	
