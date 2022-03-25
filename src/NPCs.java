@@ -9,7 +9,7 @@ public class NPCs {
 	
 	// constructor
 	public NPCs(String talking) {
-		dialogue = talking;			// set dialogue to the words in the 
+		dialogue = talking;			// set dialogue to specified words
 	}
 	
 	public String getDialogue() {
