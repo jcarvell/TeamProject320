@@ -27,8 +27,10 @@ public class Potion {
 		
 	}
 	public int getSpeedIncreaseAmount(){
-		return speedIncreaseAmount;
-		
+		return speedIncreaseAmount;	
+	}
+	public String getName() {
+		return name;
 	}
 }
 	
