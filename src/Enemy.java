@@ -58,6 +58,9 @@ public class Enemy {
 	public int health(){
 		return health;
 	}
+	public void setHealth(int x) {
+		health=x;
+	}
 	
 	public int strength(){
 		return strength;
