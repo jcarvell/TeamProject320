@@ -22,26 +22,22 @@ public class User {
 		stashLength++;
 		stash[stashLength] = grabbedPotion;
 	}
-	public void fight() {
-		
-	}
-	
-	public void flight() {
-		
-	}
 	public Weapon[] getArmory() {
 		return armory;
 	}
 	public Potion[] getStash() {
 		return stash;
 	}
-	public int getHealth() {
+	public int health() {
 		return health;
 	}
-	public int getStrength() {
+	public void setHealth(int x) {
+		health=x;
+	}
+	public int strength() {
 		return strength;
 	}
-	public int getSpeed() {
+	public int speed() {
 		return speed;
 	}
 	public int getArmoryLength() {
