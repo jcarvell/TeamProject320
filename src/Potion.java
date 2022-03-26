@@ -9,9 +9,9 @@ public class Potion {
 	
 	String[] potionNames = {"Witch's Brew", "Slug Trouble", "Spooky Scary Potion", "Green Vial", "Blue Vial", "Red potion", "Orange Juice"};
 	
-	public Potion(int x, int y, String z) {
-		healthIncreaseAmount=x;
-		speedIncreaseAmount=y;
+	public Potion(int healthIncrease, int speedIncrease, String z) {
+		healthIncreaseAmount = healthIncrease;
+		speedIncreaseAmount = speedIncrease;
 		name=z;
 	}
 	
