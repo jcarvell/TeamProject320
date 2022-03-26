@@ -8,8 +8,13 @@ import java.util.Random;
 
 public class Game {
 	public static void main(String[] args) {
+		Random rand = new Random(); //instance of random class
+		
 		//Created enemies are stored in this array of enemies(This can be changed later idk)
 		Enemy enemy = new Enemy();
+		
+		int maxWeaponDamage = 50; 	// arbitrarily chosen
+		int maxEnemyDamage = 50;	// arbitrarily chosen
 		
 		
 		//EMENY
@@ -19,7 +24,7 @@ public class Game {
 			Weapon weaponx=new Weapon();
 			
 			//Creating enemy-(health,strength,speed,item)
-			Enemy enemy = new Enemy();
+			Enemy enemy1 = new Enemy();  					// this used to be Enemy enemy so enemy was declared twice; I changed this so there wouldn't be an error, I didn't look for if this Enemy needed to stay enemy
 		}
 			Random number = new Random();
 			number.nextInt(100);
@@ -28,6 +33,7 @@ public class Game {
 		// Player info User(health,strength, speed)
 		
 		int numHealthPotions = 3;
+		int potionHealAmount = 1;  		// placeholder, we need to call the individual potions that the user has in their inventory, but I needed Game not to have errors
 		
 		User user=new User(100,30,10);
 		
@@ -68,8 +74,8 @@ public class Game {
 					int input = in.nextInt();
 					
 					if(input == 1) {
-						int damageDone = Math.random(nextInt(maxWeaponDamage[] ));
-						int damageTaken = Math.random(nextInt(maxEnemyDamage[] ));
+						int damageDone = rand.nextInt(maxWeaponDamage);				// changed maxWeaponDamage[] to maxWeaponDamage and declared it above
+						int damageTaken = rand.nextInt(maxEnemyDamage);				// changed maxEnemyDamage[] to maxEnemyDamage and declared it above
 						
 						enemy.setHealth(enemy.health()-damageDone);
 						user.setHealth(user.health()-damageTaken);
@@ -84,7 +90,7 @@ public class Game {
 					}
 					else if(input == 2) {
 						if(numHealthPotions > 0) {
-							user.setHealth(user.health()+potionHealAmount);
+							user.setHealth(user.health()+potionHealAmount);			// potionHealAmount was never declared so I declared it in 
 							numHealthPotions -= 1;
 							System.out.println("Your new Health is " + user.health() + "you now have " + numHealthPotions + " potions.");
 							
