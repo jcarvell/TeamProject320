@@ -19,10 +19,12 @@ class WeaponTest {
 	@Test
 	void testWeapon() {
 		Weapon w1 = new Weapon();
+		
 		String n1 = w1.getName();
 		if((n1 != "Knife") && (n1 != "Machette") && (n1 != "Handgun") && (n1 != "Sword")) {
 			fail("Weapon name not one of weaponNames (or is 'unarmed')");
 		}
+		
 		int s1 = w1.getStrengthBuff();
 		if((s1 != 10) && (s1!= 20) && (s1 != 50) && (s1 != 500) && (s1 != 200)) {
 			fail("Weapon StrengthBuff not one of the maxWeaponDamages");
