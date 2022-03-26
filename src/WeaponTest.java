@@ -23,11 +23,19 @@ class WeaponTest {
 		if((n1 != "Knife") && (n1 != "Machette") && (n1 != "Handgun") && (n1 != "Sword")) {
 			fail("Weapon name not one of weaponNames (or is 'unarmed')");
 		}
+		int s1 = w1.getStrengthBuff();
+		if((s1 != 10) && (s1!= 20) && (s1 != 50) && (s1 != 500) && (s1 != 200)) {
+			fail("Weapon StrengthBuff not one of the maxWeaponDamages");
+		}
 	}
 
 	@Test
 	void testGetStrengthBuff() {
-		fail("Not yet implemented");
+		Weapon weapon1 = new Weapon(100, "fancy sword");
+		assertEquals(weapon1.getStrengthBuff(), 100);
+		
+		Weapon weapon2 = new Weapon(55, "big axe");
+		assertEquals(weapon2.getStrengthBuff(), 55);
 	}
 
 	@Test
@@ -45,17 +53,6 @@ class WeaponTest {
 		String n4 = weapon4.getName();
 		if((n4 != "Knife") && (n4 != "Machette") && (n4 != "Handgun") && (n4 != "Sword")) {
 			fail("Weapon name not one of weaponNames (or is 'unarmed')");
-		}
-		
-		String name;
-		for(int i = 0; i < 20; i++) {
-			System.out.print(i);
-			weapons[i] = new Weapon();
-			System.out.print(i);
-			name = weapons[i].getName();
-			if((name != "Knife") && (name != "Machette") && (name != "Handgun") && (name != "Sword")) {
-				fail("Weapon name not one of weaponNames (or is 'unarmed')");
-			}
 		}
 	}
 
