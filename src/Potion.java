@@ -32,6 +32,12 @@ public class Potion {
 	public String getName() {
 		return name;
 	}
+	public int getMaxPotionHealthIncrease() {
+		return maxPotionHealth;
+	}
+	public int getMaxPotionSpeedIncrease() {
+		return maxPotionSpeed;
+	}
 }
 	
 	//this is a comment

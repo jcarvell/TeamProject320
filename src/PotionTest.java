@@ -29,22 +29,68 @@ class PotionTest {
 
 	@Test
 	void testPotion() {
-		fail("Not yet implemented");
+		Potion p1 = new Potion();
+		Potion p2 = new Potion();
+		Potion p3 = new Potion();
 	}
 
 	@Test
 	void testGetHealthIncreaseAmount() {
-		fail("Not yet implemented");
+		Potion potion1 = new Potion(5, 10, "Red Serum");
+		assertEquals(potion1.getHealthIncreaseAmount(), 5);
+		
+		Potion potion2 = new Potion(13, 2, "Elixir");
+		assertEquals(potion2.getHealthIncreaseAmount(), 13);
+		
+		Potion potion3 = new Potion(20, 0, "Remedy");
+		assertEquals(potion3.getHealthIncreaseAmount(), 20);
+		
+		Potion potion4 = new Potion(0, 3, "Zoom");
+		assertEquals(potion4.getHealthIncreaseAmount(), 0);
+		
+		Potion potion5 = new Potion();
+		// this is under the assumption that the potion cannot decrease health
+		int h5 = potion5.getHealthIncreaseAmount();
+		if((h5 < 0) || (h5 > potion5.getMaxPotionHealthIncrease())) {
+			fail("Health increase is out of bounds");
+		}
+		
+		Potion potion6 = new Potion();
+		// this is under the assumption that the potion cannot decrease health
+		int h6 = potion6.getHealthIncreaseAmount();
+		if((h6 < 0) || (h6 > potion6.getMaxPotionHealthIncrease())) {
+			fail("Health increase is out of bounds");
+		}
 	}
 
 	@Test
 	void testGetSpeedIncreaseAmount() {
-		fail("Not yet implemented");
+		Potion potion1 = new Potion(5, 10, "Red Serum");
+		assertEquals(potion1.getSpeedIncreaseAmount(), 10);
+		
+		Potion potion2 = new Potion(13, 2, "Elixir");
+		assertEquals(potion2.getSpeedIncreaseAmount(), 2);
+		
+		Potion potion3 = new Potion(20, 0, "Remedy");
+		assertEquals(potion3.getSpeedIncreaseAmount(), 0);
+		
+		Potion potion4 = new Potion(0, 3, "Zoom");
+		assertEquals(potion4.getSpeedIncreaseAmount(), 3);
 	}
 
 	@Test
 	void testGetName() {
-		fail("Not yet implemented");
+		Potion potion1 = new Potion(5, 10, "Red Serum");
+		assertEquals(potion1.getName(), "Red Serum");
+		
+		Potion potion2 = new Potion(13, 2, "Elixir");
+		assertEquals(potion2.getName(), "Elixir");
+		
+		Potion potion3 = new Potion(20, 0, "Remedy");
+		assertEquals(potion3.getName(), "Remedy");
+		
+		Potion potion4 = new Potion(0, 3, "Zoom");
+		assertEquals(potion4.getName(), "Zoom");
 	}
 
 }
