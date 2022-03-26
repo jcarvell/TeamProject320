@@ -76,6 +76,20 @@ class PotionTest {
 		
 		Potion potion4 = new Potion(0, 3, "Zoom");
 		assertEquals(potion4.getSpeedIncreaseAmount(), 3);
+		
+		Potion potion5 = new Potion();
+		// this is under the assumption that the potion cannot decrease speed
+		int s5 = potion5.getSpeedIncreaseAmount();
+		if((s5 < 0) || (s5 > potion5.getMaxPotionSpeedIncrease())) {
+			fail("Speed increase is out of bounds");
+		}
+		
+		Potion potion6 = new Potion();
+		// this is under the assumption that the potion cannot decrease speed
+		int s6 = potion6.getSpeedIncreaseAmount();
+		if((s6 < 0) || (s6 > potion6.getMaxPotionSpeedIncrease())) {
+			fail("Speed increase is out of bounds");
+		}
 	}
 
 	@Test
@@ -91,6 +105,12 @@ class PotionTest {
 		
 		Potion potion4 = new Potion(0, 3, "Zoom");
 		assertEquals(potion4.getName(), "Zoom");
+		
+		Potion potion5 = new Potion();
+		String n5 = potion5.getName();
+		if((n5 != "Witch's Brew") && (n5 != "Slug Trouble") && (n5 != "Spooky Scary Potion") && (n5 != "Green Vial") && (n5 != "Blue Vial") && (n5 != "Red potion") && (n5 != "Orange Juice")) {
+			fail("Potion name not one of the potionNames");
+		}
 	}
 
 }
