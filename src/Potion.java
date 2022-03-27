@@ -9,9 +9,9 @@ public class Potion {
 	
 	String[] potionNames = {"Witch's Brew", "Slug Trouble", "Spooky Scary Potion", "Green Vial", "Blue Vial", "Red potion", "Orange Juice"};
 	
-	public Potion(int x, int y, String z) {
-		healthIncreaseAmount=x;
-		speedIncreaseAmount=y;
+	public Potion(int healthIncrease, int speedIncrease, String z) {
+		healthIncreaseAmount = healthIncrease;
+		speedIncreaseAmount = speedIncrease;
 		name=z;
 	}
 	
@@ -19,7 +19,8 @@ public class Potion {
 		Random rand = new Random(); // instance of random class
 		healthIncreaseAmount = rand.nextInt(maxPotionHealth)+1;	// set the health increase for the potion to a random number between one and maxPotionHealth
 		speedIncreaseAmount = rand.nextInt(maxPotionSpeed)+1;		// set the speed increase for the potion to a random number between one and maxPotionSpeed
-		name = potionNames[rand.nextInt(8)];				// set the name of the potion to a name in the potionNames array, randomly choosing index 0 through 7
+		name = potionNames[rand.nextInt(7)];		// set the name of the potion to a name in the potionNames array, randomly choosing index 0 through 7
+		System.out.print(name);
 	}
 	
 	public int getHealthIncreaseAmount(){
@@ -31,6 +32,12 @@ public class Potion {
 	}
 	public String getName() {
 		return name;
+	}
+	public int getMaxPotionHealthIncrease() {
+		return maxPotionHealth;
+	}
+	public int getMaxPotionSpeedIncrease() {
+		return maxPotionSpeed;
 	}
 }
 	
