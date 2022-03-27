@@ -24,6 +24,8 @@ public class RoomResources {
 		// create an array of instances of Enemy
 		if(numEnemies != 0) {
 			enemy = new Enemy();
+		} else {
+			enemy = new Enemy(0, 0, 0);
 		}
 		
 		// create an array of instances of NPCs
@@ -33,9 +35,14 @@ public class RoomResources {
 		
 		if(numPotions != 0) {
 			potion = new Potion();		// create a new potion
+		} else {
+			potion = new Potion(0,0, "No potion");
 		}
+		
 		if(numWeapons != 0) {
 			weapon = new Weapon();		// create a new weapon
+		} else {
+			weapon = new Weapon(0, "No weapon");
 		}
 	}
 	
