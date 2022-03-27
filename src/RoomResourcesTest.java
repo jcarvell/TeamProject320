@@ -22,7 +22,17 @@ class RoomResourcesTest {
 
 	@Test
 	void testGetPotion() {
-		fail("Not yet implemented");
+		Potion p1 = new Potion(5, 10, "Soup");
+		Weapon w1 = new Weapon();
+		Enemy[] e1 = new Enemy[20];
+		NPCs n1[] = new NPCs[20];
+		RoomResources r1 = new RoomResources(p1, w1, e1, n1);
+		
+		Potion retrievedPotion = r1.getPotion();
+		assertEquals(retrievedPotion, p1);
+		assertEquals(retrievedPotion.getHealthIncreaseAmount(), 5);
+		assertEquals(retrievedPotion.getSpeedIncreaseAmount(), 10);
+		assertEquals(retrievedPotion.getName(), "Soup");
 	}
 
 	@Test
