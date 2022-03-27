@@ -42,7 +42,7 @@ public class RoomResources {
 	public RoomResources(Potion p, Weapon w, Enemy e, NPCs[] n) {
 		potion = p;
 		weapon = w;
-		enemyArray = e;
+		enemy = e;
 		NPCArray = n;
 	}
 	public Potion getPotion() {
