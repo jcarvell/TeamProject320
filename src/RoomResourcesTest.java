@@ -15,9 +15,8 @@ class RoomResourcesTest {
 	void testRoomResourcesPotionWeaponEnemyArrayNPCsArray() {
 		Potion p1 = new Potion();
 		Weapon w1 = new Weapon();
-		Enemy[] e1;
-		e1[0] = new Enemy();
-		NPCs n1[];
+		Enemy[] e1 = new Enemy[20];
+		NPCs n1[] = new NPCs[20];
 		RoomResources r1 = new RoomResources(p1, w1, e1, n1);
 	}
 
