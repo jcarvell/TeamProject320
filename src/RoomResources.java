@@ -1,7 +1,7 @@
 import java.util.Random;
 
 public class RoomResources {
-	private static int maxEnemies = 5, maxNPCs = 5, maxPotions = 1, maxWeapons = 1, maxPotionHealth = 10, maxPotionSpeed = 10;	//feel free to change these values
+	private static int maxEnemies = 1, maxNPCs = 5, maxPotions = 1, maxWeapons = 1, maxPotionHealth = 10, maxPotionSpeed = 10;	//feel free to change these values
 	
 	private int numEnemies, numNPCs, numPotions, numWeapons;
 	
@@ -9,7 +9,7 @@ public class RoomResources {
 	
 	private Weapon weapon;
 	
-	private Enemy[] enemyArray = new Enemy[20];
+	private Enemy enemy;
 	
 	private NPCs[] NPCArray = new NPCs[20];
 	
@@ -22,8 +22,8 @@ public class RoomResources {
 		numWeapons = rand.nextInt(maxWeapons+1);		// set the number of weapons to a random number between zero and maxWeapons
 		
 		// create an array of instances of Enemy
-		for(int i = 0; i < numEnemies; i++) {
-			enemyArray[i] = new Enemy();
+		if(numEnemies != 0) {
+			enemy = new Enemy();
 		}
 		
 		// create an array of instances of NPCs
@@ -39,7 +39,7 @@ public class RoomResources {
 		}
 	}
 	
-	public RoomResources(Potion p, Weapon w, Enemy[] e, NPCs[] n) {
+	public RoomResources(Potion p, Weapon w, Enemy e, NPCs[] n) {
 		potion = p;
 		weapon = w;
 		enemyArray = e;
@@ -52,8 +52,8 @@ public class RoomResources {
 		return weapon;
 	}
 	
-	public Enemy[] getEnemies() {
-		return enemyArray;
+	public Enemy getEnemy() {
+		return enemy;
 	}
 	public NPCs[] getNPCArray() {
 		return NPCArray;
