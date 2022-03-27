@@ -9,9 +9,9 @@ public class RoomResources {
 	
 	private Weapon weapon;
 	
-	private Enemy[] enemyArray;
+	private Enemy[] enemyArray = new Enemy[20];
 	
-	private NPCs[] NPCArray;
+	private NPCs[] NPCArray = new NPCs[20];
 	
 	public RoomResources() {
 		Random rand = new Random(); // instance of random class
