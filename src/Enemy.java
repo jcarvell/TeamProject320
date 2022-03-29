@@ -50,13 +50,10 @@ public class Enemy {
 	public int dealDamage(){
 		return strength;
 	}
-<<<<<<< HEAD
 
-	public String getEnemyName() {
-=======
 	
 	public String name() {
->>>>>>> main
+
 		return name;	
 	}
 	
