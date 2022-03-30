@@ -1,6 +1,7 @@
  
 import java.util.Scanner;
 import java.util.Random;
+import java.util.Timer;
 
 // This is the action of combat in the game. 
 // still need to implement a model and controller class to have setters and getters. 
@@ -12,8 +13,6 @@ public class Game {
 		
 		//Created enemies are stored in this array of enemies(This can be changed later idk)
 		//Enemy enemy = new Enemy();
-		Enemy enemy = null;
-
 		
 		int maxWeaponDamage = 50; 	// arbitrarily chosen
 
