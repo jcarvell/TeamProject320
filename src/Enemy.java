@@ -63,6 +63,11 @@ public class Enemy {
 	public int dealDamage(){
 		return strength;
 	}
+<<<<<<< HEAD
+=======
+
+	
+>>>>>>> main
 	public String name() {
 
 		return name;	
