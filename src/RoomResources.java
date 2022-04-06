@@ -1,7 +1,7 @@
 import java.util.Random;
 
 public class RoomResources {
-	private static int maxEnemies = 1, maxNPCs = 5, maxPotions = 1, maxWeapons = 1, maxPotionHealth = 10, maxPotionSpeed = 10;	//feel free to change these values
+	private static int maxEnemies = 1, maxNPCs = 5, maxPotions = 5, maxWeapons = 1, maxPotionHealth = 10, maxPotionSpeed = 10;	//feel free to change these values
 	
 	private int numEnemies, numNPCs, numPotions, numWeapons;
 	

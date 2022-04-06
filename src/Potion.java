@@ -6,6 +6,9 @@ public class Potion {
 	private int healthIncreaseAmount;
 	private int speedIncreaseAmount; 
 	private String name;
+	private int numofPotions;
+	
+
 	
 	String[] potionNames = {"Witch's Brew", "Slug Trouble", "Spooky Scary Potion", "Green Vial", "Blue Vial", "Red potion", "Orange Juice"};
 	
@@ -38,6 +41,7 @@ public class Potion {
 	public int getMaxPotionSpeedIncrease() {
 		return maxPotionSpeed;
 	}
+
 }
 	
 	//this is a comment
