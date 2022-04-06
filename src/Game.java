@@ -20,11 +20,19 @@ public class Game {
 		User user=new User(100,30,10);
 		
 		Scanner in = new Scanner (System.in);
-		boolean running = true;
+		boolean running = false;
 		
 		//Start of Game
 		
 		System.out.println("Welcome to the Baby Zombies Game");
+		System.out.println("Would you like to begin the game? ");
+		String input1 = in.nextLine();
+		if(input1.toLowerCase().contentEquals("yes") ) {
+			running = true;
+		}else {
+			running = false;
+			System.out.println("Maybe next time. ");
+		}
 		
 GAME:
 		while(running) {
@@ -36,7 +44,7 @@ GAME:
 					choice1 = new Room();
 					Room choice2 = new Room();
 
-					System.out.println("You have two options 1. " + choice1.getName() + "or you can choose 2. " + choice2.getName() );
+					System.out.println("You have two options 1. " + choice1.getName() + " or you can choose 2. " + choice2.getName() );
 					int choice = in.nextInt();
 					
 					if( choice == 1) {
@@ -71,11 +79,11 @@ GAME:
 				while(choice1.getRoomResources().getEnemy().gethealth() > 0) {
 	
 					System.out.println("Your Health is: " + user.health());
-					System.out.println(choice1.getRoomResources().getEnemy().name() + "their current health is " + choice1.getRoomResources().getEnemy().gethealth() );
+					System.out.println(choice1.getRoomResources().getEnemy().name() + " their current health is " + choice1.getRoomResources().getEnemy().gethealth() );
 					System.out.println("What would you like to do?");
 					System.out.println("1. Attack ");
-					System.out.println("2. Run ");
-					System.out.println("3. Use Potion ");
+					System.out.println("2. Use Potion ");
+					System.out.println("3. Run Away ");
 					
 					int input = in.nextInt();
 					
@@ -86,7 +94,7 @@ GAME:
 						choice1.getRoomResources().getEnemy().setHealth(choice1.getRoomResources().getEnemy().gethealth()-damageDone);
 						user.setHealth(user.health()-damageTaken);
 						
-						System.out.println("You attack " + choice1.getRoomResources().getEnemy().name() + " for " + damageDone + "damage.");
+						System.out.println("You attack " + choice1.getRoomResources().getEnemy().name() + " for " + damageDone + " damage.");
 						System.out.println("You have taken " + damageTaken + " from the enemy. ");
 						
 						if(user.health() < 1) {
@@ -114,7 +122,7 @@ GAME:
 							continue GAME;
 						}
 						else {
-							System.out.println("The " + choice1.getRoomResources().getEnemy().name() + "cuts you off. You must fight or DIE.");
+							System.out.println("The " + choice1.getRoomResources().getEnemy().name() + " cuts you off. You must fight or DIE.");
 						}
 						
 					}
@@ -126,7 +134,7 @@ GAME:
 				}
 			System.out.println("You deafeated the enemy!");
 
-			System.out.println("You currently have " + user.health() + "health and " + choice1.getRoomResources().getPotion() + " potions.");
+			System.out.println("You currently have " + user.health() + " health and " + choice1.getRoomResources().getPotion() + " potions.");
 		}
 	}
 	}

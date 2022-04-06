@@ -17,7 +17,7 @@ public class Room {
 	// Added this constructor so that the Room() constructor in Game wouldn't have an error
 	public Room() {
 		Random rand = new Random(); //instance of random class
-		name = nameArray[rand.nextInt(8)];		// chose one of the names in the nameArray
+		name = nameArray[rand.nextInt(6)];		// chose one of the names in the nameArray
 		location = new Location();
 		resources = new RoomResources();
 	}
