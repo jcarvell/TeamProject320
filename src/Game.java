@@ -56,7 +56,8 @@ GAME:
 						}
 						else {
 							// we can add randomness to getting materials or weapons here 
-							
+							System.out.println("There is no enemy in this room");
+
 						}
 					}
 					else if (choice == 2){
@@ -69,6 +70,7 @@ GAME:
 					}
 						else {
 							// we can add randomness here to have things happen that are not part of combat ie. NPS, items found, ect.
+							System.out.println("There is no enemy in this room");
 						}
 				}	else {
 					System.out.println("Invalid input ");
