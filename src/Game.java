@@ -47,10 +47,10 @@ public class Game {
 		GAME:
 		while(running) {
 			
-			while(enemy.health() > 0) {
+			while(enemy.getHealth() > 0) {
 
 			//All player changes and options other than combat would be in here. 
-				while (user.health() > 0 && enemy.health() > 0 ){
+				while (user.health() > 0 && enemy.getHealth() > 0 ){
 					
 					Room choice1 = new Room();
 					Room choice2 = new Room();
@@ -62,10 +62,10 @@ public class Game {
 				}
 				Combat:
 			//User still needs to be made, this value should call to user for health int
-				while(enemy.health() > 0) {
+				while(enemy.getHealth() > 0) {
 	
 					System.out.println("Your Health is: " + user.health());
-					System.out.println(enemy.name() + "their current health is " + user.health() );
+					System.out.println(enemy.getName() + "their current health is " + user.health() );
 					System.out.println("What would you like to do?");
 					System.out.println("1. Attack ");
 					System.out.println("2. Run ");
@@ -77,10 +77,10 @@ public class Game {
 						int damageDone = rand.nextInt(maxWeaponDamage);				// changed maxWeaponDamage[] to maxWeaponDamage and declared it above
 						int damageTaken = rand.nextInt(maxEnemyDamage);				// changed maxEnemyDamage[] to maxEnemyDamage and declared it above
 						
-						enemy.setHealth(enemy.health()-damageDone);
+						enemy.setHealth(enemy.getHealth()-damageDone);
 						user.setHealth(user.health()-damageTaken);
 						
-						System.out.println("You attack " + enemy.name() + " for " + damageDone + "damage.");
+						System.out.println("You attack " + enemy.getName() + " for " + damageDone + "damage.");
 						System.out.println("You have taken " + damageTaken + " from the enemy. ");
 						
 						if(user.health() < 1) {
@@ -102,12 +102,12 @@ public class Game {
 						
 					}
 					else if(input == 3) {
-						if(user.speed() > enemy.speed()) {
+						if(user.speed() > enemy.getSpeed()) {
 							System.out.println("You run away from the enemy. ");
 							continue GAME;
 						}
 						else {
-							System.out.println("The " + enemy.health() + "cuts you off. You must fight or DIE.");
+							System.out.println("The " + enemy.getHealth() + "cuts you off. You must fight or DIE.");
 						}
 						
 					}
