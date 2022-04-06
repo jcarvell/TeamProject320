@@ -40,7 +40,8 @@ GAME:
 			
 			//All player changes and options other than combat would be in here. 
 				while (user.health() > 0 && choice1.getRoomResources().getEnemy().gethealth() <= 0 ){
-
+					
+					// Checks to see if the choices are the same and if they are then populate a new room. 
 					Room temp = choice1;
 					choice1 = new Room();
 					Room choice2 = new Room();
@@ -49,7 +50,7 @@ GAME:
 					}else if (temp.getName() == choice2.getName()) {
 						choice2 = new Room();
 					}else {
-						System.out.println("You can choose between these options. ");
+						System.out.println("");
 			
 					}
 					
@@ -62,6 +63,7 @@ GAME:
 						
 						if(choice1.getRoomResources().getEnemy().gethealth() > 0) {
 							System.out.println("You are suddenly face to face with: " + choice1.getRoomResources().getEnemy().name());
+							choice1.getRoomResources().getNPCArray().
 
 						}
 						else {
