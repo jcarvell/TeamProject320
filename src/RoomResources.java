@@ -11,7 +11,7 @@ public class RoomResources {
 	
 	private Enemy enemy;
 	
-	private NPCs[] NPCArray = new NPCs[20];
+	private NPCs npc;
 	
 	public RoomResources() {
 		Random rand = new Random(); // instance of random class
@@ -29,15 +29,17 @@ public class RoomResources {
 			enemy = new Enemy(0, 0, 0);
 		}
 		
-		// create an array of instances of NPCs
-		for(int j = 0; j < numNPCs; j++) {
-			NPCArray[j] = new NPCs();
-		}
+		// create an array of instances of NPCs1
+
 		
 		if(numPotions != 0) {
 			potion = new Potion();		// create a new potion
 		} else {
 			potion = new Potion(0,0, "No potion");
+		}
+		
+		if(npc == null) {
+			npc = new NPCs();
 		}
 		
 		if(numWeapons != 0) {
@@ -47,11 +49,11 @@ public class RoomResources {
 		}
 	}
 	
-	public RoomResources(Potion p, Weapon w, Enemy e, NPCs[] n) {
+	public RoomResources(Potion p, Weapon w, Enemy e,NPCs n) {
 		potion = p;
 		weapon = w;
 		enemy = e;
-		NPCArray = n;
+		npc = n;
 	}
 	
 	public Potion getPotion() {
@@ -64,8 +66,8 @@ public class RoomResources {
 	public Enemy getEnemy() {
 		return enemy;
 	}
-	public NPCs[] getNPCArray() {
-		return NPCArray;
+	public NPCs getNPCs() {
+		return npc;
 	}
 	public void setPotion(int x) {
 		numPotions = x;

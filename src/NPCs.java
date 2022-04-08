@@ -5,6 +5,7 @@ public class NPCs {
 	// constructor 
 	public NPCs() {
 		dialogue = "Hello";		// placeholder dialogue
+		
 	}
 	
 	// constructor
@@ -15,6 +16,7 @@ public class NPCs {
 	public String getDialogue() {
 		return dialogue;
 	}
+
 
 
 }

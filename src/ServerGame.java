@@ -1,16 +1,10 @@
- 
-import java.util.Scanner;
 import java.util.Random;
-import java.util.Timer;
-
-// This is the action of combat in the game. 
-// still need to implement a model and controller class to have setters and getters. 
+import java.util.Scanner;
 
 public class Game {
 	public static void main(String[] args) {
 		Random rand = new Random(); //instance of random class
 		Room choice1 = new Room();
-		
 		
 		//Created enemies are stored in this array of enemies(This can be changed later idk)
 		//Enemy enemy = new Enemy();
@@ -40,32 +34,19 @@ GAME:
 			
 			//All player changes and options other than combat would be in here. 
 				while (user.health() > 0 && choice1.getRoomResources().getEnemy().gethealth() <= 0 ){
+
 					
-					// Checks to see if the choices are the same and if they are then populate a new room. 
-					Room temp = choice1;
 					choice1 = new Room();
 					Room choice2 = new Room();
-					if(temp.getName() == choice1.getName() ) {
-						choice1 = new Room();
-					}else if (temp.getName() == choice2.getName()) {
-						choice2 = new Room();
-					}else {
-						System.out.println("");
-			
-					}
-					
 
 					System.out.println("You have two options 1. " + choice1.getName() + " or you can choose 2. " + choice2.getName() );
 					int choice = in.nextInt();
 					
 					if( choice == 1) {
 						System.out.println("You have entered " + choice1.getName());
-						choice1.getRoomResources().getNPCs().getDialogue();
 						
 						if(choice1.getRoomResources().getEnemy().gethealth() > 0) {
 							System.out.println("You are suddenly face to face with: " + choice1.getRoomResources().getEnemy().name());
-
-							
 
 						}
 						else {
@@ -104,9 +85,6 @@ GAME:
 					int input = in.nextInt();
 					
 					if(input == 1) {
-						//Something is wrong here. User can go into the negative health
-						
-						
 						int damageDone = rand.nextInt(maxWeaponDamage);				// changed maxWeaponDamage[] to maxWeaponDamage and declared it above
 						int damageTaken = rand.nextInt(choice1.getRoomResources().getEnemy().strength());				// changed maxEnemyDamage[] to maxEnemyDamage and declared it above
 						
@@ -126,11 +104,11 @@ GAME:
 							user.setHealth(user.health()+choice1.getRoomResources().getPotion().getHealthIncreaseAmount());			// potionHealAmount was never declared so I declared it in 
 							
 							choice1.getRoomResources().setPotion(choice1.getRoomResources().getnumPotions()-1);
-							System.out.println("Your new Health is " + user.health() + " you now have " + choice1.getRoomResources().getnumPotions() + " potions.");
+							System.out.println("Your new Health is " + user.health() + "you now have " + choice1.getRoomResources().getnumPotions() + " potions.");
 							
 						}
 						else {
-							System.out.println("You have no more potions...... RIP HAHAHA.");
+							System.out.println("You have nomore potions...... RIP HAHAHA.");
 							
 						}
 						
@@ -138,7 +116,6 @@ GAME:
 					else if(input == 3) {
 						if(user.speed() > choice1.getRoomResources().getEnemy().speed()){
 							System.out.println("You run away from the enemy. ");
-							choice1.getRoomResources().getEnemy().setHealth(0);
 							continue GAME;
 						}
 						else {
@@ -153,16 +130,8 @@ GAME:
 					
 				}
 			System.out.println("You deafeated the enemy!");
-			System.out.println("You currently have " + user.health() + " health and " + choice1.getRoomResources().getnumPotions() + " potions.");
-			System.out.println("");
+
+			System.out.println("You currently have " + user.health() + " health and " + choice1.getRoomResources().getPotion() + " potions.");
 		}
 	}
 	}
-
-
-	
-	
-			
-	
-
-
