@@ -11,6 +11,7 @@ public class Game {
 		Random rand = new Random(); //instance of random class
 		Room choice1 = new Room();
 		
+		
 		//Created enemies are stored in this array of enemies(This can be changed later idk)
 		//Enemy enemy = new Enemy();
 		
@@ -40,9 +41,18 @@ GAME:
 			//All player changes and options other than combat would be in here. 
 				while (user.health() > 0 && choice1.getRoomResources().getEnemy().gethealth() <= 0 ){
 
-					
+					Room temp = choice1;
 					choice1 = new Room();
 					Room choice2 = new Room();
+					if(temp.getName() == choice1.getName() ) {
+						choice1 = new Room();
+					}else if (temp.getName() == choice2.getName()) {
+						choice2 = new Room();
+					}else {
+						System.out.println("You can choose between these options. ");
+			
+					}
+					
 
 					System.out.println("You have two options 1. " + choice1.getName() + " or you can choose 2. " + choice2.getName() );
 					int choice = in.nextInt();
@@ -109,11 +119,11 @@ GAME:
 							user.setHealth(user.health()+choice1.getRoomResources().getPotion().getHealthIncreaseAmount());			// potionHealAmount was never declared so I declared it in 
 							
 							choice1.getRoomResources().setPotion(choice1.getRoomResources().getnumPotions()-1);
-							System.out.println("Your new Health is " + user.health() + "you now have " + choice1.getRoomResources().getnumPotions() + " potions.");
+							System.out.println("Your new Health is " + user.health() + " you now have " + choice1.getRoomResources().getnumPotions() + " potions.");
 							
 						}
 						else {
-							System.out.println("You have nomore potions...... RIP HAHAHA.");
+							System.out.println("You have no more potions...... RIP HAHAHA.");
 							
 						}
 						
@@ -121,6 +131,7 @@ GAME:
 					else if(input == 3) {
 						if(user.speed() > choice1.getRoomResources().getEnemy().speed()){
 							System.out.println("You run away from the enemy. ");
+							choice1.getRoomResources().getEnemy().setHealth(0);
 							continue GAME;
 						}
 						else {
@@ -135,8 +146,8 @@ GAME:
 					
 				}
 			System.out.println("You deafeated the enemy!");
-
-			System.out.println("You currently have " + user.health() + " health and " + choice1.getRoomResources().getPotion() + " potions.");
+			System.out.println("You currently have " + user.health() + " health and " + choice1.getRoomResources().getnumPotions() + " potions.");
+			System.out.println("");
 		}
 	}
 	}

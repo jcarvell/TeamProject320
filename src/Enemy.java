@@ -6,6 +6,7 @@ public class Enemy {
 	private int health;
 	private int strength;
 	private int speed;
+	private int randomEnemynumber;
 
 	public static final Random RANDOM = new Random();
 	public static final String[] names = {"No Enemy" ,"Zombie" , "Alligator" , "Baby" , "King Zombie"};
@@ -27,18 +28,20 @@ public class Enemy {
 	
 	public Enemy() {
 		
-	/*
+	
 		int randomEnemy = RANDOM.nextInt(4);
 		name = names[randomEnemy];
 		health = enemy_Health[randomEnemy];
 		strength = enemy_Strength[randomEnemy];
 		speed = enemy_Speed[randomEnemy];
-	*/
+		
+	/*
 		
 		name = names[RANDOM.nextInt(names.length)]; //gets random enemy from array; might have to subtract 1 idk yet
 		health = enemy_Health[RANDOM.nextInt(enemy_Health.length)];
 		strength = enemy_Strength[RANDOM.nextInt(enemy_Strength.length)];
 		speed = enemy_Speed[RANDOM.nextInt(enemy_Speed.length)];
+		*/
 	}
 	
 	
