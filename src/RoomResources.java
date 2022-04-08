@@ -1,7 +1,7 @@
 import java.util.Random;
 
 public class RoomResources {
-	private static int maxEnemies = 1, maxNPCs = 5, maxPotions = 1, maxWeapons = 1, maxPotionHealth = 10, maxPotionSpeed = 10;	//feel free to change these values
+	private static int maxEnemies = 1, maxNPCs = 5, maxPotions = 5, maxWeapons = 1, maxPotionHealth = 10, maxPotionSpeed = 10;	//feel free to change these values
 	
 	private int numEnemies, numNPCs, numPotions, numWeapons;
 	
@@ -18,6 +18,7 @@ public class RoomResources {
 		numEnemies = rand.nextInt(maxEnemies+1);		// set the number of enemies to a random number between zero and maxEnemies
 		numNPCs = rand.nextInt(maxNPCs+1);				// set the number of NPCs to a random number between zero and maxNPCs
 		// this is assuming you can have only one potion and one weapon each in a room
+		
 		numPotions = rand.nextInt(maxPotions+1);		// set the number of potions to a random number between zero and maxPotions
 		numWeapons = rand.nextInt(maxWeapons+1);		// set the number of weapons to a random number between zero and maxWeapons
 		
@@ -52,6 +53,7 @@ public class RoomResources {
 		enemy = e;
 		NPCArray = n;
 	}
+	
 	public Potion getPotion() {
 		return potion;
 	}
@@ -65,5 +67,13 @@ public class RoomResources {
 	public NPCs[] getNPCArray() {
 		return NPCArray;
 	}
+	public void setPotion(int x) {
+		numPotions = x;
+	}
+	public int getnumPotions() {
+		return numPotions;
+	}
+	
+	
 
 }

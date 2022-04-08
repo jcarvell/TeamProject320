@@ -25,6 +25,7 @@ public class User {
 	public Weapon[] getArmory() {
 		return armory;
 	}
+
 	public Potion[] getStash() {
 		return stash;
 	}
