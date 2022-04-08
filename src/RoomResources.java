@@ -26,7 +26,7 @@ public class RoomResources {
 		if(numEnemies != 0) {
 			enemy = new Enemy();
 		} else {
-			enemy = new Enemy(0, 0, 0);
+			enemy = new Enemy(0, 0, 0, "No enemy");
 		}
 		
 		// create an array of instances of NPCs
