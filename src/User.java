@@ -47,6 +47,8 @@ public class User {
 	public int getStashLength() {
 		return stashLength;
 	}
-	
+	public void setStrength(int x) {
+		strength = x;
+	}
 
 }
