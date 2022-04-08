@@ -1,4 +1,6 @@
 import java.util.Random;
+import java.util.Scanner;
+
 
 public class RoomResources {
 	private static int maxEnemies = 1, maxNPCs = 5, maxPotions = 5, maxWeapons = 1, maxPotionHealth = 10, maxPotionSpeed = 10;	//feel free to change these values
@@ -13,6 +15,8 @@ public class RoomResources {
 	
 	private NPCs npc;
 	
+	Scanner in = new Scanner (System.in);
+	
 	public RoomResources() {
 		Random rand = new Random(); // instance of random class
 		numEnemies = rand.nextInt(maxEnemies+1);		// set the number of enemies to a random number between zero and maxEnemies
@@ -26,7 +30,7 @@ public class RoomResources {
 		if(numEnemies != 0) {
 			enemy = new Enemy();
 		} else {
-			enemy = new Enemy(0, 0, 0);
+			enemy = new Enemy(0, 0, 0, "No enemy");
 		}
 		
 		// create an array of instances of NPCs1
@@ -38,9 +42,8 @@ public class RoomResources {
 			potion = new Potion(0,0, "No potion");
 		}
 		
-		if(npc == null) {
-			npc = new NPCs();
-		}
+		npc = new NPCs();
+		
 		
 		if(numWeapons != 0) {
 			weapon = new Weapon();		// create a new weapon
@@ -76,6 +79,45 @@ public class RoomResources {
 		return numPotions;
 	}
 	
+	public void roomPrint() {
+		System.out.println(weapon.getName());
+		System.out.println(potion.getName());
+	}
+	
+	
+	public void noEnemyroom(User user) {
+		System.out.println("There is no enemy in this room");
+		System.out.println(getNPCs().getDialogue());
+		System.out.println("There are some resources in the room would you like to check them out?");
+		int npcChoice = in.nextInt();
+		if(npcChoice == 1 ) {
+			//NO
+			roomPrint();
+			System.out.println("Would you like to take either of the items or would you like to leave?");
+			int resourceChoice = in.nextInt();
+			if(resourceChoice == 1 && getWeapon().getName() != "No Weapon") {
+				if(getWeapon().getStrengthBuff() < user.strength()) {
+					System.out.println("Are you sure you would like to pick this up?");
+					System.out.println("Your current strength is " + user.strength() + " and the " + getWeapon().getName() + "only has " + getWeapon().getStrengthBuff());
+					int weaponpickupChoice = in.nextInt();
+					if(weaponpickupChoice == 1) {
+						resourceChoice = 1;
+					}else {
+						resourceChoice = 0;
+					}
+				}
+				System.out.println("Your strength was: " + user.strength());
+				user.setStrength(getWeapon().getStrengthBuff());
+				System.out.println("Now your new strength is: " + user.strength());
+			}
+			
+
+		}else if(npcChoice == 2 ){
+			System.out.println(getWeapon().getName());
+		}else {
+			System.out.println("");
+	}
 	
 
+}
 }

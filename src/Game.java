@@ -15,10 +15,10 @@ public class Game {
 		//Created enemies are stored in this array of enemies(This can be changed later idk)
 		//Enemy enemy = new Enemy();
 		
-		int maxWeaponDamage = 50; 	// arbitrarily chosen
+	// arbitrarily chosen
 
 
-		User user=new User(100,30,10);
+		User user=new User(100,5,10);
 		
 		Scanner in = new Scanner (System.in);
 		boolean running = false;
@@ -39,9 +39,10 @@ GAME:
 		while(running) {
 			
 			//All player changes and options other than combat would be in here. 
-				while (user.health() > 0 && choice1.getRoomResources().getEnemy().gethealth() <= 0 ){
+				while (user.health() > 0 && choice1.getRoomResources().getEnemy().getHealth() <= 0 ){
 					
 					// Checks to see if the choices are the same and if they are then populate a new room. 
+					
 					Room temp = choice1;
 					choice1 = new Room();
 					Room choice2 = new Room();
@@ -51,7 +52,6 @@ GAME:
 						choice2 = new Room();
 					}else {
 						System.out.println("");
-			
 					}
 					
 
@@ -60,31 +60,23 @@ GAME:
 					
 					if( choice == 1) {
 						System.out.println("You have entered " + choice1.getName());
-						choice1.getRoomResources().getNPCs().getDialogue();
-						
-						if(choice1.getRoomResources().getEnemy().gethealth() > 0) {
-							System.out.println("You are suddenly face to face with: " + choice1.getRoomResources().getEnemy().name());
-
-							
-
+						if(choice1.getRoomResources().getEnemy().getHealth() > 0) {
+							System.out.println("You are suddenly face to face with: " + choice1.getRoomResources().getEnemy().getName());
 						}
+						
 						else {
-							// we can add randomness to getting materials or weapons here 
-							System.out.println("There is no enemy in this room");
-
+							choice1.getRoomResources().noEnemyroom(user);
 						}
 					}
 					else if (choice == 2){
 						choice1 = choice2;
-						System.out.println("You have entered " + choice1.getName());
 						
-						if(choice1.getRoomResources().getEnemy().gethealth() > 0) {
-							System.out.println("You are suddenly face to face with: " + choice1.getRoomResources().getEnemy().name());
-							
+						System.out.println("You have entered " + choice1.getName());
+						if(choice1.getRoomResources().getEnemy().getHealth() > 0) {
+							System.out.println("You are suddenly face to face with: " + choice1.getRoomResources().getEnemy().getName());	
 					}
 						else {
-							// we can add randomness here to have things happen that are not part of combat ie. NPS, items found, ect.
-							System.out.println("There is no enemy in this room");
+							choice1.getRoomResources().noEnemyroom(user);
 						}
 				}	else {
 					System.out.println("Invalid input ");
@@ -92,10 +84,10 @@ GAME:
 				
 				}
 			//User still needs to be made, this value should call to user for health int
-				while(choice1.getRoomResources().getEnemy().gethealth() > 0) {
+				while(choice1.getRoomResources().getEnemy().getHealth() > 0) {
 	
 					System.out.println("Your Health is: " + user.health());
-					System.out.println(choice1.getRoomResources().getEnemy().name() + " their current health is " + choice1.getRoomResources().getEnemy().gethealth() );
+					System.out.println(choice1.getRoomResources().getEnemy().getName() + " their current health is " + choice1.getRoomResources().getEnemy().getHealth() );
 					System.out.println("What would you like to do?");
 					System.out.println("1. Attack ");
 					System.out.println("2. Use Potion ");
@@ -107,13 +99,13 @@ GAME:
 						//Something is wrong here. User can go into the negative health
 						
 						
-						int damageDone = rand.nextInt(maxWeaponDamage);				// changed maxWeaponDamage[] to maxWeaponDamage and declared it above
-						int damageTaken = rand.nextInt(choice1.getRoomResources().getEnemy().strength());				// changed maxEnemyDamage[] to maxEnemyDamage and declared it above
+						int damageDone = rand.nextInt(user.strength());				// changed maxWeaponDamage[] to maxWeaponDamage and declared it above
+						int damageTaken = rand.nextInt(choice1.getRoomResources().getEnemy().getStrength());				// changed maxEnemyDamage[] to maxEnemyDamage and declared it above
 						
-						choice1.getRoomResources().getEnemy().setHealth(choice1.getRoomResources().getEnemy().gethealth()-damageDone);
+						choice1.getRoomResources().getEnemy().setHealth(choice1.getRoomResources().getEnemy().getHealth()-damageDone);
 						user.setHealth(user.health()-damageTaken);
 						
-						System.out.println("You attack " + choice1.getRoomResources().getEnemy().name() + " for " + damageDone + " damage.");
+						System.out.println("You attack " + choice1.getRoomResources().getEnemy().getName() + " for " + damageDone + " damage.");
 						System.out.println("You have taken " + damageTaken + " from the enemy. ");
 						
 						if(user.health() < 1) {
@@ -136,13 +128,13 @@ GAME:
 						
 					}
 					else if(input == 3) {
-						if(user.speed() > choice1.getRoomResources().getEnemy().speed()){
+						if(user.speed() > choice1.getRoomResources().getEnemy().getSpeed()){
 							System.out.println("You run away from the enemy. ");
 							choice1.getRoomResources().getEnemy().setHealth(0);
 							continue GAME;
 						}
 						else {
-							System.out.println("The " + choice1.getRoomResources().getEnemy().name() + " cuts you off. You must fight or DIE.");
+							System.out.println("The " + choice1.getRoomResources().getEnemy().getName() + " cuts you off. You must fight or DIE.");
 						}
 						
 					}
