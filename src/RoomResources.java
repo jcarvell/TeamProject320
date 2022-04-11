@@ -1,4 +1,6 @@
 import java.util.Random;
+import java.util.Scanner;
+
 
 public class RoomResources {
 	private static int maxEnemies = 1, maxNPCs = 5, maxPotions = 5, maxWeapons = 1, maxPotionHealth = 10, maxPotionSpeed = 10;	//feel free to change these values
@@ -11,7 +13,9 @@ public class RoomResources {
 	
 	private Enemy enemy;
 	
-	private NPCs[] NPCArray = new NPCs[20];
+	private NPCs npc;
+	
+	Scanner in = new Scanner (System.in);
 	
 	public RoomResources() {
 		Random rand = new Random(); // instance of random class
@@ -29,16 +33,17 @@ public class RoomResources {
 			enemy = new Enemy(0, 0, 0, "No enemy");
 		}
 		
-		// create an array of instances of NPCs
-		for(int j = 0; j < numNPCs; j++) {
-			NPCArray[j] = new NPCs();
-		}
+		// create an array of instances of NPCs1
+
 		
 		if(numPotions != 0) {
 			potion = new Potion();		// create a new potion
 		} else {
 			potion = new Potion(0,0, "No potion");
 		}
+		
+		npc = new NPCs();
+		
 		
 		if(numWeapons != 0) {
 			weapon = new Weapon();		// create a new weapon
@@ -47,11 +52,11 @@ public class RoomResources {
 		}
 	}
 	
-	public RoomResources(Potion p, Weapon w, Enemy e, NPCs[] n) {
+	public RoomResources(Potion p, Weapon w, Enemy e,NPCs n) {
 		potion = p;
 		weapon = w;
 		enemy = e;
-		NPCArray = n;
+		npc = n;
 	}
 	
 	public Potion getPotion() {
@@ -64,8 +69,8 @@ public class RoomResources {
 	public Enemy getEnemy() {
 		return enemy;
 	}
-	public NPCs[] getNPCArray() {
-		return NPCArray;
+	public NPCs getNPCs() {
+		return npc;
 	}
 	public void setPotion(int x) {
 		numPotions = x;
@@ -74,6 +79,45 @@ public class RoomResources {
 		return numPotions;
 	}
 	
+	public void roomPrint() {
+		System.out.println(weapon.getName());
+		System.out.println(potion.getName());
+	}
+	
+	
+	public void noEnemyroom(User user) {
+		System.out.println("There is no enemy in this room");
+		System.out.println(getNPCs().getDialogue());
+		System.out.println("There are some resources in the room would you like to check them out?");
+		int npcChoice = in.nextInt();
+		if(npcChoice == 1 ) {
+			//NO
+			roomPrint();
+			System.out.println("Would you like to take either of the items or would you like to leave?");
+			int resourceChoice = in.nextInt();
+			if(resourceChoice == 1 && getWeapon().getName() != "No Weapon") {
+				if(getWeapon().getStrengthBuff() < user.strength()) {
+					System.out.println("Are you sure you would like to pick this up?");
+					System.out.println("Your current strength is " + user.strength() + " and the " + getWeapon().getName() + "only has " + getWeapon().getStrengthBuff());
+					int weaponpickupChoice = in.nextInt();
+					if(weaponpickupChoice == 1) {
+						resourceChoice = 1;
+					}else {
+						resourceChoice = 0;
+					}
+				}
+				System.out.println("Your strength was: " + user.strength());
+				user.setStrength(getWeapon().getStrengthBuff());
+				System.out.println("Now your new strength is: " + user.strength());
+			}
+			
+
+		}else if(npcChoice == 2 ){
+			System.out.println(getWeapon().getName());
+		}else {
+			System.out.println("");
+	}
 	
 
+}
 }
