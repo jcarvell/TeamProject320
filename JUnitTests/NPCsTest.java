@@ -1,9 +1,6 @@
-package junitt;
 import static org.junit.jupiter.api.Assertions.*;
 
 import org.junit.jupiter.api.Test;
-
-import NPCs;
 
 class NPCsTest {
 
