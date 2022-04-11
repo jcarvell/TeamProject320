@@ -7,6 +7,8 @@ class UserTest {
 	@Test
 	void testUser() {
 		User Bob = new User(5, 10, 15);
+		User Sally = new User(10, 5, 0);
+		User Billy = new User(0, 22, 1);
 	}
 
 	@Test
@@ -35,8 +37,15 @@ class UserTest {
 	}
 
 	@Test
-	void testHealth() {
-		fail("Not yet implemented");
+	void testGetHealth() {
+		User Bob = new User(5, 10, 15);
+		assertEquals(Bob.getHealth(), 5);
+		
+		User Sally = new User(10, 5, 0);
+		assertEquals(Sally.getHealth(), 10);
+		
+		User Billy = new User(0, 22, 1);
+		assertEquals(Billy.getHealth(), 0);
 	}
 
 	@Test
@@ -45,12 +54,12 @@ class UserTest {
 	}
 
 	@Test
-	void testStrength() {
+	void testGetStrength() {
 		fail("Not yet implemented");
 	}
 
 	@Test
-	void testSpeed() {
+	void testGetSpeed() {
 		fail("Not yet implemented");
 	}
 
