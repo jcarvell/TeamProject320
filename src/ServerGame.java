@@ -1,8 +1,9 @@
 import java.util.Random;
 import java.util.Scanner;
 
-public class Game {
-	public static void main(String[] args) {
+public class ServerGame {
+	
+	public ServerGame() {
 		Random rand = new Random(); //instance of random class
 		Room choice1 = new Room();
 		
@@ -15,7 +16,7 @@ public class Game {
 		User user=new User(100,30,10);
 		
 		Scanner in = new Scanner (System.in);
-		boolean running = false;
+		boolean startGame = false;
 		
 		//Start of Game
 		
@@ -23,14 +24,14 @@ public class Game {
 		System.out.println("Would you like to begin the game? ");
 		String input1 = in.nextLine();
 		if(input1.toLowerCase().contentEquals("yes") ) {
-			running = true;
+			startGame = true;
 		}else {
-			running = false;
+			startGame = false;
 			System.out.println("Maybe next time. ");
 		}
 		
-GAME:
-		while(running) {
+// GAME:
+		while(startGame) {
 			
 			//All player changes and options other than combat would be in here. 
 				while (user.health() > 0 && choice1.getRoomResources().getEnemy().gethealth() <= 0 ){
@@ -92,7 +93,7 @@ GAME:
 						user.setHealth(user.health()-damageTaken);
 						
 						System.out.println("You attack " + choice1.getRoomResources().getEnemy().name() + " for " + damageDone + " damage.");
-						System.out.println("You have taken " + damageTaken + " from the enemy. ");
+						System.out.println("You have taken " + damageTaken + " damage from the enemy. ");
 						
 						if(user.health() < 1) {
 							System.out.println("You have taken too much damage and you have died. ");
@@ -116,7 +117,7 @@ GAME:
 					else if(input == 3) {
 						if(user.speed() > choice1.getRoomResources().getEnemy().speed()){
 							System.out.println("You run away from the enemy. ");
-							continue GAME;
+							continue;
 						}
 						else {
 							System.out.println("The " + choice1.getRoomResources().getEnemy().name() + " cuts you off. You must fight or DIE.");
