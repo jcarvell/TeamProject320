@@ -39,7 +39,7 @@ GAME:
 		while(running) {
 			
 			//All player changes and options other than combat would be in here. 
-				while (user.health() > 0 && choice1.getRoomResources().getEnemy().getHealth() <= 0 ){
+				while (user.getHealth() > 0 && choice1.getRoomResources().getEnemy().getHealth() <= 0 ){
 					
 					// Checks to see if the choices are the same and if they are then populate a new room. 
 					
