@@ -11,21 +11,11 @@ public class Game {
 	public static void main(String[] args) {
 		Random rand = new Random(); //instance of random class
 		Room choice1 = new Room();
-		
-		
-		//Created enemies are stored in this array of enemies(This can be changed later idk)
-		//Enemy enemy = new Enemy();
-		
-	// arbitrarily chosen
-
-
-		User user=new User(100,5,10);
-		
+		User user=new User(100,5,10);	
 		Scanner in = new Scanner (System.in);
+		
 		boolean running = false;
-		
 		//Start of Game
-		
 		System.out.println("Welcome to the Baby Zombies Game");
 		System.out.println("Would you like to begin the game? ");
 		String input1 = in.nextLine();
@@ -66,7 +56,9 @@ GAME:
 						}
 						
 						else {
-							choice1.getRoomResources().noEnemyroom(user);
+						
+						choice1.getRoomResources().noEnemyRoom(user, choice1);
+					
 						}
 					}
 					else if (choice == 2){
@@ -77,7 +69,7 @@ GAME:
 							System.out.println("You are suddenly face to face with: " + choice1.getRoomResources().getEnemy().getName());	
 					}
 						else {
-							choice1.getRoomResources().noEnemyroom(user);
+							choice1.getRoomResources().noEnemyRoom(user, choice1);
 						}
 				}	else {
 					System.out.println("Invalid input ");
@@ -147,6 +139,7 @@ GAME:
 				}
 			System.out.println("You deafeated the enemy!");
 			System.out.println("You currently have " + user.getHealth() + " health and " + choice1.getRoomResources().getnumPotions() + " potions.");
+			choice1.getRoomResources().calculatePoints(user);
 			System.out.println("");
 		}
 	}

@@ -8,10 +8,11 @@ public class Enemy {
 	private int strength;
 	private int speed;
 	private int randomEnemy;
-
+	private int enemyPoints;
+	
 	public static final Random RANDOM = new Random();
 	public static final String[] names = {"No Enemy","Zombie" , "Alligator" , "Baby" , "King Zombie"};
-	public static final int [] enemy_Health = { 0, 50 , 300, 5, 100000 };
+	public static final int [] enemy_Health = { 0, 50 , 50, 5, 100000 };
 	public static final  int [] enemy_Strength = { 0, 10 , 50 , 1, 100 };
 	public static final int [] enemy_Speed = { 0, 5 , 10 , 1, 100 };
 	
@@ -36,6 +37,7 @@ public class Enemy {
 		health = enemy_Health[randomEnemy];
 		strength = enemy_Strength[randomEnemy];
 		speed = enemy_Speed[randomEnemy];
+		enemyPoints = health;
 	}
 	
 	public int dealDamage(){
@@ -59,6 +61,9 @@ public class Enemy {
 	
 	public int getSpeed(){
 		return speed; 
+	}
+	public int getPoints() {
+		return enemyPoints;
 	}
 
 	

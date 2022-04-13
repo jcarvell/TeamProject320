@@ -38,4 +38,5 @@ public class Room {
 	public RoomResources getRoomResources() {
 		return resources;
 	}
+	
 }
