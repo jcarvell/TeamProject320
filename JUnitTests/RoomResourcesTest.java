@@ -2,6 +2,12 @@ import static org.junit.jupiter.api.Assertions.*;
 
 import org.junit.jupiter.api.Test;
 
+import teamproject.cs320.Enemy;
+import teamproject.cs320.NPCs;
+import teamproject.cs320.Potion;
+import teamproject.cs320.RoomResources;
+import teamproject.cs320.Weapon;
+
 class RoomResourcesTest {
 
 	@Test
