@@ -1,3 +1,4 @@
+package teamproject.cs320;
 
 public class NPCs {
 	private String dialogue;

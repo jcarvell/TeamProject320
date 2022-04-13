@@ -1,3 +1,5 @@
+package teamproject.cs320;
+
 public class User {
 	private int health, strength, speed, armoryLength, stashLength;
 	
