@@ -1,3 +1,4 @@
+package teamproject.cs320;
  
 import java.util.Scanner;
 import java.util.Random;
