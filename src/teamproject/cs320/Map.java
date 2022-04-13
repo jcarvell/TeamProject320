@@ -1,3 +1,5 @@
+package teamproject.cs320;
+
 public class Map {
 	
 	

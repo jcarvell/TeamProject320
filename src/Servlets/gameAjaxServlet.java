@@ -6,8 +6,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import edu.ycp.cs320.lab02a_ereckard.controller.NumbersController;
-import edu.ycp.cs320.lab02a_ereckard.model.Numbers;
+import teamproject.cs320.*;
 
 public class gameAjaxServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
