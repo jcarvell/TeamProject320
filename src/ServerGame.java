@@ -1,7 +1,7 @@
 import java.util.Random;
 import java.util.Scanner;
 
-public class Game {
+public class ServerGame {
 	public static void main(String[] args) {
 		Random rand = new Random(); //instance of random class
 		Room choice1 = new Room();
