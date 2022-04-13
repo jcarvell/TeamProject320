@@ -97,9 +97,9 @@ public class RoomResources {
 			System.out.println("Would you like to take either of the items or would you like to leave?");
 			int resourceChoice = in.nextInt();
 			if(resourceChoice == 1 && getWeapon().getName() != "No Weapon") {
-				if(getWeapon().getStrengthBuff() < user.strength()) {
+				if(getWeapon().getStrengthBuff() < user.getStrength()) {
 					System.out.println("Are you sure you would like to pick this up?");
-					System.out.println("Your current strength is " + user.strength() + " and the " + getWeapon().getName() + "only has " + getWeapon().getStrengthBuff());
+					System.out.println("Your current strength is " + user.getStrength() + " and the " + getWeapon().getName() + "only has " + getWeapon().getStrengthBuff());
 					int weaponpickupChoice = in.nextInt();
 					if(weaponpickupChoice == 1) {
 						resourceChoice = 1;
@@ -107,9 +107,9 @@ public class RoomResources {
 						resourceChoice = 0;
 					}
 				}
-				System.out.println("Your strength was: " + user.strength());
+				System.out.println("Your strength was: " + user.getStrength());
 				user.setStrength(getWeapon().getStrengthBuff());
-				System.out.println("Now your new strength is: " + user.strength());
+				System.out.println("Now your new strength is: " + user.getStrength());
 			}
 			
 

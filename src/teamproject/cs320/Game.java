@@ -40,7 +40,7 @@ GAME:
 		while(running) {
 			
 			//All player changes and options other than combat would be in here. 
-				while (user.health() > 0 && choice1.getRoomResources().getEnemy().getHealth() <= 0 ){
+				while (user.getHealth() > 0 && choice1.getRoomResources().getEnemy().getHealth() <= 0 ){
 					
 					// Checks to see if the choices are the same and if they are then populate a new room. 
 					
@@ -87,7 +87,7 @@ GAME:
 			//User still needs to be made, this value should call to user for health int
 				while(choice1.getRoomResources().getEnemy().getHealth() > 0) {
 	
-					System.out.println("Your Health is: " + user.health());
+					System.out.println("Your Health is: " + user.getHealth());
 					System.out.println(choice1.getRoomResources().getEnemy().getName() + " their current health is " + choice1.getRoomResources().getEnemy().getHealth() );
 					System.out.println("What would you like to do?");
 					System.out.println("1. Attack ");
@@ -100,26 +100,26 @@ GAME:
 						//Something is wrong here. User can go into the negative health
 						
 						
-						int damageDone = rand.nextInt(user.strength());				// changed maxWeaponDamage[] to maxWeaponDamage and declared it above
+						int damageDone = rand.nextInt(user.getStrength());				// changed maxWeaponDamage[] to maxWeaponDamage and declared it above
 						int damageTaken = rand.nextInt(choice1.getRoomResources().getEnemy().getStrength());				// changed maxEnemyDamage[] to maxEnemyDamage and declared it above
 						
 						choice1.getRoomResources().getEnemy().setHealth(choice1.getRoomResources().getEnemy().getHealth()-damageDone);
-						user.setHealth(user.health()-damageTaken);
+						user.setHealth(user.getHealth()-damageTaken);
 						
 						System.out.println("You attack " + choice1.getRoomResources().getEnemy().getName() + " for " + damageDone + " damage.");
 						System.out.println("You have taken " + damageTaken + " from the enemy. ");
 						
-						if(user.health() < 1) {
+						if(user.getHealth() < 1) {
 							System.out.println("You have taken too much damage and you have died. ");
 							break; 
 						}
 					}
 					else if(input == 2) {
 						if(choice1.getRoomResources().getnumPotions() > 0) {
-							user.setHealth(user.health()+choice1.getRoomResources().getPotion().getHealthIncreaseAmount());			// potionHealAmount was never declared so I declared it in 
+							user.setHealth(user.getHealth()+choice1.getRoomResources().getPotion().getHealthIncreaseAmount());			// potionHealAmount was never declared so I declared it in 
 							
 							choice1.getRoomResources().setPotion(choice1.getRoomResources().getnumPotions()-1);
-							System.out.println("Your new Health is " + user.health() + " you now have " + choice1.getRoomResources().getnumPotions() + " potions.");
+							System.out.println("Your new Health is " + user.getHealth() + " you now have " + choice1.getRoomResources().getnumPotions() + " potions.");
 							
 						}
 						else {
@@ -129,7 +129,7 @@ GAME:
 						
 					}
 					else if(input == 3) {
-						if(user.speed() > choice1.getRoomResources().getEnemy().getSpeed()){
+						if(user.getSpeed() > choice1.getRoomResources().getEnemy().getSpeed()){
 							System.out.println("You run away from the enemy. ");
 							choice1.getRoomResources().getEnemy().setHealth(0);
 							continue GAME;
@@ -146,7 +146,7 @@ GAME:
 					
 				}
 			System.out.println("You deafeated the enemy!");
-			System.out.println("You currently have " + user.health() + " health and " + choice1.getRoomResources().getnumPotions() + " potions.");
+			System.out.println("You currently have " + user.getHealth() + " health and " + choice1.getRoomResources().getnumPotions() + " potions.");
 			System.out.println("");
 		}
 	}

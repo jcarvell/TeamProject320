@@ -31,16 +31,16 @@ public class User {
 	public Potion[] getStash() {
 		return stash;
 	}
-	public int health() {
+	public int getHealth() {
 		return health;
 	}
 	public void setHealth(int x) {
 		health=x;
 	}
-	public int strength() {
+	public int getStrength() {
 		return strength;
 	}
-	public int speed() {
+	public int getSpeed() {
 		return speed;
 	}
 	public int getArmoryLength() {
@@ -51,6 +51,9 @@ public class User {
 	}
 	public void setStrength(int x) {
 		strength = x;
+	}
+	public void setSpeed(int x) {
+		speed = x;
 	}
 
 }
