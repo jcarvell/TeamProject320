@@ -1,5 +1,8 @@
+package teamproject.cs320;
 import java.util.Random;
 import java.util.Scanner;
+
+import User;
 
 public class Game {
 	public static void main(String[] args) {
