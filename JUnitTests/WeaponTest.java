@@ -2,6 +2,8 @@ import static org.junit.jupiter.api.Assertions.*;
 
 import org.junit.jupiter.api.Test;
 
+import teamproject.cs320.Weapon;
+
 class WeaponTest {
 	Weapon[] weapons;
 	
