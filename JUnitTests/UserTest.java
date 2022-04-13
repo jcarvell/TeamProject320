@@ -52,7 +52,25 @@ class UserTest {
 
 	@Test
 	void testSetHealth() {
-		fail("Not yet implemented");
+		User Bob = new User(5, 10, 15);
+		assertEquals(Bob.getHealth(), 5);
+		Bob.setHealth(11);
+		assertEquals(Bob.getHealth(), 11);
+		
+		User Sally = new User(10, 5, 0);
+		assertEquals(Sally.getHealth(), 10);
+		Sally.setHealth(8);
+		assertEquals(Sally.getHealth(), 8);
+		
+		User Billy = new User(0, 22, 1);
+		assertEquals(Billy.getHealth(), 0);
+		Billy.setHealth(16);
+		assertEquals(Billy.getHealth(), 16);
+		
+		User Jenny = new User(5, 10, 15);
+		assertEquals(Jenny.getHealth(), 5);
+		Jenny.setHealth(0);
+		assertEquals(Jenny.getHealth(), 0);
 	}
 
 	@Test
