@@ -1,3 +1,4 @@
+package teamproject.cs320;
 import java.util.Random;
 
 public class Room {
@@ -37,4 +38,5 @@ public class Room {
 	public RoomResources getRoomResources() {
 		return resources;
 	}
+	
 }

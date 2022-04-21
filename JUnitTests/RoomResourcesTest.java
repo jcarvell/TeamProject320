@@ -2,6 +2,12 @@ import static org.junit.jupiter.api.Assertions.*;
 
 import org.junit.jupiter.api.Test;
 
+import teamproject.cs320.Enemy;
+import teamproject.cs320.NPCs;
+import teamproject.cs320.Potion;
+import teamproject.cs320.RoomResources;
+import teamproject.cs320.Weapon;
+
 class RoomResourcesTest {
 
 	@Test
@@ -16,7 +22,7 @@ class RoomResourcesTest {
 		Potion p1 = new Potion();
 		Weapon w1 = new Weapon();
 		Enemy e1 = new Enemy();
-		NPCs n1[] = new NPCs[20];
+		NPCs n1 = new NPCs();
 		RoomResources r1 = new RoomResources(p1, w1, e1, n1);
 	}
 
@@ -25,7 +31,7 @@ class RoomResourcesTest {
 		Potion p1 = new Potion(5, 10, "Soup");
 		Weapon w1 = new Weapon();
 		Enemy e1 = new Enemy();
-		NPCs n1[] = new NPCs[20];
+		NPCs n1 = new NPCs();
 		RoomResources r1 = new RoomResources(p1, w1, e1, n1);
 		
 		Potion retrievedPotion = r1.getPotion();
@@ -40,7 +46,7 @@ class RoomResourcesTest {
 		Potion p1 = new Potion();
 		Weapon w1 = new Weapon(10, "Sword of Terror");
 		Enemy e1 = new Enemy();
-		NPCs n1[] = new NPCs[20];
+		NPCs n1 = new NPCs();
 		RoomResources r1 = new RoomResources(p1, w1, e1, n1);
 		
 		Weapon retrievedWeapon = r1.getWeapon();
@@ -53,7 +59,7 @@ class RoomResourcesTest {
 		Potion p1 = new Potion();
 		Weapon w1 = new Weapon();
 		Enemy e1 = new Enemy(3, 6, 9, "Monstrous Lizard");
-		NPCs n1[] = new NPCs[20];
+		NPCs n1 = new NPCs();
 		RoomResources r1 = new RoomResources(p1, w1, e1, n1);
 		
 		Enemy retrievedEnemy = r1.getEnemy();
@@ -68,14 +74,11 @@ class RoomResourcesTest {
 		Potion p1 = new Potion();
 		Weapon w1 = new Weapon();
 		Enemy e1 = new Enemy();
-		NPCs n1[] = new NPCs[2];
-		n1[0] = new NPCs("You will die a horrible death");
-		n1[1] = new NPCs("Cookie?");
+		NPCs n1 = new NPCs("You will die a horrible death");
 		RoomResources r1 = new RoomResources(p1, w1, e1, n1);
 		
-		NPCs retrievedNPCs[] = r1.getNPCArray();
-		assertEquals(retrievedNPCs[0].getDialogue(), "You will die a horrible death");
-		assertEquals(retrievedNPCs[1].getDialogue(), "Cookie?");
+		NPCs retrievedNPCs = r1.getNPCs();
+		assertEquals(retrievedNPCs.getDialogue(), "You will die a horrible death");
 	}
 
 }

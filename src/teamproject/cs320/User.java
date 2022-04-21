@@ -1,6 +1,8 @@
+package teamproject.cs320;
+
 public class User {
-	private int health, strength, speed, armoryLength, stashLength;
-	
+	private int health, strength, speed, armoryLength, stashLength, userPoints;
+	private String currentWeaponName;
 	private Weapon[] armory;
 	private Potion[] stash;
 	
@@ -29,16 +31,16 @@ public class User {
 	public Potion[] getStash() {
 		return stash;
 	}
-	public int health() {
+	public int getHealth() {
 		return health;
 	}
 	public void setHealth(int x) {
 		health=x;
 	}
-	public int strength() {
+	public int getStrength() {
 		return strength;
 	}
-	public int speed() {
+	public int getSpeed() {
 		return speed;
 	}
 	public int getArmoryLength() {
@@ -49,6 +51,23 @@ public class User {
 	}
 	public void setStrength(int x) {
 		strength = x;
+	}
+<<<<<<< Updated upstream
+	public void setSpeed(int x) {
+		speed = x;
+=======
+	public int getUserPoints() {
+		return userPoints;
+	}
+	public void setPoints(int x) {
+		userPoints = x;
+	}
+	public String currentWeaponName() {
+		return currentWeaponName;
+	}
+	public void setCurrentWeapon(String x) {
+		currentWeaponName = x;
+>>>>>>> Stashed changes
 	}
 
 }

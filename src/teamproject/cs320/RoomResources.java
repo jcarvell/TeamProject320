@@ -1,3 +1,4 @@
+package teamproject.cs320;
 import java.util.Random;
 import java.util.Scanner;
 
@@ -42,7 +43,10 @@ public class RoomResources {
 			potion = new Potion(0,0, "No potion");
 		}
 		
+
 		npc = new NPCs();
+
+		
 		
 		
 		if(numWeapons != 0) {
@@ -85,9 +89,16 @@ public class RoomResources {
 	}
 	
 	
-	public void noEnemyroom(User user) {
+	public void noEnemyRoom(User user, Room choice1) {
 		System.out.println("There is no enemy in this room");
-		System.out.println(getNPCs().getDialogue());
+		System.out.println(" YET ");
+		System.out.println("This room is called: " + choice1.getName());
+		//need to change dialogue. Pass variable choice. 
+		//Why is this printing HELLO!!!!!!!!!!!!!!!!!!!!!
+		
+		//npc.setRoomName(choice1.getName());
+		//npc.printDialogue();
+		
 		System.out.println("There are some resources in the room would you like to check them out?");
 		int npcChoice = in.nextInt();
 		if(npcChoice == 1 ) {
@@ -96,9 +107,9 @@ public class RoomResources {
 			System.out.println("Would you like to take either of the items or would you like to leave?");
 			int resourceChoice = in.nextInt();
 			if(resourceChoice == 1 && getWeapon().getName() != "No Weapon") {
-				if(getWeapon().getStrengthBuff() < user.strength()) {
+				if(getWeapon().getStrengthBuff() < user.getStrength()) {
 					System.out.println("Are you sure you would like to pick this up?");
-					System.out.println("Your current strength is " + user.strength() + " and the " + getWeapon().getName() + "only has " + getWeapon().getStrengthBuff());
+					System.out.println("Your current strength is " + user.getStrength() + " and the " + getWeapon().getName() + "only has " + getWeapon().getStrengthBuff());
 					int weaponpickupChoice = in.nextInt();
 					if(weaponpickupChoice == 1) {
 						resourceChoice = 1;
@@ -106,9 +117,16 @@ public class RoomResources {
 						resourceChoice = 0;
 					}
 				}
-				System.out.println("Your strength was: " + user.strength());
+				System.out.println("Your strength was: " + user.getStrength());
 				user.setStrength(getWeapon().getStrengthBuff());
-				System.out.println("Now your new strength is: " + user.strength());
+				System.out.println("Now your new strength is: " + user.getStrength());
+				System.out.println("Your weapon was: " + user.currentWeaponName());
+				System.out.println("Your strength was: " + user.getStrength());
+				user.setCurrentWeapon(getWeapon().getName());
+				user.setStrength(getWeapon().getStrengthBuff());
+				System.out.println("Now your new weapon name is: " + user.currentWeaponName());
+				System.out.println("Now your new strength is: " + user.getStrength());
+
 			}
 			
 
@@ -117,7 +135,15 @@ public class RoomResources {
 		}else {
 			System.out.println("");
 	}
-	
-
 }
+	public void calculatePoints(User user) {
+		int x = enemy.getPoints();
+		int y = user.getUserPoints();
+		user.setPoints(x + y);
+		System.out.println("Your points before the battle where: " + y);
+		System.out.println("The enemy: " + enemy.getName() + " awarded you " + x + " points.");
+		System.out.println("Your new points total is: " + user.getUserPoints());
+		
+	}
+	
 }
