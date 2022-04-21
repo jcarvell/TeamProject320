@@ -75,7 +75,17 @@ class UserTest {
 
 	@Test
 	void testGetStrength() {
-		fail("Not yet implemented");
+		User Bob = new User(5, 10, 15);
+		assertEquals(Bob.getStrength(), 10);
+		
+		User Sally = new User(10, 5, 0);
+		assertEquals(Sally.getStrength(), 5);
+		
+		User Billy = new User(0, 22, 1);
+		assertEquals(Billy.getStrength(), 22);
+		
+		User Suzy = new User(10, 0, 10);
+		assertEquals(Suzy.getStrength(), 0);
 	}
 
 	@Test
@@ -95,7 +105,28 @@ class UserTest {
 	
 	@Test
 	void testSetStrength() {
-		fail("Not yet implemented");
+		User Bob = new User(5, 10, 15);
+		assertEquals(Bob.getStrength(), 10);
+		Bob.setStrength(3);
+		assertEquals(Bob.getStrength(), 3);
+		
+		User Sally = new User(10, 5, 0);
+		assertEquals(Sally.getStrength(), 5);
+		Sally.setStrength(7);
+		assertEquals(Sally.getStrength(), 7);
+		
+		User Billy = new User(0, 22, 1);
+		assertEquals(Billy.getStrength(), 22);
+		Billy.setStrength(11);
+		assertEquals(Billy.getStrength(), 11);
+		
+		User Suzy = new User(10, 0, 10);
+		assertEquals(Suzy.getStrength(), 0);
+		Suzy.setStrength(4);
+		assertEquals(Suzy.getStrength(), 4);
+		
+		User June = new User(3, 6 , 9);
+		assertEquals(June.getStrength(), 6);
 	}
 	
 	@Test
