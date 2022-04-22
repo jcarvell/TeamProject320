@@ -9,10 +9,11 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-import edu.ycp.cs320.booksdb.model.Author;
-import edu.ycp.cs320.booksdb.model.Book;
-import edu.ycp.cs320.booksdb.model.BookAuthor;
-import edu.ycp.cs320.booksdb.model.Pair;
+import Database_Model.Player;
+import teamproject.cs320.Potion;
+import teamproject.cs320.Room;
+import teamproject.cs320.Weapon;
+
 
 public class DerbyDatabase implements IDatabase {
 	static {
@@ -32,28 +33,26 @@ public class DerbyDatabase implements IDatabase {
 	
 	// transaction that retrieves a Book, and its Author by Title
 	@Override
-	public List<Pair<Author, Book>> create_table() {
-		return executeTransaction(new Transaction<List<Pair<Author,Book>>>() {
+	public List<Player> insertPlayer(String name, int health, int speed, int strength, Weapon weapon, Potion potion, Room currentRoom) {
+		return executeTransaction(new Transaction<List<Player>() {
 			@Override
-			public List<Pair<Author, Book>> execute(Connection conn) throws SQLException {
+			public List<Player> execute(Connection conn) throws SQLException {
 				PreparedStatement stmt = null;
 				ResultSet resultSet = null;
 				
 				try {
 					stmt = conn.prepareStatement(
-							"create table player_table ( " 
-							+"  player_id int, " 
-							+"  player_health int,  " 
-							+ "  player_speed int,"
-							+ "player_weapon(20),"
-							+ "player_Strength int"
-							+ "player_CurrentRoom(30)"
-							+ " );"
+							"insert into player (player.name, player.health, player.speed, player.strength, player.weapon, player.potion, player.currentRoom) " 
+							+"  values(?, ?, ?, ?, ?, ?, ?) " 
 							
 					);
-					stmt.setString();
+					stmt.setString(1, name);
+					stmt.setInt(2, health);
+					stmt.setInt(3, speed);
+					stmt.setInt(4, strength);
+					stmt.set
 					
-					List<Pair<Author, Book>> result = new ArrayList<Pair<Author,Book>>();
+					List<Player> result = new ArrayList<Player>();
 					
 					resultSet = stmt.executeQuery();
 					

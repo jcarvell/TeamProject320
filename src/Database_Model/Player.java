@@ -1,17 +1,17 @@
 package Database_Model;
 
-import teamproject.cs320.Potion;
-import teamproject.cs320.Room;
-import teamproject.cs320.Weapon;
-
 public class Player {
 	private String playerName;
 	private int health;  
 	private int speed;
 	private int strength;
-	private Weapon weapon;
-	private Potion[] potion;
-	private Room currentRoom;
+	private String weaponName;
+	private int weaponStrength;
+	private String potionName;
+	private int numPotions;
+	private int potionHealth;
+	private int potionSpeed;
+	private String currentRoomName;
 	
 	public Player() {
 		
@@ -49,27 +49,60 @@ public class Player {
 		return strength;
 	}
 	
-	public void setWeapon(Weapon weapon) {
-		this.weapon = weapon;
+	public void setWeaponName(String weaponName) {
+		this.weaponName = weaponName;
 	}
 	
-	public Weapon getWeapon() {
-		return weapon;
+	public String getWeaponName() {
+		return weaponName;
 	}
 	
-	public void setPotion(Potion[] potion) {
-		this.potion = potion;
+	public void setWeaponStrength(int weaponStrength) {
+		this.weaponStrength = weaponStrength;
 	}
 	
-	public Potion[] getPotion() {
-		return potion;
+	public int getWeaponStrength() {
+		return weaponStrength;
 	}
 	
-	public void setCurrentRoom(Room currentRoom) {
-		this.currentRoom = currentRoom;
+	public void setPotionName(String potionName) {
+		this.potionName = potionName;
 	}
 	
-	public Room getCurrentRoom() {
-		return currentRoom;
+	public String getPotionName() {
+		return potionName;
 	}
+	
+	public void setNumPotions(int numPotions) {
+		this.numPotions = numPotions;
+	}
+	
+	public int getNumPotions() {
+		return numPotions;
+	}
+	
+	public void setPotionHealth(int potionHealth) {
+		this.potionHealth = potionHealth;
+	}
+	
+	public int getPotionHealth() {
+		return potionHealth;
+	}
+	
+	public void setPotionSpeed(int potionSpeed) {
+		this.potionSpeed = potionSpeed;
+	}
+	
+	public int getPotionSpeed() {
+		return potionSpeed;
+	}
+	
+	public void setCurrentRoomName(String currentRoomName) {
+		this.currentRoomName = currentRoomName;
+	}
+	
+	public String getCurrentRoomName() {
+		return currentRoomName;
+	}
+	
 }
