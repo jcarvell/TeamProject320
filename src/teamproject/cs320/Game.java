@@ -143,7 +143,10 @@ GAME:
 			System.out.println("");
 		}
 	}
-	}
+}
+public Game() {
+	
+}
 
 
 	
