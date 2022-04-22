@@ -33,8 +33,8 @@ public class DerbyDatabase implements IDatabase {
 	
 	// transaction that retrieves a Book, and its Author by Title
 	@Override
-	public List<Player> insertPlayer(String name, int health, int speed, int strength, Weapon weapon, Potion potion, Room currentRoom) {
-		return executeTransaction(new Transaction<List<Player>() {
+	public List<Player> insertPlayer(String name, int health, int speed, int strength, String weaponName, int weaponStrength, String potionName, int potionHealth, int potionSpeed, String currentRoomName) {
+		return executeTransaction(new Transaction<List<Player>>() {
 			@Override
 			public List<Player> execute(Connection conn) throws SQLException {
 				PreparedStatement stmt = null;
@@ -42,7 +42,8 @@ public class DerbyDatabase implements IDatabase {
 				
 				try {
 					stmt = conn.prepareStatement(
-							"insert into player (player.name, player.health, player.speed, player.strength, player.weapon, player.potion, player.currentRoom) " 
+							"insert into player (player.name, player.health, player.speed, player.strength, player.weaponName, player.weaponStrength,"
+							+ "player.potionName, player.potionHealth, player.potionSpeed, player.currentRoomName) " 
 							+"  values(?, ?, ?, ?, ?, ?, ?) " 
 							
 					);
@@ -50,7 +51,10 @@ public class DerbyDatabase implements IDatabase {
 					stmt.setInt(2, health);
 					stmt.setInt(3, speed);
 					stmt.setInt(4, strength);
-					stmt.set
+					stmt.setString(5, weaponName);
+					stmt.setInt(6, weaponStrength);
+					stmt.setString(7, potionName);
+					stmt.setInt(8, potionHealth);
 					
 					List<Player> result = new ArrayList<Player>();
 					

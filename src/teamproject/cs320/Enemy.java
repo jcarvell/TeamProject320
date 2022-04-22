@@ -14,7 +14,7 @@ public class Enemy {
 	public static final String[] names = {"No Enemy","Zombie" , "Alligator" , "Baby" , "King Zombie"};
 	public static final int [] enemy_Health = { 0, 50 , 50, 5, 100000 };
 	public static final  int [] enemy_Strength = { 0, 10 , 50 , 1, 100 };
-	public static final int [] enemy_Speed = { 0, 5 , 10 , 1, 100 };
+	public static final int [] enemy_Speed = { 0, 5 , 1 , 1, 100 };
 	
 	public Enemy(int hel, int str,int spe, String n) {
 		health=hel;
