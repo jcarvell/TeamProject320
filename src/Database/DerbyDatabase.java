@@ -31,16 +31,31 @@ public class DerbyDatabase implements IDatabase {
 	private static final int MAX_ATTEMPTS = 10;
 
 	
-	// transaction that retrieves a Book, and its Author by Title
+	// save a new game state
 	@Override
-	public List<Player> insertPlayer(String name, int health, int speed, int strength, String weaponName, int weaponStrength, String potionName, int potionHealth, int potionSpeed, String currentRoomName) {
-		return executeTransaction(new Transaction<List<Player>>() {
+	public String insertPlayer(String name, int health, int speed, int strength, String weaponName, int weaponStrength, String potionName, int potionHealth, int potionSpeed, String currentRoomName) {
+		return executeTransaction(new Transaction<String>() {
 			@Override
-			public List<Player> execute(Connection conn) throws SQLException {
+			public String execute(Connection conn) throws SQLException {
 				PreparedStatement stmt = null;
-				ResultSet resultSet = null;
+				PreparedStatement deleteSmt = null;
+				ResultSet deleteSet = null;
 				
 				try {
+					// delete the player's previous saved game (since it is the same game but without their current progress)
+					deleteSmt = conn.prepareStatement(
+							"delete from player"
+							+ "where player.name = ?"
+					);
+					deleteSmt.setString(1, name);
+			
+					deleteSet = deleteSmt.executeQuery();
+				
+					
+					// check that it delete correctly
+					// add later, using Ed's find player function
+					
+					// insert the player's current game state
 					stmt = conn.prepareStatement(
 							"insert into player (player.name, player.health, player.speed, player.strength, player.weaponName, player.weaponStrength,"
 							+ "player.potionName, player.potionHealth, player.potionSpeed, player.currentRoomName) " 
@@ -56,32 +71,15 @@ public class DerbyDatabase implements IDatabase {
 					stmt.setString(7, potionName);
 					stmt.setInt(8, potionHealth);
 					
-					List<Player> result = new ArrayList<Player>();
 					
-					resultSet = stmt.executeQuery();
+					stmt.executeUpdate();
 					
-					// for testing that a result was returned
-					Boolean found = false;
+					// I don't think it has anything it needs to return but I couldn't figure out how to get the function return type to be void
+					return name;
 					
-					while (resultSet.next()) {
-						found = true;
-						
-						Author author = new Author();
-						loadAuthor(author, resultSet, 1);
-						Book book = new Book();
-						loadBook(book, resultSet, 4);
-						
-						result.add(new Pair<Author, Book>(author, book));
-					}
-					
-					// check if the title was found
-					if (!found) {
-						System.out.println("<" + title + "> was not found in the books table");
-					}
-					
-					return result;
 				} finally {
-					DBUtil.closeQuietly(resultSet);
+					DBUtil.closeQuietly(deleteSet);
+					DBUtil.closeQuietly(deleteSmt);
 					DBUtil.closeQuietly(stmt);
 				}
 			}
