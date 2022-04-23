@@ -15,7 +15,7 @@ public class InitialData {
 
 	
 	// reads initial BookAuthor data from CSV file and returns a List of BookAuthors
-	public static List<BookAuthor> getBookAuthors() throws IOException {
+	public static List<Plyaer> getBookAuthors() throws IOException {
 		List<BookAuthor> bookAuthorList = new ArrayList<BookAuthor>();
 		ReadCSV readBookAuthors = new ReadCSV("book_authors.csv");
 		try {

@@ -12,5 +12,7 @@ public interface IDatabase {
 	public Integer insertBookIntoBooksTable(String title, String isbn, int published, String lastName, String firstName);
 	public List<Pair<Author, Book>> findAllBooksWithAuthors();
 	public List<Author> findAllAuthors();
-	public List<Author> removeBookByTitle(String title);		
+	public List<Author> removeBookByTitle(String title);	
+	
+	public List<Player> retrieve();
 }
