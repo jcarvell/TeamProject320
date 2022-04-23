@@ -38,7 +38,6 @@ public class DerbyDatabase implements IDatabase {
 
 	
 	// save a new game state
-	@Override
 	public String insertPlayer(String name, int health, int speed, int strength, String weaponName, int weaponStrength, String potionName, int potionHealth, int potionSpeed, String currentRoomName, String enemyName, int enemyHealth, int enemySpeed, int enemyStrength) {
 		return executeTransaction(new Transaction<String>() {
 			@Override
@@ -66,7 +65,7 @@ public class DerbyDatabase implements IDatabase {
 							"insert into player (player.name, player.health, player.speed, player.strength, player.weaponName, "
 							+ "player.weaponStrength,player.potionName, player.potionHealth, player.potionSpeed, player.currentRoomName, "
 							+ "player.enemyName, player.enemyStrength, player.enemySpeed, player.enemyHealth) " 
-							+"  values(?, ?, ?, ?, ?, ?, ?) " 
+							+"  values(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?) " 
 							
 					);
 					stmt.setString(1, name);
@@ -78,7 +77,11 @@ public class DerbyDatabase implements IDatabase {
 					stmt.setString(7, potionName);
 					stmt.setInt(8, potionHealth);
 					stmt.setInt(9, potionSpeed);
-					
+					stmt.setString(10, currentRoomName);
+					stmt.setString(11, enemyName);
+					stmt.setInt(12, enemyStrength);
+					stmt.setInt(13, enemySpeed);
+					stmt.setInt(14, enemyHealth);
 					
 					
 					stmt.executeUpdate();
@@ -96,6 +99,12 @@ public class DerbyDatabase implements IDatabase {
 	}
 	
 	
+	private String executeTransaction(Transaction<String> transaction) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+
 	public List<Player> retrieveGameStateByName(final String name) {
 		return executeTransaction(new Transaction<List<Player>>() {
 			@Override
