@@ -2,6 +2,7 @@ package Database;
 
 import java.util.List;
 
+import Database_Model.Player;
 import edu.ycp.cs320.booksdb.model.Author;
 import edu.ycp.cs320.booksdb.model.Book;
 import edu.ycp.cs320.booksdb.model.Pair;
@@ -12,7 +13,8 @@ public interface IDatabase {
 	public Integer insertBookIntoBooksTable(String title, String isbn, int published, String lastName, String firstName);
 	public List<Pair<Author, Book>> findAllBooksWithAuthors();
 	public List<Author> findAllAuthors();
-	public List<Author> removeBookByTitle(String title);	
-	
+	public List<Author> removeBookByTitle(String title);
+	public String insertPlayer(String name, int health, int speed, int strength, String weaponName, int weaponStrength,
+			String potionName, int potionHealth, int potionSpeed, String currentRoomName);		
 	public List<Player> retrieve();
 }
