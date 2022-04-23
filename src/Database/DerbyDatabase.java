@@ -39,7 +39,7 @@ public class DerbyDatabase implements IDatabase {
 	
 	// save a new game state
 	@Override
-	public String insertPlayer(String name, int health, int speed, int strength, String weaponName, int weaponStrength, String potionName, int potionHealth, int potionSpeed, String currentRoomName) {
+	public String insertPlayer(String name, int health, int speed, int strength, String weaponName, int weaponStrength, String potionName, int potionHealth, int potionSpeed, String currentRoomName, String enemyName, int enemyHealth, int enemySpeed, int enemyStrength) {
 		return executeTransaction(new Transaction<String>() {
 			@Override
 			public String execute(Connection conn) throws SQLException {
@@ -63,8 +63,9 @@ public class DerbyDatabase implements IDatabase {
 					
 					// insert the player's current game state
 					stmt = conn.prepareStatement(
-							"insert into player (player.name, player.health, player.speed, player.strength, player.weaponName, player.weaponStrength,"
-							+ "player.potionName, player.potionHealth, player.potionSpeed, player.currentRoomName) " 
+							"insert into player (player.name, player.health, player.speed, player.strength, player.weaponName, "
+							+ "player.weaponStrength,player.potionName, player.potionHealth, player.potionSpeed, player.currentRoomName, "
+							+ "player.enemyName, player.enemyStrength, player.enemySpeed, player.enemyHealth) " 
 							+"  values(?, ?, ?, ?, ?, ?, ?) " 
 							
 					);
@@ -76,6 +77,8 @@ public class DerbyDatabase implements IDatabase {
 					stmt.setInt(6, weaponStrength);
 					stmt.setString(7, potionName);
 					stmt.setInt(8, potionHealth);
+					stmt.setInt(9, potionSpeed);
+					
 					
 					
 					stmt.executeUpdate();

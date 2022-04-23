@@ -11,6 +11,10 @@ public class Player {
 	private int numPotions;
 	private int potionHealth;
 	private int potionSpeed;
+	private String enemyName;
+	private int enemyStrength;
+	private int enemySpeed;
+	private int enemyHealth;
 	private String currentRoomName;
 	
 	public Player() {
@@ -95,6 +99,38 @@ public class Player {
 	
 	public int getPotionSpeed() {
 		return potionSpeed;
+	}
+	
+	public void setEnemyName(String enemyName) {
+		this.enemyName = enemyName;
+	}
+	
+	public String getEnemyName() {
+		return enemyName;
+	}
+	
+	public void setEnemySrength(int enemyStrength) {
+		this.enemyStrength = enemyStrength;
+	}
+	
+	public int getEnemyStrengthh() {
+		return enemyStrength;
+	}
+	
+	public void setEnemyHealth(int enemyHealth) {
+		this.enemyHealth = enemyHealth;
+	}
+	
+	public int getEnemyHealth() {
+		return enemyHealth;
+	}
+	
+	public void setEnemySpeed(int enemySpeed) {
+		this.enemySpeed = enemySpeed;
+	}
+	
+	public int getEnemySpeed() {
+		return enemySpeed;
 	}
 	
 	public void setCurrentRoomName(String currentRoomName) {
