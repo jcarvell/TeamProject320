@@ -7,7 +7,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
- import teamproject.cs320.*;
+import Controller.GameController;
+import Database_Model.Player;
+import teamproject.cs320.*;
 
 public class gameServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
@@ -16,7 +18,7 @@ public class gameServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp)
 			throws ServletException, IOException {
 		
-		System.out.println("GuessingGame Servlet: doGet");	
+		System.out.println("Game Servlet: doGet");	
 		
 		// call JSP to generate empty form
 		req.getRequestDispatcher("/_view/babyZombies.jsp").forward(req, resp);
@@ -26,15 +28,15 @@ public class gameServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp)
 			throws ServletException, IOException {
 		
-		System.out.println("GuessingGame Servlet: doPost");
+		System.out.println("Game Servlet: doPost");
 		
 		// create GuessingGame model - model does not persist between requests
 		// must recreate it each time a Post comes in 
-		GuessingGame model = new GuessingGame();
+		Player model = new Player();
 
 		// create GuessingGame controller - controller does not persist between requests
 		// must recreate it each time a Post comes in
-		GuessingGameController controller = new GuessingGameController();
+		GameController controller = new GameController();
 		
 		// assign model reference to controller so that controller can access model
 		controller.setModel(model);
@@ -55,15 +57,17 @@ public class gameServlet extends HttpServlet {
 			// initialize model with the old min, max values
 			// since the data does not persist between posts, we need to 
 			// recreate and re-initialize the model each time
-			model.setMin(curMin);
-			model.setMax(curMax);
+			//model.setMin(curMin);
+			//model.setMax(curMax);
 
 			// now check to see which button the user pressed
 			// and adjust min, max, and guess accordingly
 			// must call controller methods to do this since the
 			// view only reads the model data, it never changes
 			// the model - only the controller can change the model
-			if (req.getParameter("gotIt") != null) {
+			
+			/*Based on which button is clicked what happens
+			 *if (req.getParameter("gotIt") != null) {
 				controller.setNumberFound();
 			} else if (req.getParameter("less") != null) {
 				controller.setNumberIsLessThanGuess();
@@ -72,7 +76,7 @@ public class gameServlet extends HttpServlet {
 			} else {
 				throw new ServletException("Unknown command");
 			}
-		}
+		}*/
 		
 		// set "game" attribute to the model reference
 		// the JSP will reference the model elements through "game"
