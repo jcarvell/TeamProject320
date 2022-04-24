@@ -104,140 +104,47 @@ public class DerbyDatabase implements IDatabase {
 		return executeTransaction(new Transaction<List<Player>>() {
 			@Override
 			public List<Player> execute(Connection conn) throws SQLException {
-				PreparedStatement stmt1 = null;
-				PreparedStatement stmt2 = null;
-				PreparedStatement stmt3 = null;
-				PreparedStatement stmt4 = null;
-				PreparedStatement stmt5 = null;
-				PreparedStatement stmt6 = null;							
-				
-				ResultSet resultSet1    = null;			
+				PreparedStatement stmtDelete = null;
+				PreparedStatement stmt2 = null;					
+						
 				ResultSet resultSet2    = null;
-				ResultSet resultSet5    = null;
 				
-				try {
-					// first get the Author(s) of the Book to be deleted
-					// just in case it's the only Book by this Author
-					// in which case, we should also remove the Author(s)
-					stmt1 = conn.prepareStatement(
-							"select authors.* " +
-							"  from  authors, books, bookAuthors " +
-							"  where books.title = ? " +
-							"    and authors.author_id = bookAuthors.author_id " +
-							"    and books.book_id     = bookAuthors.book_id"
-					);
-					
-					// get the Book's Author(s)
-					stmt1.setString(1, title);
-					resultSet1 = stmt1.executeQuery();
-					
-					// assemble list of Authors from query
-					List<Author> authors = new ArrayList<Author>();					
-				
-					while (resultSet1.next()) {
-						Author author = new Author();
-						loadAuthor(author, resultSet1, 1);
-						authors.add(author);
-					}
-					
-					// check if any Authors were found
-					// this shouldn't be necessary, there should not be a Book in the DB without an Author
-					if (authors.size() == 0) {
-						System.out.println("No author was found for title <" + title + "> in the database");
-					}
-										
-					// now get the Book(s) to be deleted
-					// we will need the book_id to remove associated entries in BookAuthors (junction table)
-				
-					stmt2 = conn.prepareStatement(
-							"select books.* " +
-							"  from  books " +
-							"  where books.title = ? "
-					);
-					
-					// get the Book(s)
-					stmt2.setString(1, title);
-					resultSet2 = stmt2.executeQuery();
-					
-					// assemble list of Books from query
-					List<Book> books = new ArrayList<Book>();					
-				
-					while (resultSet2.next()) {
-						Book book = new Book();
-						loadBook(book, resultSet2, 1);
-						books.add(book);
-					}
-					
-					// first delete entries in BookAuthors junction table
-					// can't delete entries in Books or Authors tables while they have foreign keys in junction table
-					// prepare to delete the junction table entries (bookAuthors)
-					stmt3 = conn.prepareStatement(
-							"delete from bookAuthors " +
-							"  where book_id = ? "
-					);
-					
-					// delete the junction table entries from the DB for this title
-					// this works if there are not multiple books with the same name
-					stmt3.setInt(1, books.get(0).getBookId());
-					stmt3.executeUpdate();
-					
-					System.out.println("Deleted junction table entries for book(s) <" + title + "> from DB");									
-					
-					// now delete entries in Books table for this title
-					stmt4 = conn.prepareStatement(
-							"delete from books " +
+				try {							
+					// delete entries in Player table for this name
+					stmtDelete = conn.prepareStatement(
+							"delete from players " +
 							"  where title = ? "
 					);
 					
 					// delete the Book entries from the DB for this title
-					stmt4.setString(1, title);
-					stmt4.executeUpdate();
+					stmtDelete.setString(1, name);
+					stmtDelete.executeQuery();
 					
-					System.out.println("Deleted book(s) with title <" + title + "> from DB");									
+					System.out.println("Deleted book(s) with title <" + name + "> from DB");									
 					
-					// now check if the Author(s) have any Books remaining in the DB
-					// only need to check if there are any entries in junction table that have this author ID
-					for (int i = 0; i < authors.size(); i++) {
-						// prepare to find Books for this Author
-						stmt5 = conn.prepareStatement(
-								"select books.book_id from books, bookAuthors " +
-								"  where bookAuthors.author_id = ? "
-						);
-						
-						// retrieve any remaining books for this Author
-						stmt5.setInt(1, books.get(i).getAuthorId());
-						resultSet5 = stmt5.executeQuery();						
-
-						// if nothing returned, then delete Author
-						if (!resultSet5.next()) {
-							stmt6 = conn.prepareStatement(
-								"delete from authors " +
-								"  where author_id = ?"
-							);
-							
-							// delete the Author from DB
-							stmt6.setInt(1, authors.get(i).getAuthorId());
-							stmt6.executeUpdate();
-							
-							System.out.println("Deleted author <" + authors.get(i).getLastname() + ", " + authors.get(i).getFirstname() + "> from DB");
-							
-							// we're done with this, so close it, since we might have more to do
-							DBUtil.closeQuietly(stmt6);
-						}
-						
-						// we're done with this, so close it since we might have more to do
-						DBUtil.closeQuietly(resultSet5);
-						DBUtil.closeQuietly(stmt5);
+					// look at remaining players
+					stmt2 = conn.prepareStatement(
+							"select * from players "
+					);
+					
+					resultSet2 = stmt2.executeQuery();
+					
+					// assemble list of remaining Players from query
+					List<Player> players = new ArrayList<Player>();					
+				
+					while (resultSet2.next()) {
+						Player player = new Player();
+						loadPlayer(player, resultSet2, 1);
+						player.add(player);
 					}
-					return authors;
-				} finally {
-					DBUtil.closeQuietly(resultSet1);
-					DBUtil.closeQuietly(resultSet2);
 					
-					DBUtil.closeQuietly(stmt1);
-					DBUtil.closeQuietly(stmt2);
-					DBUtil.closeQuietly(stmt3);					
-					DBUtil.closeQuietly(stmt4);					
+					
+					return players;
+				} finally {
+					
+					DBUtil.closeQuietly(resultSet2);
+					DBUtil.closeQuietly(stmtDelete);
+					DBUtil.closeQuietly(stmt2);				
 				}
 			}
 		});
@@ -245,6 +152,11 @@ public class DerbyDatabase implements IDatabase {
 
 	
 	
+	private List<Player> executeTransaction(Transaction<List<Player>> transaction) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 	private String executeTransaction(Transaction<String> transaction) {
 		// TODO Auto-generated method stub
 		return null;
