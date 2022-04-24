@@ -174,19 +174,6 @@ public class DerbyDatabase implements IDatabase {
 		});
 	}
 
-	
-
-	
-	private List<Player> executeTransaction(Transaction<List<Player>> transaction) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	private String executeTransaction(Transaction<String> transaction) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
 
 	public List<Player> retrieveGameStateByName(final String name) {
 		return executeTransaction(new Transaction<List<Player>>() {
@@ -231,6 +218,62 @@ public class DerbyDatabase implements IDatabase {
 			}
 		});
 	}
+	
+	// wrapper SQL transaction function that calls actual transaction function (which has retries)
+	public<ResultType> ResultType executeTransaction(Transaction<ResultType> txn) {
+		try {
+			return doExecuteTransaction(txn);
+		} catch (SQLException e) {
+			throw new PersistenceException("Transaction failed", e);
+		}
+	}
+	
+	// SQL transaction function which retries the transaction MAX_ATTEMPTS times before failing
+	public<ResultType> ResultType doExecuteTransaction(Transaction<ResultType> txn) throws SQLException {
+		Connection conn = connect();
+		
+		try {
+			int numAttempts = 0;
+			boolean success = false;
+			ResultType result = null;
+			
+			while (!success && numAttempts < MAX_ATTEMPTS) {
+				try {
+					result = txn.execute(conn);
+					conn.commit();
+					success = true;
+				} catch (SQLException e) {
+					if (e.getSQLState() != null && e.getSQLState().equals("41000")) {
+						// Deadlock: retry (unless max retry count has been reached)
+						numAttempts++;
+					} else {
+						// Some other kind of SQLException
+						throw e;
+					}
+				}
+			}
+			
+			if (!success) {
+				throw new SQLException("Transaction failed (too many retries)");
+			}
+			
+			// Success!
+			return result;
+		} finally {
+			DBUtil.closeQuietly(conn);
+		}
+	}
+	
+	private Connection connect() throws SQLException {
+		Connection conn = DriverManager.getConnection("jdbc:derby:C:/CS320-2022-LibraryExample-DB/library.db;create=true");		
+		
+		// Set autocommit() to false to allow the execution of
+		// multiple queries/statements as part of the same transaction.
+		conn.setAutoCommit(false);
+		
+		return conn;
+	}
+	
 	//This is a function
 	public void createTables() {
 		executeTransaction(new Transaction<Boolean>() {
@@ -324,7 +367,7 @@ public class DerbyDatabase implements IDatabase {
 		});
 	}
 	
-
+	
 	// The main method creates the database tables and loads the initial data.
 	public static void main(String[] args) throws IOException {
 		System.out.println("Creating tables...");
