@@ -52,10 +52,11 @@ public class User {
 	public void setStrength(int x) {
 		strength = x;
 	}
-<<<<<<< Updated upstream
+
 	public void setSpeed(int x) {
 		speed = x;
-=======
+	}
+
 	public int getUserPoints() {
 		return userPoints;
 	}
@@ -67,7 +68,6 @@ public class User {
 	}
 	public void setCurrentWeapon(String x) {
 		currentWeaponName = x;
->>>>>>> Stashed changes
 	}
 
 }

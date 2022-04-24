@@ -3,6 +3,10 @@ package teamproject.cs320;
 import java.util.Scanner;
 import java.util.Random;
 import java.util.Timer;
+import Database.IDatabase;
+import Database_functions.InitDatabase;
+import Database.DatabaseProvider;
+import Database.DerbyDatabase;
 
 // This is the action of combat in the game. 
 // still need to implement a model and controller class to have setters and getters. 
@@ -45,9 +49,22 @@ GAME:
 						System.out.println("");
 					}
 					
-
+					
+					// ask if you want to save game (this can be anywhere/should maybe be at more points)
+					System.out.println("Would you like to save game? 1. Yes 2. No");
+					int save = in.nextInt();
+					if(save == 1) {
+						System.out.println("Enter your name: ");
+						String playerName = in.nextLine();
+						// Create the default IDatabase instance
+						InitDatabase.init(in);
+						IDatabase db = DatabaseProvider.getInstance();
+						db.insertPlayer(playerName, user.getHealth(), user.getSpeed(), user.getStrength(), user.getArmory()[0].getName(), user.getArmory()[0].getStrengthBuff(), user.getStash()[0].getName(), user.getStash()[0].getHealthIncreaseAmount(), user.getStash()[0].getSpeedIncreaseAmount(), temp.getName(), temp.getRoomResources().getEnemy().getName(), temp.getRoomResources().getEnemy().getHealth(), temp.getRoomResources().getEnemy().getSpeed(), temp.getRoomResources().getEnemy().getStrength());
+					}
+					
 					System.out.println("You have two options 1. " + choice1.getName() + " or you can choose 2. " + choice2.getName() );
 					int choice = in.nextInt();
+					
 					
 					if( choice == 1) {
 						System.out.println("You have entered " + choice1.getName());
@@ -144,9 +161,8 @@ GAME:
 		}
 	}
 }
-public Game() {
-	
-}
+
+
 
 
 	
