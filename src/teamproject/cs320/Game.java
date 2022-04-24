@@ -59,6 +59,7 @@ GAME:
 						// Create the default IDatabase instance
 						InitDatabase.init(in);
 						IDatabase db = DatabaseProvider.getInstance();
+						//Alina is the one who typed out the following line:
 						//db.insertPlayer(playerName, user.getHealth(), user.getSpeed(), user.getStrength(), user.getArmory()[0].getName(), user.getArmory()[0].getStrengthBuff(), user.getStash()[0].getName(), user.getStash()[0].getHealthIncreaseAmount(), user.getStash()[0].getSpeedIncreaseAmount(), temp.getName(), temp.getRoomResources().getEnemy().getName(), temp.getRoomResources().getEnemy().getHealth(), temp.getRoomResources().getEnemy().getSpeed(), temp.getRoomResources().getEnemy().getStrength());
 						db.insertPlayer(playerName, 5, 10, 5, "fake", 5, "fake potion", 99, 98, "Room", "enemy", 8, 7, 6);
 					}

@@ -324,7 +324,7 @@ public class DerbyDatabase implements IDatabase {
 				
 				
 				try {
-					player     = InitialData.getPlayer();
+					playerList     = InitialData.getPlayer();
 									
 				} catch (IOException e) {
 					throw new SQLException("Couldn't read initial data", e);
