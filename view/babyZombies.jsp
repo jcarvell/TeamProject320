@@ -17,14 +17,14 @@
 
 	<body>
 
-<h1 class="label">Welcome to the Baby Zombies Game</h1>
-
-		<form action="${pageContext.servletContext.contextPath}/game.java" method="post">
-			<table>
-	
-	
-			</table>
+<h1 class="label">Baby Zombies Game</h1>
 			<input type="Submit" name="submit" value="Start Game">
 		</form>
+		<form action="${pageContext.servletContext.contextPath}/game.java">
+		  <label for="userText">Your decision</label>
+		  <input type="text" id="userText" name="userText"><br><br>
+		</form>
+		
+		
 	</body>
 </html>

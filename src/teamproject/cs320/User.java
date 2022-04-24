@@ -52,10 +52,11 @@ public class User {
 	public void setStrength(int x) {
 		strength = x;
 	}
+
 	public void setSpeed(int x) {
 		speed = x;
 	}
-		
+
 	public int getUserPoints() {
 		return userPoints;
 	}
