@@ -109,7 +109,7 @@ public class Player {
 		return enemyName;
 	}
 	
-	public void setEnemySrength(int enemyStrength) {
+	public void setEnemyStrength(int enemyStrength) {
 		this.enemyStrength = enemyStrength;
 	}
 	

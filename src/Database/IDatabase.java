@@ -13,8 +13,10 @@ public interface IDatabase {
 	public Integer insertBookIntoBooksTable(String title, String isbn, int published, String lastName, String firstName);
 	public List<Pair<Author, Book>> findAllBooksWithAuthors();
 	public List<Author> findAllAuthors();
-	public List<Author> removeBookByTitle(String title);
-	public String insertPlayer(String name, int health, int speed, int strength, String weaponName, int weaponStrength,
-			String potionName, int potionHealth, int potionSpeed, String currentRoomName);		
+	public List<Author> removeBookByTitle(String title);	
 	public List<Player> retrieve();
+	String insertPlayer(String name, int health, int speed, int strength, String weaponName, int weaponStrength,
+			String potionName, int potionHealth, int potionSpeed, String currentRoomName, String enemyName,
+			int enemyHealth, int enemySpeed, int enemyStrength);
+	List<Player> removePlayer(String name);
 }
