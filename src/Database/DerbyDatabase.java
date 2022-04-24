@@ -157,7 +157,7 @@ public class DerbyDatabase implements IDatabase {
 					while (resultSet2.next()) {
 						Player player = new Player();
 						loadPlayer(player, resultSet2, 1);
-						player.add(player);
+						players.add(player);
 					}
 					
 					
