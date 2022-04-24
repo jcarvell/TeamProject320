@@ -115,7 +115,66 @@ public class DerbyDatabase implements IDatabase {
 	}
 	
 
+
+	// transaction that deletes Player from Library
+	@Override
+	public List<Player> removePlayer(final String name) {
+		return executeTransaction(new Transaction<List<Player>>() {
+			@Override
+			public List<Player> execute(Connection conn) throws SQLException {
+				PreparedStatement stmtDelete = null;
+				PreparedStatement stmt2 = null;					
+						
+				ResultSet resultSet2    = null;
+				
+				try {							
+					// delete entries in Player table for this name
+					stmtDelete = conn.prepareStatement(
+							"delete from players " +
+							"  where title = ? "
+					);
+					
+					// delete the Book entries from the DB for this title
+					stmtDelete.setString(1, name);
+					stmtDelete.executeQuery();
+					
+					System.out.println("Deleted book(s) with title <" + name + "> from DB");									
+					
+					// look at remaining players
+					stmt2 = conn.prepareStatement(
+							"select * from players "
+					);
+					
+					resultSet2 = stmt2.executeQuery();
+					
+					// assemble list of remaining Players from query
+					List<Player> players = new ArrayList<Player>();					
+				
+					while (resultSet2.next()) {
+						Player player = new Player();
+						loadPlayer(player, resultSet2, 1);
+						player.add(player);
+					}
+					
+					
+					return players;
+				} finally {
+					
+					DBUtil.closeQuietly(resultSet2);
+					DBUtil.closeQuietly(stmtDelete);
+					DBUtil.closeQuietly(stmt2);				
+				}
+			}
+		});
+	}
+
 	
+
+	
+	
+
+	
+
 	public List<Player> retrieveGameStateByName(final String name) {
 		return executeTransaction(new Transaction<List<Player>>() {
 			@Override
