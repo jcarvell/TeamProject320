@@ -36,7 +36,6 @@ public class NPCs {
 	
 	public int printNPCinteraction(User user) {
 		int R = 0;
-		System.out.println("You are in:" + roomName);
 		if(roomName == "Meadow"){
 			System.out.println("There is a tree in the middle of the meadow with a man standing at the base of the tree.");
 			setNPC("Sheep Hearder");
