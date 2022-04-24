@@ -10,7 +10,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 import Database_Model.Player;
-
+import edu.ycp.cs320.booksdb.model.Author;
+import edu.ycp.cs320.booksdb.model.Book;
+import edu.ycp.cs320.booksdb.model.BookAuthor;
+import edu.ycp.cs320.booksdb.model.Pair;
+import edu.ycp.cs320.booksdb.persist.DBUtil;
+import edu.ycp.cs320.booksdb.persist.DerbyDatabase;
+import edu.ycp.cs320.booksdb.persist.InitialData;
+import edu.ycp.cs320.booksdb.persist.DerbyDatabase.Transaction;
 import teamproject.cs320.Potion;
 import teamproject.cs320.Room;
 import teamproject.cs320.Weapon;
@@ -28,8 +35,7 @@ public class DerbyDatabase implements IDatabase {
 	private interface Transaction<ResultType> {
 		public ResultType execute(Connection conn) throws SQLException;
 	}
-	
-	
+
 	private static final int MAX_ATTEMPTS = 10;
 
 	
@@ -153,7 +159,7 @@ public class DerbyDatabase implements IDatabase {
 					while (resultSet2.next()) {
 						Player player = new Player();
 						loadPlayer(player, resultSet2, 1);
-						players.add(player);
+						player.add(player);
 					}
 					
 					
@@ -171,9 +177,16 @@ public class DerbyDatabase implements IDatabase {
 	
 
 	
-	
+	private List<Player> executeTransaction(Transaction<List<Player>> transaction) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 
-	
+	private String executeTransaction(Transaction<String> transaction) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 
 	public List<Player> retrieveGameStateByName(final String name) {
 		return executeTransaction(new Transaction<List<Player>>() {
@@ -218,62 +231,6 @@ public class DerbyDatabase implements IDatabase {
 			}
 		});
 	}
-	
-	// wrapper SQL transaction function that calls actual transaction function (which has retries)
-		public<ResultType> ResultType executeTransaction(Transaction<ResultType> txn) {
-			try {
-				return doExecuteTransaction(txn);
-			} catch (SQLException e) {
-				throw new PersistenceException("Transaction failed", e);
-			}
-		}
-		
-		// SQL transaction function which retries the transaction MAX_ATTEMPTS times before failing
-		public<ResultType> ResultType doExecuteTransaction(Transaction<ResultType> txn) throws SQLException {
-			Connection conn = connect();
-			
-			try {
-				int numAttempts = 0;
-				boolean success = false;
-				ResultType result = null;
-				
-				while (!success && numAttempts < MAX_ATTEMPTS) {
-					try {
-						result = txn.execute(conn);
-						conn.commit();
-						success = true;
-					} catch (SQLException e) {
-						if (e.getSQLState() != null && e.getSQLState().equals("41000")) {
-							// Deadlock: retry (unless max retry count has been reached)
-							numAttempts++;
-						} else {
-							// Some other kind of SQLException
-							throw e;
-						}
-					}
-				}
-				
-				if (!success) {
-					throw new SQLException("Transaction failed (too many retries)");
-				}
-				
-				// Success!
-				return result;
-			} finally {
-				DBUtil.closeQuietly(conn);
-			}
-		}
-		
-		private Connection connect() throws SQLException {
-			Connection conn = DriverManager.getConnection("jdbc:derby:C:/CS320-2022-LibraryExample-DB/library.db;create=true");		
-			
-			// Set autocommit() to false to allow the execution of
-			// multiple queries/statements as part of the same transaction.
-			conn.setAutoCommit(false);
-			
-			return conn;
-		}
-	
 	//This is a function
 	public void createTables() {
 		executeTransaction(new Transaction<Boolean>() {
@@ -311,6 +268,57 @@ public class DerbyDatabase implements IDatabase {
 					return true;
 				} finally {
 					DBUtil.closeQuietly(stmt1);
+				}
+			}
+		});
+	}
+	
+	public void loadInitialData() {
+		executeTransaction(new Transaction<Boolean>() {
+			@Override
+			public Boolean execute(Connection conn) throws SQLException {
+				List<Player> playerList;
+				
+				
+				try {
+					player     = InitialData.getPlayer();
+									
+				} catch (IOException e) {
+					throw new SQLException("Couldn't read initial data", e);
+				}
+
+				PreparedStatement insertPlayer     = null;
+				
+
+				try {
+					// Populating players table
+					insertPlayer = conn.prepareStatement(
+							"insert into player (player.name, player.health, player.speed, player.strength, player.weaponName, "
+									+ "player.weaponStrength,player.potionName, player.potionHealth, player.potionSpeed, player.currentRoomName, "
+									+ "player.enemyName, player.enemyStrength, player.enemySpeed, player.enemyHealth) " );
+					for (Player player : playerList) {
+						insertPlayer.setString(1, player.getPlayerName());
+						insertPlayer.setInt(2, player.getHealth());
+						insertPlayer.setInt(3, player.getSpeed());
+						insertPlayer.setInt(4, player.getStrength());
+						insertPlayer.setString(5, player.getWeaponName());
+						insertPlayer.setInt(6, player.getWeaponStrength());
+						insertPlayer.setString(7, player.getPotionName());
+						insertPlayer.setInt(8, player.getPotionHealth());
+						insertPlayer.setInt(9, player.getPotionSpeed());
+						insertPlayer.setString(10, player.getCurrentRoomName());
+						insertPlayer.setString(11, player.getEnemyName());
+						insertPlayer.setInt(12, player.getEnemyStrength());
+						insertPlayer.setInt(13, player.getEnemySpeed());
+						insertPlayer.setInt(14, player.getEnemyHealth());
+					}
+					insertPlayer.executeBatch();
+					
+					System.out.println("Player table populated");
+					
+					return true;
+				} finally {
+					DBUtil.closeQuietly(insertPlayer);			
 				}
 			}
 		});

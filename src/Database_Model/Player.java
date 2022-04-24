@@ -113,7 +113,7 @@ public class Player {
 		this.enemyStrength = enemyStrength;
 	}
 	
-	public int getEnemyStrengthh() {
+	public int getEnemyStrength() {
 		return enemyStrength;
 	}
 	
