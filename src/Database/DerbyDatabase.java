@@ -51,7 +51,7 @@ public class DerbyDatabase implements IDatabase {
 				try {
 					// delete the player's previous saved game (since it is the same game but without their current progress)
 					deleteSmt = conn.prepareStatement(
-							"delete from player"
+							"delete from players"
 							+ "where player.name = ?"
 					);
 					deleteSmt.setString(1, name);
