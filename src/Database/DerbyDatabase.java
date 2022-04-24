@@ -95,6 +95,26 @@ public class DerbyDatabase implements IDatabase {
 		});
 	}
 	
+	private void loadPlayer(Player player, ResultSet resultSet, int index) throws SQLException {
+		player.setPlayerName(resultSet.getString(index++));
+		player.setHealth(resultSet.getInt(index++));
+		player.setSpeed(resultSet.getInt(index++));
+		player.setStrength(resultSet.getInt(index++));
+		player.setWeaponName(resultSet.getString(index++));
+		player.setWeaponStrength(resultSet.getInt(index++));
+		player.setPotionName(resultSet.getString(index++));
+		player.setPotionHealth(resultSet.getInt(index++));
+		player.setPotionSpeed(resultSet.getInt(index++));
+		player.setCurrentRoomName(resultSet.getString(index++));
+		player.setEnemyName(resultSet.getString(index++));
+		player.setEnemyStrength(resultSet.getInt(index++));
+		player.setEnemySpeed(resultSet.getInt(index++));
+		player.setEnemyHealth(resultSet.getInt(index++));
+		
+		
+	}
+	
+
 	
 	public List<Player> retrieveGameStateByName(final String name) {
 		return executeTransaction(new Transaction<List<Player>>() {
@@ -139,56 +159,43 @@ public class DerbyDatabase implements IDatabase {
 			}
 		});
 	}
-	
+	//This is a function
 	public void createTables() {
 		executeTransaction(new Transaction<Boolean>() {
 			@Override
 			public Boolean execute(Connection conn) throws SQLException {
-				PreparedStatement stmt1 = null;
-				PreparedStatement stmt2 = null;
-				PreparedStatement stmt3 = null;				
+				PreparedStatement stmt1 = null;		
 			
 				try {
 					stmt1 = conn.prepareStatement(
-						"create table authors (" +
-						"	author_id integer primary key " +
-						"		generated always as identity (start with 1, increment by 1), " +									
-						"	lastname varchar(40)," +
-						"	firstname varchar(40)" +
+						"create table player (" +
+						"	name string primary key " +
+						//Primary might break since there is no incrementing of id since the key is a string -Ed			
+						"	health integer," +
+						"	speed integer," +
+						"	strength integer," +
+						"	weoponName varchar(15)," +
+						"	weoponStrength integer," +
+						"	potionName varchar(15)," +
+						"	potionHealth integer," +
+						"	potionSpeed integer," +
+						"	roomName varchar(15)," +
+						"	enemyName varchar(15)," +
+						"	enemyStrength integer," +
+						"	enemySpeed integer," +
+						"	enemyHealth integer," +
+						
 						")"
 					);	
+					
 					stmt1.executeUpdate();
 					
-					System.out.println("Authors table created");
-					
-					stmt2 = conn.prepareStatement(
-							"create table books (" +
-							"	book_id integer primary key " +
-							"		generated always as identity (start with 1, increment by 1), " +
-//							"	author_id integer constraint author_id references authors, " +  	// this is now in the BookAuthors table
-							"	title varchar(70)," +
-							"	isbn varchar(15)," +
-							"   published integer" +
-							")"
-					);
-					stmt2.executeUpdate();
-					
-					System.out.println("Books table created");					
-					
-					stmt3 = conn.prepareStatement(
-							"create table bookAuthors (" +
-							"	book_id   integer constraint book_id references books, " +
-							"	author_id integer constraint author_id references authors " +
-							")"
-					);
-					stmt3.executeUpdate();
-					
-					System.out.println("BookAuthors table created");					
+					System.out.println("Player table created");
+									
 										
 					return true;
 				} finally {
 					DBUtil.closeQuietly(stmt1);
-					DBUtil.closeQuietly(stmt2);
 				}
 			}
 		});
