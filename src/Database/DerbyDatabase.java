@@ -38,7 +38,6 @@ public class DerbyDatabase implements IDatabase {
 
 	
 	// save a new game state
-	@Override
 	public String insertPlayer(String name, int health, int speed, int strength, String weaponName, int weaponStrength, String potionName, int potionHealth, int potionSpeed, String currentRoomName, String enemyName, int enemyHealth, int enemySpeed, int enemyStrength) {
 		return executeTransaction(new Transaction<String>() {
 			@Override
@@ -66,7 +65,7 @@ public class DerbyDatabase implements IDatabase {
 							"insert into player (player.name, player.health, player.speed, player.strength, player.weaponName, "
 							+ "player.weaponStrength,player.potionName, player.potionHealth, player.potionSpeed, player.currentRoomName, "
 							+ "player.enemyName, player.enemyStrength, player.enemySpeed, player.enemyHealth) " 
-							+"  values(?, ?, ?, ?, ?, ?, ?) " 
+							+"  values(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?) " 
 							
 					);
 					stmt.setString(1, name);
@@ -78,7 +77,11 @@ public class DerbyDatabase implements IDatabase {
 					stmt.setString(7, potionName);
 					stmt.setInt(8, potionHealth);
 					stmt.setInt(9, potionSpeed);
-					
+					stmt.setString(10, currentRoomName);
+					stmt.setString(11, enemyName);
+					stmt.setInt(12, enemyStrength);
+					stmt.setInt(13, enemySpeed);
+					stmt.setInt(14, enemyHealth);
 					
 					
 					stmt.executeUpdate();
@@ -95,6 +98,7 @@ public class DerbyDatabase implements IDatabase {
 		});
 	}
 	
+
 	private void loadPlayer(Player player, ResultSet resultSet, int index) throws SQLException {
 		player.setPlayerName(resultSet.getString(index++));
 		player.setHealth(resultSet.getInt(index++));
@@ -115,7 +119,73 @@ public class DerbyDatabase implements IDatabase {
 	}
 	
 
+
+	// transaction that deletes Player from Library
+	@Override
+	public List<Player> removePlayer(final String name) {
+		return executeTransaction(new Transaction<List<Player>>() {
+			@Override
+			public List<Player> execute(Connection conn) throws SQLException {
+				PreparedStatement stmtDelete = null;
+				PreparedStatement stmt2 = null;					
+						
+				ResultSet resultSet2    = null;
+				
+				try {							
+					// delete entries in Player table for this name
+					stmtDelete = conn.prepareStatement(
+							"delete from players " +
+							"  where title = ? "
+					);
+					
+					// delete the Book entries from the DB for this title
+					stmtDelete.setString(1, name);
+					stmtDelete.executeQuery();
+					
+					System.out.println("Deleted book(s) with title <" + name + "> from DB");									
+					
+					// look at remaining players
+					stmt2 = conn.prepareStatement(
+							"select * from players "
+					);
+					
+					resultSet2 = stmt2.executeQuery();
+					
+					// assemble list of remaining Players from query
+					List<Player> players = new ArrayList<Player>();					
+				
+					while (resultSet2.next()) {
+						Player player = new Player();
+						loadPlayer(player, resultSet2, 1);
+						player.add(player);
+					}
+					
+					
+					return players;
+				} finally {
+					
+					DBUtil.closeQuietly(resultSet2);
+					DBUtil.closeQuietly(stmtDelete);
+					DBUtil.closeQuietly(stmt2);				
+				}
+			}
+		});
+	}
+
 	
+
+	
+	private List<Player> executeTransaction(Transaction<List<Player>> transaction) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	private String executeTransaction(Transaction<String> transaction) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+
 	public List<Player> retrieveGameStateByName(final String name) {
 		return executeTransaction(new Transaction<List<Player>>() {
 			@Override
@@ -201,6 +271,7 @@ public class DerbyDatabase implements IDatabase {
 		});
 	}
 	
+
 	// The main method creates the database tables and loads the initial data.
 	public static void main(String[] args) throws IOException {
 		System.out.println("Creating tables...");
