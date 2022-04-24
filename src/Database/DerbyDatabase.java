@@ -10,14 +10,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import Database_Model.Player;
-import edu.ycp.cs320.booksdb.model.Author;
-import edu.ycp.cs320.booksdb.model.Book;
-import edu.ycp.cs320.booksdb.model.BookAuthor;
-import edu.ycp.cs320.booksdb.model.Pair;
-import edu.ycp.cs320.booksdb.persist.DBUtil;
-import edu.ycp.cs320.booksdb.persist.DerbyDatabase;
-import edu.ycp.cs320.booksdb.persist.InitialData;
-import edu.ycp.cs320.booksdb.persist.DerbyDatabase.Transaction;
 import teamproject.cs320.Potion;
 import teamproject.cs320.Room;
 import teamproject.cs320.Weapon;
@@ -50,21 +42,22 @@ public class DerbyDatabase implements IDatabase {
 				
 				try {
 					// delete the player's previous saved game (since it is the same game but without their current progress)
-					deleteSmt = conn.prepareStatement(
+					/*deleteSmt = conn.prepareStatement(
 							"delete from players"
 							+ "where player.name = ?"
 					);
 					deleteSmt.setString(1, name);
 			
 					deleteSet = deleteSmt.executeQuery();
-				
+				*/
 					
 					// check that it delete correctly
 					// add later, using Ed's find player function
 					
 					// insert the player's current game state
 					stmt = conn.prepareStatement(
-							"insert into player (player.name, player.health, player.speed, player.strength, player.weaponName, "
+							// issue: DerbyDatabase is not initializing the player table (right now called playerList)
+							"insert into playerList (player.name, player.health, player.speed, player.strength, player.weaponName, "
 							+ "player.weaponStrength,player.potionName, player.potionHealth, player.potionSpeed, player.currentRoomName, "
 							+ "player.enemyName, player.enemyStrength, player.enemySpeed, player.enemyHealth) " 
 							+"  values(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?) " 
@@ -159,7 +152,7 @@ public class DerbyDatabase implements IDatabase {
 					while (resultSet2.next()) {
 						Player player = new Player();
 						loadPlayer(player, resultSet2, 1);
-						player.add(player);
+						players.add(player);
 					}
 					
 					
