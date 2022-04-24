@@ -12,9 +12,11 @@ import java.util.List;
 import Database_Model.Player;
 import edu.ycp.cs320.booksdb.model.Author;
 import edu.ycp.cs320.booksdb.model.Book;
+import edu.ycp.cs320.booksdb.model.BookAuthor;
 import edu.ycp.cs320.booksdb.model.Pair;
 import edu.ycp.cs320.booksdb.persist.DBUtil;
 import edu.ycp.cs320.booksdb.persist.DerbyDatabase;
+import edu.ycp.cs320.booksdb.persist.InitialData;
 import edu.ycp.cs320.booksdb.persist.DerbyDatabase.Transaction;
 import teamproject.cs320.Potion;
 import teamproject.cs320.Room;
@@ -38,7 +40,6 @@ public class DerbyDatabase implements IDatabase {
 
 	
 	// save a new game state
-	@Override
 	public String insertPlayer(String name, int health, int speed, int strength, String weaponName, int weaponStrength, String potionName, int potionHealth, int potionSpeed, String currentRoomName, String enemyName, int enemyHealth, int enemySpeed, int enemyStrength) {
 		return executeTransaction(new Transaction<String>() {
 			@Override
@@ -66,7 +67,7 @@ public class DerbyDatabase implements IDatabase {
 							"insert into player (player.name, player.health, player.speed, player.strength, player.weaponName, "
 							+ "player.weaponStrength,player.potionName, player.potionHealth, player.potionSpeed, player.currentRoomName, "
 							+ "player.enemyName, player.enemyStrength, player.enemySpeed, player.enemyHealth) " 
-							+"  values(?, ?, ?, ?, ?, ?, ?) " 
+							+"  values(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?) " 
 							
 					);
 					stmt.setString(1, name);
@@ -78,7 +79,11 @@ public class DerbyDatabase implements IDatabase {
 					stmt.setString(7, potionName);
 					stmt.setInt(8, potionHealth);
 					stmt.setInt(9, potionSpeed);
-					
+					stmt.setString(10, currentRoomName);
+					stmt.setString(11, enemyName);
+					stmt.setInt(12, enemyStrength);
+					stmt.setInt(13, enemySpeed);
+					stmt.setInt(14, enemyHealth);
 					
 					
 					stmt.executeUpdate();
@@ -95,6 +100,7 @@ public class DerbyDatabase implements IDatabase {
 		});
 	}
 	
+
 	private void loadPlayer(Player player, ResultSet resultSet, int index) throws SQLException {
 		player.setPlayerName(resultSet.getString(index++));
 		player.setHealth(resultSet.getInt(index++));
@@ -171,9 +177,16 @@ public class DerbyDatabase implements IDatabase {
 	
 
 	
-	
+	private List<Player> executeTransaction(Transaction<List<Player>> transaction) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 
-	
+	private String executeTransaction(Transaction<String> transaction) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 
 	public List<Player> retrieveGameStateByName(final String name) {
 		return executeTransaction(new Transaction<List<Player>>() {
@@ -260,6 +273,58 @@ public class DerbyDatabase implements IDatabase {
 		});
 	}
 	
+	public void loadInitialData() {
+		executeTransaction(new Transaction<Boolean>() {
+			@Override
+			public Boolean execute(Connection conn) throws SQLException {
+				List<Player> playerList;
+				
+				
+				try {
+					player     = InitialData.getPlayer();
+									
+				} catch (IOException e) {
+					throw new SQLException("Couldn't read initial data", e);
+				}
+
+				PreparedStatement insertPlayer     = null;
+				
+
+				try {
+					// Populating players table
+					insertPlayer = conn.prepareStatement(
+							"insert into player (player.name, player.health, player.speed, player.strength, player.weaponName, "
+									+ "player.weaponStrength,player.potionName, player.potionHealth, player.potionSpeed, player.currentRoomName, "
+									+ "player.enemyName, player.enemyStrength, player.enemySpeed, player.enemyHealth) " );
+					for (Player player : playerList) {
+						insertPlayer.setString(1, player.getPlayerName());
+						insertPlayer.setInt(2, player.getHealth());
+						insertPlayer.setInt(3, player.getSpeed());
+						insertPlayer.setInt(4, player.getStrength());
+						insertPlayer.setString(5, player.getWeaponName());
+						insertPlayer.setInt(6, player.getWeaponStrength());
+						insertPlayer.setString(7, player.getPotionName());
+						insertPlayer.setInt(8, player.getPotionHealth());
+						insertPlayer.setInt(9, player.getPotionSpeed());
+						insertPlayer.setString(10, player.getCurrentRoomName());
+						insertPlayer.setString(11, player.getEnemyName());
+						insertPlayer.setInt(12, player.getEnemyStrength());
+						insertPlayer.setInt(13, player.getEnemySpeed());
+						insertPlayer.setInt(14, player.getEnemyHealth());
+					}
+					insertPlayer.executeBatch();
+					
+					System.out.println("Player table populated");
+					
+					return true;
+				} finally {
+					DBUtil.closeQuietly(insertPlayer);			
+				}
+			}
+		});
+	}
+	
+
 	// The main method creates the database tables and loads the initial data.
 	public static void main(String[] args) throws IOException {
 		System.out.println("Creating tables...");
