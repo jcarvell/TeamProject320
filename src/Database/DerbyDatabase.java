@@ -234,8 +234,10 @@ public class DerbyDatabase implements IDatabase {
 			while (!success && numAttempts < MAX_ATTEMPTS) {
 				try {
 					result = txn.execute(conn);
+					System.out.println("This is where it is happening. ");
 					conn.commit();
 					success = true;
+
 				} catch (SQLException e) {
 					if (e.getSQLState() != null && e.getSQLState().equals("41000")) {
 						// Deadlock: retry (unless max retry count has been reached)
@@ -267,6 +269,26 @@ public class DerbyDatabase implements IDatabase {
 		
 		return conn;
 	}
+	//Maybe use to get rid of the table. 
+	public void dropTables() {
+		executeTransaction(new Transaction<Boolean>() {
+			
+			@Override
+			public Boolean execute(Connection conn) throws SQLException {
+				PreparedStatement stmt1 = null;
+				try {
+					stmt1= conn.prepareStatement(
+							"drop table players"
+							);
+					return true;
+				}finally{
+					stmt1.executeUpdate();
+					
+					System.out.println("Player table created");
+					DBUtil.closeQuietly(stmt1);
+				}
+				}
+			});}
 	
 	//This is a function
 	public void createTables() {
@@ -278,7 +300,7 @@ public class DerbyDatabase implements IDatabase {
 				try {
 					stmt1 = conn.prepareStatement(
 						"create table players (" 	 +
-						"	name varchar(15) primary key, "		 +
+						"	playerName varchar(15) primary key, "		 +
 						//Primary might break since there is no incrementing of id since the key is a string -Ed			
 						"	health integer," 		 +
 						"	speed integer," 		 +
