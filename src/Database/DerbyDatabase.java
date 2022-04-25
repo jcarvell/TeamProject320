@@ -57,8 +57,8 @@ public class DerbyDatabase implements IDatabase {
 					// insert the player's current game state
 					stmt = conn.prepareStatement(
 							// issue: DerbyDatabase is not initializing the player table (right now called playerList)
-							"insert into player (player.name, player.health, player.speed, player.strength, player.weaponName, "
-							+ "player.weaponStrength,player.potionName, player.potionHealth, player.potionSpeed, player.currentRoomName, "
+							"insert into player (player.name, player.health, player.speed, player.strength, player.weoponName, "
+							+ "player.weoponStrength,player.potionName, player.potionHealth, player.potionSpeed, player.RoomName, "
 							+ "player.enemyName, player.enemyStrength, player.enemySpeed, player.enemyHealth) " 
 							+"  values(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?) " 
 							
@@ -270,7 +270,7 @@ public class DerbyDatabase implements IDatabase {
 		return conn;
 	}
 	//Maybe use to get rid of the table. 
-	public void dropTables() {
+	public void showTables() {
 		executeTransaction(new Transaction<Boolean>() {
 			
 			@Override
@@ -278,7 +278,7 @@ public class DerbyDatabase implements IDatabase {
 				PreparedStatement stmt1 = null;
 				try {
 					stmt1= conn.prepareStatement(
-							"drop table players"
+							"select * from players"
 							);
 					return true;
 				}finally{
@@ -299,8 +299,9 @@ public class DerbyDatabase implements IDatabase {
 			
 				try {
 					stmt1 = conn.prepareStatement(
-						"create table players (" 	 +
-						"	playerName varchar(15) primary key, "		 +
+							
+						" create table player(" 	 +
+						"	name varchar(15), "		 +
 						//Primary might break since there is no incrementing of id since the key is a string -Ed			
 						"	health integer," 		 +
 						"	speed integer," 		 +
@@ -387,6 +388,7 @@ public class DerbyDatabase implements IDatabase {
 	public static void main(String[] args) throws IOException {
 		System.out.println("Creating tables...");
 		DerbyDatabase db = new DerbyDatabase();
+		// db.dropTables();
 		db.createTables();
 		
 		System.out.println("Loading initial data...");

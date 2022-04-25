@@ -61,9 +61,9 @@ GAME:
 						IDatabase db = DatabaseProvider.getInstance();
 						//Alina is the one who typed out the following line:
 						//db.insertPlayer(playerName, user.getHealth(), user.getSpeed(), user.getStrength(), user.getArmory()[0].getName(), user.getArmory()[0].getStrengthBuff(), user.getStash()[0].getName(), user.getStash()[0].getHealthIncreaseAmount(), user.getStash()[0].getSpeedIncreaseAmount(), temp.getName(), temp.getRoomResources().getEnemy().getName(), temp.getRoomResources().getEnemy().getHealth(), temp.getRoomResources().getEnemy().getSpeed(), temp.getRoomResources().getEnemy().getStrength());
-						
-						db.insertPlayer(playerName, user.getHealth(), user.getSpeed(), user.getStrength(), "No Weapon" , user.getStrength(), "health" , 10, 10, choice1.getName(), choice1.getRoomResources().getEnemy().getName(), choice1.getRoomResources().getEnemy().getHealth(), choice1.getRoomResources().getEnemy().getSpeed(), choice1.getRoomResources().getEnemy().getStrength());
-
+						//db.insertPlayer(name, health, speed, strength, weaponName, weaponStrength, potionName, potionHealth, potionSpeed, currentRoomName, enemyName, enemyHealth, enemySpeed, enemyStrength)
+						String i = db.insertPlayer(playerName, user.getHealth(), user.getSpeed(), user.getStrength(), "No Weapon" , user.getStrength(), "health" , 10, 10, choice1.getName(), choice1.getRoomResources().getEnemy().getName(), choice1.getRoomResources().getEnemy().getHealth(), choice1.getRoomResources().getEnemy().getSpeed(), choice1.getRoomResources().getEnemy().getStrength());
+				
 					}
 					
 					System.out.println("You have two options 1. " + choice1.getName() + " or you can choose 2. " + choice2.getName() );
