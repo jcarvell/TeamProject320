@@ -277,8 +277,13 @@ public class DerbyDatabase implements IDatabase {
 			
 				try {
 					stmt1 = conn.prepareStatement(
+<<<<<<< HEAD
 						"create table players (" 	 +
 						"	name varchar(15) primary key, "		 +
+=======
+						"create table player (" 	 +
+						"	name varchar(15), "		 +
+>>>>>>> ORIGINSUCKS
 						//Primary might break since there is no incrementing of id since the key is a string -Ed			
 						"	health integer," 		 +
 						"	speed integer," 		 +
