@@ -91,15 +91,14 @@ public class RoomResources {
 	
 	public void noEnemyRoom(User user, Room choice1) {
 		System.out.println("There is no enemy in this room");
-		System.out.println(" YET ");
-		System.out.println("This room is called: " + choice1.getName());
+		// System.out.println("This room is called: " + choice1.getName());
 		//need to change dialogue. Pass variable choice. 
 		//Why is this printing HELLO!!!!!!!!!!!!!!!!!!!!!
 		
-		//npc.setRoomName(choice1.getName());
-		//npc.printDialogue();
+		npc.setRoomName(choice1.getName());
+		npc.printNPCinteraction(user);
 		
-		System.out.println("There are some resources in the room would you like to check them out?");
+		System.out.println("There are some resources in the area would you like to check them out?");
 		int npcChoice = in.nextInt();
 		if(npcChoice == 1 ) {
 			//NO

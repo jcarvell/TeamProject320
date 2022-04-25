@@ -2,7 +2,7 @@ package teamproject.cs320;
  
 import java.util.Scanner;
 import java.util.Random;
-import java.util.Timer;
+
 import Database.IDatabase;
 import Database_functions.InitDatabase;
 import Database.DatabaseProvider;
@@ -61,7 +61,9 @@ GAME:
 						IDatabase db = DatabaseProvider.getInstance();
 						//Alina is the one who typed out the following line:
 						//db.insertPlayer(playerName, user.getHealth(), user.getSpeed(), user.getStrength(), user.getArmory()[0].getName(), user.getArmory()[0].getStrengthBuff(), user.getStash()[0].getName(), user.getStash()[0].getHealthIncreaseAmount(), user.getStash()[0].getSpeedIncreaseAmount(), temp.getName(), temp.getRoomResources().getEnemy().getName(), temp.getRoomResources().getEnemy().getHealth(), temp.getRoomResources().getEnemy().getSpeed(), temp.getRoomResources().getEnemy().getStrength());
-						db.insertPlayer(playerName, 5, 10, 5, "fake", 5, "fake potion", 99, 98, "Room", "enemy", 8, 7, 6);
+						
+						db.insertPlayer(playerName, user.getHealth(), user.getSpeed(), user.getStrength(), "No Weapon" , user.getStrength(), "health" , 10, 10, choice1.getName(), choice1.getRoomResources().getEnemy().getName(), choice1.getRoomResources().getEnemy().getHealth(), choice1.getRoomResources().getEnemy().getSpeed(), choice1.getRoomResources().getEnemy().getStrength());
+
 					}
 					
 					System.out.println("You have two options 1. " + choice1.getName() + " or you can choose 2. " + choice2.getName() );

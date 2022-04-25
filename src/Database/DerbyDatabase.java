@@ -57,7 +57,7 @@ public class DerbyDatabase implements IDatabase {
 					// insert the player's current game state
 					stmt = conn.prepareStatement(
 							// issue: DerbyDatabase is not initializing the player table (right now called playerList)
-							"insert into playerList (player.name, player.health, player.speed, player.strength, player.weaponName, "
+							"insert into player (player.name, player.health, player.speed, player.strength, player.weaponName, "
 							+ "player.weaponStrength,player.potionName, player.potionHealth, player.potionSpeed, player.currentRoomName, "
 							+ "player.enemyName, player.enemyStrength, player.enemySpeed, player.enemyHealth) " 
 							+"  values(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?) " 
@@ -80,6 +80,7 @@ public class DerbyDatabase implements IDatabase {
 					
 					
 					stmt.executeUpdate();
+					
 					
 					// I don't think it has anything it needs to return but I couldn't figure out how to get the function return type to be void
 					return name;
@@ -276,23 +277,22 @@ public class DerbyDatabase implements IDatabase {
 			
 				try {
 					stmt1 = conn.prepareStatement(
-						"create table player (" +
-						"	name string primary key " +
+						"create table player (" 	 +
+						"	name varchar(15), "		 +
 						//Primary might break since there is no incrementing of id since the key is a string -Ed			
-						"	health integer," +
-						"	speed integer," +
-						"	strength integer," +
-						"	weoponName varchar(15)," +
-						"	weoponStrength integer," +
+						"	health integer," 		 +
+						"	speed integer," 		 +
+						"	strength integer," 		 +
+						"	weaponName varchar(30)," +
+						"	weaponStrength integer," +
 						"	potionName varchar(15)," +
-						"	potionHealth integer," +
-						"	potionSpeed integer," +
-						"	roomName varchar(15)," +
-						"	enemyName varchar(15)," +
-						"	enemyStrength integer," +
-						"	enemySpeed integer," +
-						"	enemyHealth integer," +
-						
+						"	potionHealth integer,"   +
+						"	potionSpeed integer,"    +
+						"	roomName varchar(15),"   +
+						"	enemyName varchar(15),"  +
+						"	enemyStrength integer,"  +
+						"	enemySpeed integer," 	 +
+						"	enemyHealth integer" 	 +	
 						")"
 					);	
 					
