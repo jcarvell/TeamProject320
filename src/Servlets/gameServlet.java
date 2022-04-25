@@ -16,7 +16,7 @@ public class gameServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp)
 			throws ServletException, IOException {
 		
-		System.out.println("GuessingGame Servlet: doGet");	
+		System.out.println("Team Project320 : doGet");	
 		
 		// call JSP to generate empty form
 		req.getRequestDispatcher("/_view/babyZombies.jsp").forward(req, resp);
@@ -26,7 +26,7 @@ public class gameServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp)
 			throws ServletException, IOException {
 		
-		System.out.println("GuessingGame Servlet: doPost");
+		System.out.println("Team Project320 : doPost");
 		
 		// create GuessingGame model - model does not persist between requests
 		// must recreate it each time a Post comes in 
