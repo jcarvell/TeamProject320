@@ -178,10 +178,10 @@ public class DerbyDatabase implements IDatabase {
 				
 				try {
 					stmt = conn.prepareStatement(
-							"select * from player "+
-							"player.name=?"
+							"select * from player "//+
+							//"player.playerName=?"
 					);
-					stmt.setString(1, name);
+					//stmt.setString(1, name);
 					
 					List<Player> result = new ArrayList<Player>();
 					
@@ -299,8 +299,8 @@ public class DerbyDatabase implements IDatabase {
 			
 				try {
 					stmt1 = conn.prepareStatement(
-							
-						" create table player(" 	 +
+
+						"create table player (" 	 +
 						"	name varchar(15), "		 +
 						//Primary might break since there is no incrementing of id since the key is a string -Ed			
 						"	health integer," 		 +
@@ -311,7 +311,7 @@ public class DerbyDatabase implements IDatabase {
 						"	potionName varchar(15)," +
 						"	potionHealth integer,"   +
 						"	potionSpeed integer,"    +
-						"	roomName varchar(15),"   +
+						"	roomName varchar(30),"   +
 						"	enemyName varchar(15),"  +
 						"	enemyStrength integer,"  +
 						"	enemySpeed integer," 	 +

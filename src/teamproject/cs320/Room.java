@@ -4,11 +4,11 @@ import java.util.Random;
 public class Room {
 
 	private String name;
-	private String[] nameArray = {"Haunted Forest", "Meadow", "Slithering Stream", "Cave", "Mall", "Sewers", "Rooftop"};
+	private String[] nameArray = {"Haunted Forest", "Meadow", "Slithering", "Cave", "Mall", "Sewers", "Rooftop"};
 	private Location location;
 	private RoomResources resources;
 	
-	
+	//ADDD STREAM BACK IN
 	public Room(String n,Location loc) {
 		name=n;
 		location=loc;
