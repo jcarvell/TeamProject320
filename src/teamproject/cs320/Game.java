@@ -7,9 +7,6 @@ import java.util.Random;
 import Database.IDatabase;
 import Database_Model.Player;
 import Database_functions.InitDatabase;
-import edu.ycp.cs320.booksdb.model.Author;
-import edu.ycp.cs320.booksdb.model.Book;
-import edu.ycp.cs320.booksdb.model.Pair;
 import Database.DatabaseProvider;
 import Database.DerbyDatabase;
 
@@ -69,12 +66,12 @@ GAME:
 						//db.insertPlayer(name, health, speed, strength, weaponName, weaponStrength, potionName, potionHealth, potionSpeed, currentRoomName, enemyName, enemyHealth, enemySpeed, enemyStrength)
 						String i = db.insertPlayer(playerName, user.getHealth(), user.getSpeed(), user.getStrength(), user.currentWeaponName() , user.getStrength(), "health" , 10, 10, choice1.getName(), choice1.getRoomResources().getEnemy().getName(), choice1.getRoomResources().getEnemy().getHealth(), choice1.getRoomResources().getEnemy().getSpeed(), choice1.getRoomResources().getEnemy().getStrength());
 							
-						List<Player> plauer = db.retrieveGameStateByName(playerName);
-						if (plauer.isEmpty()) {
+						List<Player> player1 = db.retrieveGameStateByName(playerName);
+						if (player1.isEmpty()) {
 							System.out.println("No books found for author <" + playerName + ">");
 						}
 						else {
-							System.out.println("Your current health is: " +plauer.get(plauer.size()-1).getHealth() + " Your current weapon is: " + plauer.get(plauer.size()-1).getWeaponName());
+							System.out.println("Your current health is: " + player1.get(player1.size()-1).getHealth() + " Your current weapon is: " + player1.get(player1.size()-1).getWeaponName());
 							
 						}
 					}

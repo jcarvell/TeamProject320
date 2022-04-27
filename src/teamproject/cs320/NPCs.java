@@ -20,6 +20,10 @@ public class NPCs {
 		this.roomName = roomName;		// placeholder dialogue
 	}
 	
+	public void NPCs(String dialogue) {
+		this.dialogue = dialogue;
+	}
+	
 	public void setNPC(String x) {
 		npc = x;
 	}
