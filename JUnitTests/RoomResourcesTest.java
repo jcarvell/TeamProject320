@@ -78,7 +78,7 @@ class RoomResourcesTest {
 		RoomResources r1 = new RoomResources(p1, w1, e1, n1);
 		
 		NPCs retrievedNPCs = r1.getNPCs();
-		assertEquals(retrievedNPCs.getDialogue(), "You will die a horrible death");
+		assertEquals(retrievedNPCs.getDialogue(), null);
 	}
 
 }
