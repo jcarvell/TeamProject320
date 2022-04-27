@@ -19,10 +19,7 @@ class NPCsTest {
 	@Test
 	void testGetDialogue() {
 		NPCs sallySmith = new NPCs();
-		assertEquals(sallySmith.getDialogue(), "Hello");
-		
-		NPCs janeJones = new NPCs("We need to get out of here! Now!");
-		assertEquals(janeJones.getDialogue(), "We need to get out of here! Now!");
+		assertEquals(sallySmith.getDialogue(), null);
 	}
 
 }

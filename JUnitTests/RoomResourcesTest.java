@@ -70,7 +70,7 @@ class RoomResourcesTest {
 	}
 
 	@Test
-	void testGetNPCArray() {
+	void testGetNPCs() {
 		Potion p1 = new Potion();
 		Weapon w1 = new Weapon();
 		Enemy e1 = new Enemy();
@@ -79,6 +79,8 @@ class RoomResourcesTest {
 		
 		NPCs retrievedNPCs = r1.getNPCs();
 		assertEquals(retrievedNPCs.getDialogue(), null);
+		// we don't have a getter for the roomname in NPCs
 	}
+	
 
 }
