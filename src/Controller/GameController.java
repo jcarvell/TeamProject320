@@ -2,17 +2,16 @@ package Controller;
 
 import java.util.*;
 
-import Database_Model.Player;
+import teamproject.model.*;
 
 import teamproject.cs320.*;
 
 public class GameController{
-	Player model = new Player();
+	gameModel model = new gameModel();
 	
-	public void setModel(Player model) {
+	public void setModel(gameModel model) {
 		this.model = model;
 	}
-	
 	
 	public void startGame() {
 		
