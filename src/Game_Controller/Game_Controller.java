@@ -50,7 +50,7 @@ public class Game_Controller{
 	
 	
 	public class Game {
-		public void main(String[] args) {
+		 {
 			Random rand = new Random(); //instance of random class
 			Room choice1 = new Room();
 			
@@ -59,8 +59,8 @@ public class Game_Controller{
 			//Start of Game
 			
 			welcome();
-			String input1 = in.nextLine();
-			if(input1.toLowerCase().contentEquals("yes") ) {
+			int input1 = model.getUserChoice1();
+			if(input1 == 1) {
 				running = true;
 			}else {
 				running = false;
@@ -89,7 +89,8 @@ public class Game_Controller{
 						
 						// ask if you want to save game (this can be anywhere/should maybe be at more points)
 						System.out.println("Would you like to save game? 1. Yes 2. No");
-						int save = in.nextInt();
+						int save = model.getUserChoice1();
+						// int save = in.nextInt();
 						if(save == 1) {
 							System.out.println("Enter your name: ");
 							String playerName = in.nextLine();
@@ -103,7 +104,7 @@ public class Game_Controller{
 								
 							List<Player> player1 = db.retrieveGameStateByName(playerName);
 							if (player1.isEmpty()) {
-								System.out.println("No books found for author <" + playerName + ">");
+								System.out.println("No character found for author <" + playerName + ">");
 							}
 							else {
 								System.out.println("Your current health is: " + player1.get(player1.size()-1).getHealth() + " Your current weapon is: " + player1.get(player1.size()-1).getWeaponName());
@@ -112,8 +113,8 @@ public class Game_Controller{
 						}
 						
 						System.out.println("You have two options 1. " + choice1.getName() + " or you can choose 2. " + choice2.getName() );
-						int choice = in.nextInt();
-						
+						// int choice = in.nextInt();
+						int choice = model.getUserChoice1();
 						
 						if( choice == 1) {
 							System.out.println("You have entered " + choice1.getName());
@@ -152,8 +153,8 @@ public class Game_Controller{
 						System.out.println("2. Use Potion ");
 						System.out.println("3. Run Away ");
 						
-						int input = in.nextInt();
-						
+						// int input = in.nextInt();
+						int input = model.getUserChoice1();
 						if(input == 1) {
 							//Something is wrong here. User can go into the negative health
 							

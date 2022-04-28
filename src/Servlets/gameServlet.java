@@ -85,7 +85,7 @@ public class gameServlet extends HttpServlet {
 		req.setAttribute("game", model);
 		
 		// now call the JSP to render the new page
-		req.getRequestDispatcher("/_view/guessingGame.jsp").forward(req, resp);
+		req.getRequestDispatcher("/_view/babyZombies.jsp").forward(req, resp);
 	}
 	
 	// gets an Integer from the Posted form data, for the given attribute name
