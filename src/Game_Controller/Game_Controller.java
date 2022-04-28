@@ -49,7 +49,7 @@ public class Game_Controller{
 	}
 	
 	
-	public class Game {
+	public void runGame(){
 		 {
 			Random rand = new Random(); //instance of random class
 			Room choice1 = new Room();
@@ -71,7 +71,7 @@ public class Game_Controller{
 			while(running) {
 				
 				//All player changes and options other than combat would be in here. 
-					while (model.getUserHealth() > 0 && choice1.getRoomResources().getEnemy().getHealth() <= 0 ){
+					while (model.getUserHealth() > 0 && model.get_enemyHealth() <= 0 ){
 						
 						// Checks to see if the choices are the same and if they are then populate a new room. 
 						

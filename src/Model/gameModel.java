@@ -169,22 +169,22 @@ public class gameModel{
 		return enemy_strength;
 	}
 	
-	public String getName() {
+	public String get_enemyName() {
 		return enemy_name;	
 	}
 	
-	public int getHealth(){
+	public int get_enemyHealth(){
 		return enemy_health;
 	}
-	public void setHealth(int x) {
+	public void set_enemyHealth(int x) {
 		enemy_health=x;
 	}
 	
-	public int getStrength(){
+	public int get_enemyStrength(){
 		return enemy_strength;
 	}
 	
-	public int getSpeed(){
+	public int get_enemySpeed(){
 		return enemy_speed; 
 	}
 	public int getPoints() {
