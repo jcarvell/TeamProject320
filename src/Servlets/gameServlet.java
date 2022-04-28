@@ -8,8 +8,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import Controller.GameController;
-import Database_Model.Player;
 import teamproject.cs320.*;
+import teamproject.model.*;
 
 public class gameServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
@@ -32,7 +32,7 @@ public class gameServlet extends HttpServlet {
 		
 		// create GuessingGame model - model does not persist between requests
 		// must recreate it each time a Post comes in 
-		Player model = new Player();
+		gameModel model = new gameModel();
 
 		// create GuessingGame controller - controller does not persist between requests
 		// must recreate it each time a Post comes in
@@ -45,23 +45,22 @@ public class gameServlet extends HttpServlet {
 		if (req.getParameter("startGame") != null) {
 			controller.startGame();
 		}
-		// otherwise, user is already playing the game - get the old min and max
+		// otherwise, user is already playing the game - get the old  and max
 		// from the posted form
 		// without persistence, we must pass the values back and forth between the
 		// client and the server every time in order to remember them
 		else {
-			// get min and max from the Posted form data
-			Integer curMin = getInteger(req, "min");
-			Integer curMax = getInteger(req, "max");
+			// get  and max from the Posted form data
+			//Integer curMin = getInteger(req, "min");
+			//Integer curMax = getInteger(req, "max");
 			
-			// initialize model with the old min, max values
 			// since the data does not persist between posts, we need to 
 			// recreate and re-initialize the model each time
 			//model.setMin(curMin);
 			//model.setMax(curMax);
 
 			// now check to see which button the user pressed
-			// and adjust min, max, and guess accordingly
+			// and adjust , max, and guess accordingly
 			// must call controller methods to do this since the
 			// view only reads the model data, it never changes
 			// the model - only the controller can change the model
@@ -83,7 +82,7 @@ public class gameServlet extends HttpServlet {
 		req.setAttribute("game", model);
 		
 		// now call the JSP to render the new page
-		req.getRequestDispatcher("/_view/guessingGame.jsp").forward(req, resp);
+		req.getRequestDispatcher("/_view/babyZombies.jsp").forward(req, resp);
 	}
 
 	// gets an Integer from the Posted form data, for the given attribute name
