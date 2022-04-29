@@ -151,5 +151,42 @@ class UserTest {
 		User Billy = new User(0, 22, 1);
 		assertEquals(Billy.getUserPoints(), 0);
 	}
+	
+	void testSetUserPoints() {
+		User Bob = new User(5, 10, 15);
+		assertEquals(Bob.getUserPoints(), 0);
+		Bob.setPoints(2);
+		assertEquals(Bob.getUserPoints(), 2);
+		Bob.setPoints(4);
+		assertEquals(Bob.getUserPoints(), 4);
+		Bob.setPoints(10);
+		assertEquals(Bob.getUserPoints(), 10);
+		
+		User Sally = new User(10, 5, 0);
+		assertEquals(Sally.getUserPoints(), 0);
+		Sally.setPoints(5);
+		assertEquals(Sally.getUserPoints(), 5);
+		Sally.setPoints(5);
+		assertEquals(Sally.getUserPoints(), 5);
+		Sally.setPoints(15);
+		assertEquals(Sally.getUserPoints(), 15);
+		Sally.setPoints(29);
+		assertEquals(Sally.getUserPoints(), 29);
+		
+		User Billy = new User(0, 22, 1);
+		assertEquals(Billy.getUserPoints(), 0);
+		Billy.setPoints(11);
+		assertEquals(Billy.getUserPoints(), 11);
+		Billy.setPoints(7);
+		assertEquals(Billy.getUserPoints(), 7);
+		Billy.setPoints(0);
+		assertEquals(Billy.getUserPoints(), 0);
+		Billy.setPoints(11);
+		assertEquals(Billy.getUserPoints(), 11);
+		Billy.setPoints(21);
+		assertEquals(Billy.getUserPoints(), 21);
+		Billy.setPoints(100);
+		assertEquals(Billy.getUserPoints(), 100);
+	}
 
 }
