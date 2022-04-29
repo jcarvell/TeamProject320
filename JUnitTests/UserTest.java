@@ -14,31 +14,6 @@ class UserTest {
 	}
 
 	@Test
-	void testChooseNextRoom() {
-		fail("Not yet implemented");
-	}
-
-	@Test
-	void testWeaponPickup() {
-		fail("Not yet implemented");
-	}
-
-	@Test
-	void testPotionPickup() {
-		fail("Not yet implemented");
-	}
-
-	@Test
-	void testGetArmory() {
-		fail("Not yet implemented");
-	}
-
-	@Test
-	void testGetStash() {
-		fail("Not yet implemented");
-	}
-
-	@Test
 	void testGetHealth() {
 		User Bob = new User(5, 10, 15);
 		assertEquals(Bob.getHealth(), 5);
@@ -103,16 +78,6 @@ class UserTest {
 		User Suzy = new User(10, 0, 10);
 		assertEquals(Suzy.getSpeed(), 10);
 	}
-
-	@Test
-	void testGetArmoryLength() {
-		fail("Not yet implemented");
-	}
-
-	@Test
-	void testGetStashLength() {
-		fail("Not yet implemented");
-	}
 	
 	@Test
 	void testSetStrength() {
@@ -174,7 +139,17 @@ class UserTest {
 		Suzy.setSpeed(0);
 		assertEquals(Suzy.getSpeed(), 0);
 	}
-
-
+	
+	@Test
+	void testGetUserPoints() {
+		User Bob = new User(5, 10, 15);
+		assertEquals(Bob.getUserPoints(), 0);
+		
+		User Sally = new User(10, 5, 0);
+		assertEquals(Sally.getUserPoints(), 0);
+		
+		User Billy = new User(0, 22, 1);
+		assertEquals(Billy.getUserPoints(), 0);
+	}
 
 }
