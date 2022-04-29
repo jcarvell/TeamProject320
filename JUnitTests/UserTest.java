@@ -90,7 +90,18 @@ class UserTest {
 
 	@Test
 	void testGetSpeed() {
-		fail("Not yet implemented");
+		// public User(health,strength,speed) h
+		User Bob = new User(5, 10, 15);
+		assertEquals(Bob.getSpeed(), 15);
+		
+		User Sally = new User(10, 5, 0);
+		assertEquals(Sally.getSpeed(), 0);
+		
+		User Billy = new User(0, 22, 1);
+		assertEquals(Billy.getSpeed(), 1);
+		
+		User Suzy = new User(10, 0, 10);
+		assertEquals(Suzy.getSpeed(), 10);
 	}
 
 	@Test
