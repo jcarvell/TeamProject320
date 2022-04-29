@@ -188,5 +188,58 @@ class UserTest {
 		Billy.setPoints(100);
 		assertEquals(Billy.getUserPoints(), 100);
 	}
-
+	
+	@Test
+	void testCurrentWeaponName() {
+		User Bob = new User(5, 10, 15);
+		assertEquals(Bob.currentWeaponName(), null);
+		
+		User Sally = new User(10, 5, 0);
+		assertEquals(Sally.currentWeaponName(), null);
+		
+		User Billy = new User(0, 22, 1);
+		assertEquals(Billy.currentWeaponName(), null);
+		
+		User Suzy = new User(10, 0, 10);
+		assertEquals(Suzy.currentWeaponName(), null);
+	}
+	
+	@Test
+	void testSetCurrentWeapon() {
+		User Bob = new User(5, 10, 15);
+		assertEquals(Bob.currentWeaponName(), null);
+		Bob.setCurrentWeapon("Sword");
+		assertEquals(Bob.currentWeaponName(), "Sword");
+		Bob.setCurrentWeapon("Sword of Evil");
+		assertEquals(Bob.currentWeaponName(), "Sword of Evil");
+		Bob.setCurrentWeapon("Knife");
+		assertEquals(Bob.currentWeaponName(), "Knife");
+		
+		User Sally = new User(10, 5, 0);
+		assertEquals(Sally.currentWeaponName(), null);
+		Sally.setCurrentWeapon("Large rock");
+		assertEquals(Sally.currentWeaponName(), "Large rock");
+		Sally.setCurrentWeapon("Sword");
+		assertEquals(Sally.currentWeaponName(), "Sword");
+		Sally.setCurrentWeapon("Large rock");
+		assertEquals(Sally.currentWeaponName(), "Large rock");
+		
+		User Billy = new User(0, 22, 1);
+		assertEquals(Billy.currentWeaponName(), null);
+		Billy.setCurrentWeapon("Rock");
+		assertEquals(Billy.currentWeaponName(), "Rock");
+		Billy.setCurrentWeapon("Small rock");
+		assertEquals(Billy.currentWeaponName(), "Small rock");
+		Billy.setCurrentWeapon("Medium rock");
+		assertEquals(Billy.currentWeaponName(), "Medium rock");
+		
+		User Suzy = new User(10, 0, 10);
+		assertEquals(Suzy.currentWeaponName(), null);
+		Suzy.setCurrentWeapon("Zzz");
+		assertEquals(Suzy.currentWeaponName(), "Zzz");
+		Suzy.setCurrentWeapon("There are many weapons");
+		assertEquals(Suzy.currentWeaponName(), "There are many weapons");
+		Suzy.setCurrentWeapon("Alligators");
+		assertEquals(Suzy.currentWeaponName(), "Alligators");
+	}
 }
