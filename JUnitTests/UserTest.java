@@ -153,7 +153,7 @@ class UserTest {
 	}
 	
 	@Test
-	void testSetUserPoints() {
+	void testSetPoints() {
 		User Bob = new User(5, 10, 15);
 		assertEquals(Bob.getUserPoints(), 0);
 		Bob.setPoints(2);
