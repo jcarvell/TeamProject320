@@ -293,4 +293,16 @@ class UserTest {
 		Billy.setUserChoice1(100);
 		assertEquals(Billy.getUserChoice1(), 100);
 	}
+	
+	@Test
+	void testGetUserChoice2() {
+		User Bob = new User(5, 10, 15);
+		assertEquals(Bob.getUserChoice2(), 0);
+		
+		User Sally = new User(10, 5, 0);
+		assertEquals(Sally.getUserChoice2(), 0);
+		
+		User Billy = new User(0, 22, 1);
+		assertEquals(Billy.getUserChoice2(), 0);
+	}
 }
