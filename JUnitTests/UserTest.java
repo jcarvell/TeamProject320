@@ -243,4 +243,16 @@ class UserTest {
 		Suzy.setCurrentWeapon("Alligators");
 		assertEquals(Suzy.currentWeaponName(), "Alligators");
 	}
+	
+	@Test
+	void testGetUserChoice1() {
+		User Bob = new User(5, 10, 15);
+		assertEquals(Bob.getUserChoice1(), 0);
+		
+		User Sally = new User(10, 5, 0);
+		assertEquals(Sally.getUserChoice1(), 0);
+		
+		User Billy = new User(0, 22, 1);
+		assertEquals(Billy.getUserChoice1(), 0);
+	}
 }
