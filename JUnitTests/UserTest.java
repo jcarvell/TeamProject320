@@ -255,4 +255,42 @@ class UserTest {
 		User Billy = new User(0, 22, 1);
 		assertEquals(Billy.getUserChoice1(), 0);
 	}
+	
+	@Test
+	void testSetUserChoice1() {
+		User Bob = new User(5, 10, 15);
+		assertEquals(Bob.getUserChoice1(), 0);
+		Bob.setUserChoice1(2);
+		assertEquals(Bob.getUserChoice1(), 2);
+		Bob.setUserChoice1(4);
+		assertEquals(Bob.getUserChoice1(), 4);
+		Bob.setUserChoice1(10);
+		assertEquals(Bob.getUserChoice1(), 10);
+		
+		User Sally = new User(10, 5, 0);
+		assertEquals(Sally.getUserChoice1(), 0);
+		Sally.setUserChoice1(5);
+		assertEquals(Sally.getUserChoice1(), 5);
+		Sally.setUserChoice1(5);
+		assertEquals(Sally.getUserChoice1(), 5);
+		Sally.setUserChoice1(15);
+		assertEquals(Sally.getUserChoice1(), 15);
+		Sally.setUserChoice1(29);
+		assertEquals(Sally.getUserChoice1(), 29);
+		
+		User Billy = new User(0, 22, 1);
+		assertEquals(Billy.getUserChoice1(), 0);
+		Billy.setUserChoice1(11);
+		assertEquals(Billy.getUserChoice1(), 11);
+		Billy.setUserChoice1(7);
+		assertEquals(Billy.getUserChoice1(), 7);
+		Billy.setUserChoice1(0);
+		assertEquals(Billy.getUserChoice1(), 0);
+		Billy.setUserChoice1(11);
+		assertEquals(Billy.getUserChoice1(), 11);
+		Billy.setUserChoice1(21);
+		assertEquals(Billy.getUserChoice1(), 21);
+		Billy.setUserChoice1(100);
+		assertEquals(Billy.getUserChoice1(), 100);
+	}
 }
