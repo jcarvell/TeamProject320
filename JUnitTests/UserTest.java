@@ -7,7 +7,7 @@ import teamproject.cs320.User;
 class UserTest {
 
 	@Test
-	void testUser() {
+	void testUserIntIntInt() {
 		User Bob = new User(5, 10, 15);
 		User Sally = new User(10, 5, 0);
 		User Billy = new User(0, 22, 1);
@@ -152,6 +152,7 @@ class UserTest {
 		assertEquals(Billy.getUserPoints(), 0);
 	}
 	
+	@Test
 	void testSetUserPoints() {
 		User Bob = new User(5, 10, 15);
 		assertEquals(Bob.getUserPoints(), 0);
