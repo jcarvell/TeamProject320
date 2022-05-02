@@ -8,7 +8,7 @@ class PotionTest_RandomName {
 
 	@Test
 	void testCheckNames() {
-		int numTests = 66;
+		int numTests = 200;
 		
 		// Initialize array of Potions
 		Potion potions[] = new Potion[numTests];
@@ -18,7 +18,7 @@ class PotionTest_RandomName {
 		
 		// Initialize array of the names of the Potions
 		String names[] = new String[numTests];
-		for(int i = 0; i < 66; i++) {
+		for(int i = 0; i < numTests; i++) {
 			names[i] = potions[i].getName();
 		}
 		
@@ -33,7 +33,7 @@ class PotionTest_RandomName {
 	
 	@Test
 	void testWitch() {
-		int numTests = 66;
+		int numTests = 200;
 		int witchCount = 0;
 		
 		// Initialize array of Potions
@@ -46,14 +46,6 @@ class PotionTest_RandomName {
 		String names[] = new String[numTests];
 		for(int i = 0; i < numTests; i++) {
 			names[i] = potions[i].getName();
-		}
-		
-		// Check that all Potion names are one of the potionNames
-		for(int i = 0; i < numTests; i++) {
-			if((names[i] != "Witch's Brew") && (names[i] != "Slug Trouble") && (names[i] != "Spooky Scary Potion") && (names[i] != "Green Vial") && (names[i] != "Blue Vial") && (names[i] != "Red potion") && (names[i] != "Orange Juice")) {
-				System.out.print(names[i]);
-				fail("The Potion's name is not one of the potionNames");
-			}
 		}
 		
 		// Check how many times a potion is named "Witch's Brew"
@@ -73,7 +65,7 @@ class PotionTest_RandomName {
 	
 	@Test
 	void testSlug() {
-		int numTests = 66;
+		int numTests = 200;
 		int slugCount = 0;
 		
 		// Initialize array of Potions
@@ -86,14 +78,6 @@ class PotionTest_RandomName {
 		String names[] = new String[numTests];
 		for(int i = 0; i < numTests; i++) {
 			names[i] = potions[i].getName();
-		}
-		
-		// Check that all Potion names are one of the potionNames
-		for(int i = 0; i < numTests; i++) {
-			if((names[i] != "Witch's Brew") && (names[i] != "Slug Trouble") && (names[i] != "Spooky Scary Potion") && (names[i] != "Green Vial") && (names[i] != "Blue Vial") && (names[i] != "Red potion") && (names[i] != "Orange Juice")) {
-				System.out.print(names[i]);
-				fail("The Potion's name is not one of the potionNames");
-			}
 		}
 		
 		// Check how many times a potion is named "Slug Trouble"
@@ -113,7 +97,7 @@ class PotionTest_RandomName {
 	
 	@Test
 	void testSpooky() {
-		int numTests = 66;
+		int numTests = 200;
 		int spookyCount = 0;
 		
 		// Initialize array of Potions
@@ -126,14 +110,6 @@ class PotionTest_RandomName {
 		String names[] = new String[numTests];
 		for(int i = 0; i < numTests; i++) {
 			names[i] = potions[i].getName();
-		}
-		
-		// Check that all Potion names are one of the potionNames
-		for(int i = 0; i < numTests; i++) {
-			if((names[i] != "Witch's Brew") && (names[i] != "Slug Trouble") && (names[i] != "Spooky Scary Potion") && (names[i] != "Green Vial") && (names[i] != "Blue Vial") && (names[i] != "Red potion") && (names[i] != "Orange Juice")) {
-				System.out.print(names[i]);
-				fail("The Potion's name is not one of the potionNames");
-			}
 		}
 		
 		// Check how many times a potion is named "Spooky Scary Potion"
@@ -153,7 +129,7 @@ class PotionTest_RandomName {
 	
 	@Test
 	void testGreen() {
-		int numTests = 66;
+		int numTests = 200;
 		int greenCount = 0;
 		String potionNameUnderTest = "Green Vial";
 		
@@ -167,14 +143,6 @@ class PotionTest_RandomName {
 		String names[] = new String[numTests];
 		for(int i = 0; i < numTests; i++) {
 			names[i] = potions[i].getName();
-		}
-		
-		// Check that all Potion names are one of the potionNames
-		for(int i = 0; i < numTests; i++) {
-			if((names[i] != "Witch's Brew") && (names[i] != "Slug Trouble") && (names[i] != "Spooky Scary Potion") && (names[i] != "Green Vial") && (names[i] != "Blue Vial") && (names[i] != "Red potion") && (names[i] != "Orange Juice")) {
-				System.out.print(names[i]);
-				fail("The Potion's name is not one of the potionNames");
-			}
 		}
 		
 		// Check how many times a potion is named "Green Vial"
@@ -194,7 +162,7 @@ class PotionTest_RandomName {
 	
 	@Test
 	void testBlue() {
-		int numTests = 66;
+		int numTests = 200;
 		int blueCount = 0;
 		String potionNameUnderTest = "Blue Vial";
 		
@@ -208,14 +176,6 @@ class PotionTest_RandomName {
 		String names[] = new String[numTests];
 		for(int i = 0; i < numTests; i++) {
 			names[i] = potions[i].getName();
-		}
-		
-		// Check that all Potion names are one of the potionNames
-		for(int i = 0; i < numTests; i++) {
-			if((names[i] != "Witch's Brew") && (names[i] != "Slug Trouble") && (names[i] != "Spooky Scary Potion") && (names[i] != "Green Vial") && (names[i] != "Blue Vial") && (names[i] != "Red potion") && (names[i] != "Orange Juice")) {
-				System.out.print(names[i]);
-				fail("The Potion's name is not one of the potionNames");
-			}
 		}
 		
 		// Check how many times a potion is named "Blue Vial"
@@ -251,14 +211,6 @@ class PotionTest_RandomName {
 			names[i] = potions[i].getName();
 		}
 		
-		// Check that all Potion names are one of the potionNames
-		for(int i = 0; i < numTests; i++) {
-			if((names[i] != "Witch's Brew") && (names[i] != "Slug Trouble") && (names[i] != "Spooky Scary Potion") && (names[i] != "Green Vial") && (names[i] != "Blue Vial") && (names[i] != "Red potion") && (names[i] != "Orange Juice")) {
-				System.out.print(names[i]);
-				fail("The Potion's name is not one of the potionNames");
-			}
-		}
-		
 		// Check how many times a potion is named "Red potion"
 		for(int i = 0; i < numTests; i++) {
 			if(names[i] == potionNameUnderTest) {
@@ -290,14 +242,6 @@ class PotionTest_RandomName {
 		String names[] = new String[numTests];
 		for(int i = 0; i < numTests; i++) {
 			names[i] = potions[i].getName();
-		}
-		
-		// Check that all Potion names are one of the potionNames
-		for(int i = 0; i < numTests; i++) {
-			if((names[i] != "Witch's Brew") && (names[i] != "Slug Trouble") && (names[i] != "Spooky Scary Potion") && (names[i] != "Green Vial") && (names[i] != "Blue Vial") && (names[i] != "Red potion") && (names[i] != "Orange Juice")) {
-				System.out.print(names[i]);
-				fail("The Potion's name is not one of the potionNames");
-			}
 		}
 		
 		// Check how many times a potion is named "Orange Juice"
