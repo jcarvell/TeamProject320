@@ -237,7 +237,7 @@ class PotionTest_RandomName {
 	void testRed() {
 		int numTests = 300;
 		int redCount = 0;
-		String potionNameUnderTest = "Red Potion";
+		String potionNameUnderTest = "Red potion";
 		
 		// Initialize array of Potions
 		Potion potions[] = new Potion[numTests];
