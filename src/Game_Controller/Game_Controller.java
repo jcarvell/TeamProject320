@@ -13,14 +13,14 @@ import edu.ycp.cs320.TeamProject.*;
 import teamproject.cs320.Room;
 import teamproject.cs320.User;
 
-public class Game_Controller{
+public class Game_Controller {
 	private gameModel model;
-	Scanner in = new Scanner (System.in);
-	
+	Scanner in = new Scanner(System.in);
+
 	public void setModel(gameModel model) {
 		this.model = model;
 	}
-	
+
 	public void startGame() {
 		//Set the user stats for a new game. 
 		userReset();	
@@ -28,6 +28,7 @@ public class Game_Controller{
 	public void setUserChoice1(int x) {
 		model.getUser().setUserChoice1(x);	
 	}
+
 	public void userReset() {
 		model.getUser().setHealth(100);
 		model.getUser().setPoints(0);
@@ -157,16 +158,16 @@ public class Game_Controller{
 		 {
 			Random rand = new Random(); //instance of random class
 			Room choice1 = new Room();
-			
-			userReset();	
+
+			userReset();
 			boolean running = false;
-			//Start of Game
-			
+			// Start of Game
+
 			welcome();
 			int input1 = model.getUserChoice1();
 			if(input1 == 1) {
 				running = true;
-			}else {
+			} else {
 				running = false;
 				System.out.println("Maybe next time. ");
 			}
@@ -181,13 +182,49 @@ public class Game_Controller{
 						
 						Room temp = choice1;
 						choice1 = new Room();
-						Room choice2 = new Room();
-						if(temp.getName() == choice1.getName() ) {
-							choice1 = new Room();
-						}else if (temp.getName() == choice2.getName()) {
-							choice2 = new Room();
-						}else {
-							System.out.println("");
+					} else if (temp.getName() == choice2.getName()) {
+						choice2 = new Room();
+					} else {
+						System.out.println("");
+					}
+
+					// ask if you want to save game (this can be anywhere/should maybe be at more
+					// points)
+					System.out.println("Would you like to save game? 1. Yes 2. No");
+					int save = in.nextInt();
+					if (save == 1) {
+						System.out.println("Enter your name: ");
+						String playerName = in.nextLine();
+						// Create the default IDatabase instance
+						InitDatabase.init(in);
+						IDatabase db = DatabaseProvider.getInstance();
+						// Alina is the one who typed out the following line:
+						// db.insertPlayer(playerName, user.getHealth(), user.getSpeed(),
+						// user.getStrength(), user.getArmory()[0].getName(),
+						// user.getArmory()[0].getStrengthBuff(), user.getStash()[0].getName(),
+						// user.getStash()[0].getHealthIncreaseAmount(),
+						// user.getStash()[0].getSpeedIncreaseAmount(), temp.getName(),
+						// temp.getRoomResources().getEnemy().getName(),
+						// temp.getRoomResources().getEnemy().getHealth(),
+						// temp.getRoomResources().getEnemy().getSpeed(),
+						// temp.getRoomResources().getEnemy().getStrength());
+						// db.insertPlayer(name, health, speed, strength, weaponName, weaponStrength,
+						// potionName, potionHealth, potionSpeed, currentRoomName, enemyName,
+						// enemyHealth, enemySpeed, enemyStrength)
+						String i = db.insertPlayer(playerName, model.getUserHealth(), model.getUserSpeed(),
+								model.getUserStrength(), model.getcurrentWeaponName(), model.getWeaponStrengthBuff(),
+								"health", 10, 10, choice1.getName(), choice1.getRoomResources().getEnemy().getName(),
+								choice1.getRoomResources().getEnemy().getHealth(),
+								choice1.getRoomResources().getEnemy().getSpeed(),
+								choice1.getRoomResources().getEnemy().getStrength());
+
+						List<Player> player1 = db.retrieveGameStateByName(playerName);
+						if (player1.isEmpty()) {
+							System.out.println("No books found for author <" + playerName + ">");
+						} else {
+							System.out.println("Your current health is: " + player1.get(player1.size() - 1).getHealth()
+									+ " Your current weapon is: " + player1.get(player1.size() - 1).getWeaponName());
+
 						}
 						
 						
@@ -232,17 +269,17 @@ public class Game_Controller{
 						
 							}
 						}
-						else if (choice == 2){
-							choice1 = choice2;
-							
-							System.out.println("You have entered " + choice1.getName());
-							if(choice1.getRoomResources().getEnemy().getHealth() > 0) {
-								System.out.println("You are suddenly face to face with: " + choice1.getRoomResources().getEnemy().getName());	
+					} else if (choice == 2) {
+						choice1 = choice2;
+
+						System.out.println("You have entered " + choice1.getName());
+						if (choice1.getRoomResources().getEnemy().getHealth() > 0) {
+							System.out.println("You are suddenly face to face with: "
+									+ choice1.getRoomResources().getEnemy().getName());
+						} else {
+							choice1.getRoomResources().noEnemyRoom(model.getUser(), choice1);
 						}
-							else {
-								choice1.getRoomResources().noEnemyRoom(model.getUser(), choice1);
-							}
-					}	else {
+					} else {
 						System.out.println("Invalid input ");
 					}
 					
