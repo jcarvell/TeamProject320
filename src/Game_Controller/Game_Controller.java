@@ -13,14 +13,16 @@ import edu.ycp.cs320.TeamProject.*;
 import teamproject.cs320.Room;
 import teamproject.cs320.User;
 
-public class Game_Controller {
+public class Game_Controller{
 	private gameModel model;
-	Scanner in = new Scanner(System.in);
-
+	Scanner in = new Scanner (System.in);
+	Random rand = new Random();
+	private String response = null;
+	
 	public void setModel(gameModel model) {
 		this.model = model;
 	}
-
+	
 	public void startGame() {
 		//Set the user stats for a new game. 
 		userReset();	
@@ -28,12 +30,12 @@ public class Game_Controller {
 	public void setUserChoice1(int x) {
 		model.getUser().setUserChoice1(x);	
 	}
-
 	public void userReset() {
 		model.getUser().setHealth(100);
 		model.getUser().setPoints(0);
 		model.getUser().setStrength(5);
 		model.getUser().setSpeed(20);
+		model.getPotion().setNumPotions(3);
 	}
 	public String printNPCinteraction(String roomName) {
 		String diaolog = null;
@@ -89,204 +91,84 @@ public class Game_Controller {
 		String intro = "Welcome to the Baby Zombies Game Would you like to begin the game? ";
 	}
 	
-	public void enemyCombat() {
-		
-			System.out.println("Your Health is: " + model.getUserHealth());
-			System.out.println(choice1.getRoomResources().getEnemy().getName() + " their current health is " + choice1.getRoomResources().getEnemy().getHealth() );
-			System.out.println("What would you like to do?");
-			System.out.println("1. Attack ");
-			System.out.println("2. Use Potion ");
-			System.out.println("3. Run Away ");
+	
+	public String attack() {
+
+			int damageDone = rand.nextInt(model.getUser().getStrength());
+			int damageTaken = rand.nextInt(model.getEnemy().getStrength());
+			model.getUser().setHealth(model.getUser().getHealth() - damageTaken);
+			model.getEnemy().setHealth(model.getEnemy().getHealth() - damageDone);
+			response = "You attacked" + model.getEnemy().getName() + " for " + damageDone + " damage. You have taken " + damageTaken + " from enemy. ";
 			
-			// int input = in.nextInt();
-			int input = model.getUserChoice1();
-			if(input == 1) {
-				//Something is wrong here. User can go into the negative health
-				
-				
-				int damageDone = rand.nextInt(model.getUserStrength());				// changed maxWeaponDamage[] to maxWeaponDamage and declared it above
-				int damageTaken = rand.nextInt(choice1.getRoomResources().getEnemy().getStrength());				// changed maxEnemyDamage[] to maxEnemyDamage and declared it above
-				
-				choice1.getRoomResources().getEnemy().setHealth(choice1.getRoomResources().getEnemy().getHealth()-damageDone);
-				model.setUserHealth(model.getUserHealth()- damageTaken);
-				
-				System.out.println("You attack " + choice1.getRoomResources().getEnemy().getName() + " for " + damageDone + " damage.");
-				System.out.println("You have taken " + damageTaken + " from the enemy. ");
-				
-				if(model.getUserHealth() < 1) {
-					System.out.println("You have taken too much damage and you have died. ");
-					break; 
-				}
+			if(model.getUser().getHealth() < 1) {
+				response = "You have taken too much damage and you have died. ";
 			}
-			else if(input == 2) {
-				if(choice1.getRoomResources().getnumPotions() > 0) {
-					model.setUserHealth(model.getUserHealth() +  choice1.getRoomResources().getPotion().getHealthIncreaseAmount());
-					choice1.getRoomResources().setPotion(choice1.getRoomResources().getnumPotions()-1);
-					System.out.println("Your new Health is " + model.getUserHealth() + " you now have " + choice1.getRoomResources().getnumPotions() + " potions.");
-					
-				}
-				else {
-					System.out.println("You have no more potions...... RIP HAHAHA.");
-					
-				}
-				
-			}
-			else if(input == 3) {
-				if(model.getUserSpeed() > model.get_enemySpeed()){
-					System.out.println("You run away from the enemy. ");
-					choice1.getRoomResources().getEnemy().setHealth(0);
-					continue GAME;
-				}
-				else {
-					System.out.println("The " + model.get_enemyName() + " cuts you off. You must fight or DIE.");
-				}
+			return response;
+		}
+	
+	public String usePotion() {
+			if( model.getPotion().getNumPotions() > 0 ) {
+				model.getUser().setHealth(model.getUser().getHealth() + model.getPotion().getHealthIncreaseAmount());
+				model.getPotion().setNumPotions(model.getPotion().getNumPotions() -1);
+				response = "Your new Health is " + model.getUser().getHealth() + " you now have " + model.getPotion().getNumPotions() + " potions. ";
 				
 			}
 			else {
-			
-				System.out.println("Invalid input ");
+				response = "You have no more potions...... RIP HAHAHA." ;				
 			}
-			
-		}
-	System.out.println("You deafeated the enemy!");
-	System.out.println("You currently have " + model.getUserHealth() + " health and " + model.getnumPotions() + " potions.");
-	choice1.getRoomResources().calculatePoints(model.getUser());
-	System.out.println("");
-		
+			return response; 
 	}
-	public void runGame(){
-		 {
-			Random rand = new Random(); //instance of random class
-			Room choice1 = new Room();
-
-			userReset();
-			boolean running = false;
-			// Start of Game
-
-			welcome();
-			int input1 = model.getUserChoice1();
-			if(input1 == 1) {
-				running = true;
-			} else {
-				running = false;
-				System.out.println("Maybe next time. ");
+	public String runAway() {
+			if(model.getUser().getSpeed() > model.getEnemy().getSpeed()) {
+				response = "You run away from the enemy";
+				//Check this out. Might need to just set enemy health to 0
+				model.setEnemy(null);
 			}
+			else {
+				response = "The " + model.getEnemy().getName() + " cuts you off. You must fight or DIE.";
+			}
+			return response;
+	}
+	
+	public String lookAround() {
+	response = "You find some items." +  model.getRoom().getRoomResources().getWeapon().getName() + " and "  + model.getRoom().getRoomResources().getPotion().getName() +" Would you like to take either of the items or would you like to leave?";
+	return response;
+	}
+	
+	public String pickupWeapon() {
+		if(model.getRoom().getRoomResources().getWeapon().getName() != "No Weapon") {
+			int tempStrength = model.getUser().getStrength();
 			
-	GAME:
-			while(running) {
-				
-				//All player changes and options other than combat would be in here. 
-					while (model.getUserHealth() > 0 && model.get_enemyHealth() <= 0 ){
-						
-						// Checks to see if the choices are the same and if they are then populate a new room. 
-						
-						Room temp = choice1;
-						choice1 = new Room();
-					} else if (temp.getName() == choice2.getName()) {
-						choice2 = new Room();
-					} else {
-						System.out.println("");
-					}
-
-					// ask if you want to save game (this can be anywhere/should maybe be at more
-					// points)
-					System.out.println("Would you like to save game? 1. Yes 2. No");
-					int save = in.nextInt();
-					if (save == 1) {
-						System.out.println("Enter your name: ");
-						String playerName = in.nextLine();
-						// Create the default IDatabase instance
-						InitDatabase.init(in);
-						IDatabase db = DatabaseProvider.getInstance();
-						// Alina is the one who typed out the following line:
-						// db.insertPlayer(playerName, user.getHealth(), user.getSpeed(),
-						// user.getStrength(), user.getArmory()[0].getName(),
-						// user.getArmory()[0].getStrengthBuff(), user.getStash()[0].getName(),
-						// user.getStash()[0].getHealthIncreaseAmount(),
-						// user.getStash()[0].getSpeedIncreaseAmount(), temp.getName(),
-						// temp.getRoomResources().getEnemy().getName(),
-						// temp.getRoomResources().getEnemy().getHealth(),
-						// temp.getRoomResources().getEnemy().getSpeed(),
-						// temp.getRoomResources().getEnemy().getStrength());
-						// db.insertPlayer(name, health, speed, strength, weaponName, weaponStrength,
-						// potionName, potionHealth, potionSpeed, currentRoomName, enemyName,
-						// enemyHealth, enemySpeed, enemyStrength)
-						String i = db.insertPlayer(playerName, model.getUserHealth(), model.getUserSpeed(),
-								model.getUserStrength(), model.getcurrentWeaponName(), model.getWeaponStrengthBuff(),
-								"health", 10, 10, choice1.getName(), choice1.getRoomResources().getEnemy().getName(),
-								choice1.getRoomResources().getEnemy().getHealth(),
-								choice1.getRoomResources().getEnemy().getSpeed(),
-								choice1.getRoomResources().getEnemy().getStrength());
-
-						List<Player> player1 = db.retrieveGameStateByName(playerName);
-						if (player1.isEmpty()) {
-							System.out.println("No books found for author <" + playerName + ">");
-						} else {
-							System.out.println("Your current health is: " + player1.get(player1.size() - 1).getHealth()
-									+ " Your current weapon is: " + player1.get(player1.size() - 1).getWeaponName());
-
-						}
-						
-						
-						// ask if you want to save game (this can be anywhere/should maybe be at more points)
-						System.out.println("Would you like to save game? 1. Yes 2. No");
-						int save = model.getUserChoice1();
-						// int save = in.nextInt();
-						if(save == 1) {
-							System.out.println("Enter your name: ");
-							String playerName = in.nextLine();
-							// Create the default IDatabase instance
-							InitDatabase.init(in);
-							IDatabase db = DatabaseProvider.getInstance();
-							//Alina is the one who typed out the following line:
-							//db.insertPlayer(playerName, user.getHealth(), user.getSpeed(), user.getStrength(), user.getArmory()[0].getName(), user.getArmory()[0].getStrengthBuff(), user.getStash()[0].getName(), user.getStash()[0].getHealthIncreaseAmount(), user.getStash()[0].getSpeedIncreaseAmount(), temp.getName(), temp.getRoomResources().getEnemy().getName(), temp.getRoomResources().getEnemy().getHealth(), temp.getRoomResources().getEnemy().getSpeed(), temp.getRoomResources().getEnemy().getStrength());
-							//db.insertPlayer(name, health, speed, strength, weaponName, weaponStrength, potionName, potionHealth, potionSpeed, currentRoomName, enemyName, enemyHealth, enemySpeed, enemyStrength)
-							String i = db.insertPlayer(playerName, model.getUserHealth(), model.getUserSpeed(), model.getUserStrength(), model.getcurrentWeaponName() , model.getWeaponStrengthBuff(), "health" , 10, 10, choice1.getName(), choice1.getRoomResources().getEnemy().getName(), choice1.getRoomResources().getEnemy().getHealth(), choice1.getRoomResources().getEnemy().getSpeed(), choice1.getRoomResources().getEnemy().getStrength());
-								
-							List<Player> player1 = db.retrieveGameStateByName(playerName);
-							if (player1.isEmpty()) {
-								System.out.println("No character found for author <" + playerName + ">");
-							}
-							else {
-								System.out.println("Your current health is: " + player1.get(player1.size()-1).getHealth() + " Your current weapon is: " + player1.get(player1.size()-1).getWeaponName());
-								
-							}
-						}
-						
-						System.out.println("You have two options 1. " + choice1.getName() + " or you can choose 2. " + choice2.getName() );
-						// int choice = in.nextInt();
-						int choice = model.getUserChoice1();
-						
-						if( choice == 1) {
-							System.out.println("You have entered " + choice1.getName());
-							if(choice1.getRoomResources().getEnemy().getHealth() > 0) {
-								System.out.println("You are suddenly face to face with: " + choice1.getRoomResources().getEnemy().getName());
-							}
-							
-							else {
-							
-							choice1.getRoomResources().noEnemyRoom( model.getUser(), choice1);
-						
-							}
-						}
-					} else if (choice == 2) {
-						choice1 = choice2;
-
-						System.out.println("You have entered " + choice1.getName());
-						if (choice1.getRoomResources().getEnemy().getHealth() > 0) {
-							System.out.println("You are suddenly face to face with: "
-									+ choice1.getRoomResources().getEnemy().getName());
-						} else {
-							choice1.getRoomResources().noEnemyRoom(model.getUser(), choice1);
-						}
-					} else {
-						System.out.println("Invalid input ");
-					}
-					
-					}
-				//User still needs to be made, this value should call to user for health in
-			}
+			String roomWeapon = model.getRoom().getRoomResources().getWeapon().getName();
+			model.getUser().setStrength(model.getRoom().getRoomResources().getWeapon().getStrengthBuff());
+			response = "Your strength was: " + tempStrength + " now your new strength is: " + model.getUser().getStrength() + " your weapon was " + model.getUser().currentWeaponName() + " your new weapon is now " + roomWeapon;
+			model.getUser().setCurrentWeapon(roomWeapon);
 		}
+		else {
+				response = "No weapon to pickup. ";
+			}
+			return response;
+	}
+		
+	public String pickupPotion() {
+		if(model.getRoom().getRoomResources().getPotion().getName() != "No Potion") {
+			int tempPotions = model.getPotion().getNumPotions();
+			model.getPotion().setNumPotions(model.getPotion().getNumPotions() +1);
+			response = "You had " + tempPotions + " and you now have " + model.getPotion().getNumPotions();
+		}
+		else {
+			response = "No Potions to pickup. ";
+		}
+		return response; 
+	}
+	
+	public String enemyDefeated() {
+	int x = model.getEnemy().getHealth();
+	int y = model.getUser().getUserPoints();
+	model.getUser().setPoints(x + y);
+	response = "You deafeated the enemy. You currently have" + model.getUser().getHealth() + " health and " + model.getPotion().getNumPotions() + " potions. Your points before the battle where: " + y +
+			" the enemy awarded you" + x + " points your new total is: " + model.getUser().getUserPoints();
+	return response; 
 	}
 
 }
