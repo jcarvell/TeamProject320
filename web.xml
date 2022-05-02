@@ -8,19 +8,19 @@
   <!-- Servlets -->
   <servlet>
     <servlet-name>IndexServlet</servlet-name>
-    <servlet-class>edu.ycp.cs320.lab02.servlet.IndexServlet</servlet-class>
+    <servlet-class>Servlets.indexServlet</servlet-class>
   </servlet>
   
   <!-- AJAX servlets. -->
   <servlet>
-    <servlet-name>AddNumbersAjaxServlet</servlet-name>
-    <servlet-class>edu.ycp.cs320.lab02.servlet.ajax.AddNumbersAjaxServlet</servlet-class>
+    <servlet-name>gameAjaxServlet</servlet-name>
+    <servlet-class>Servelets.gamesAjaxServlet</servlet-class>
   </servlet>
  
 
   <!-- Servlet mappings -->
   <servlet-mapping>
-    <servlet-name>IndexServlet</servlet-name>
+    <servlet-name>indexServlet</servlet-name>
     <url-pattern>/index</url-pattern>
   </servlet-mapping>
   <servlet-mapping>
@@ -30,7 +30,7 @@
  
   <!--  AJAX servlet mappings. -->
   <servlet-mapping>
-    <servlet-name>AddNumbersAjaxServlet</servlet-name>
+    <servlet-name>gmeAjaxServlet</servlet-name>
     <url-pattern>/ajax/addNumbers</url-pattern>
   </servlet-mapping>
 
