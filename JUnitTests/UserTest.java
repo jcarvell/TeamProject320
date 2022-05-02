@@ -14,31 +14,6 @@ class UserTest {
 	}
 
 	@Test
-	void testChooseNextRoom() {
-		fail("Not yet implemented");
-	}
-
-	@Test
-	void testWeaponPickup() {
-		fail("Not yet implemented");
-	}
-
-	@Test
-	void testPotionPickup() {
-		fail("Not yet implemented");
-	}
-
-	@Test
-	void testGetArmory() {
-		fail("Not yet implemented");
-	}
-
-	@Test
-	void testGetStash() {
-		fail("Not yet implemented");
-	}
-
-	@Test
 	void testGetHealth() {
 		User Bob = new User(5, 10, 15);
 		assertEquals(Bob.getHealth(), 5);
@@ -90,7 +65,18 @@ class UserTest {
 
 	@Test
 	void testGetSpeed() {
-		fail("Not yet implemented");
+		// public User(health,strength,speed) h
+		User Bob = new User(5, 10, 15);
+		assertEquals(Bob.getSpeed(), 15);
+		
+		User Sally = new User(10, 5, 0);
+		assertEquals(Sally.getSpeed(), 0);
+		
+		User Billy = new User(0, 22, 1);
+		assertEquals(Billy.getSpeed(), 1);
+		
+		User Suzy = new User(10, 0, 10);
+		assertEquals(Suzy.getSpeed(), 10);
 	}
 
 	@Test
@@ -131,7 +117,39 @@ class UserTest {
 
 	@Test
 	void testSetSpeed() {
-		fail("Not yet implemented");
+		User Bob = new User(5, 10, 15);
+		assertEquals(Bob.getSpeed(), 15);
+		Bob.setSpeed(9);
+		assertEquals(Bob.getSpeed(), 9);
+		Bob.setSpeed(19);
+		assertEquals(Bob.getSpeed(), 19);
+		
+		User Sally = new User(10, 5, 0);
+		assertEquals(Sally.getSpeed(), 0);
+		Sally.setSpeed(1);
+		assertEquals(Sally.getSpeed(), 1);
+		Sally.setSpeed(2);
+		assertEquals(Sally.getSpeed(), 2);
+		
+		User Billy = new User(0, 22, 1);
+		assertEquals(Billy.getSpeed(), 1);
+		Billy.setSpeed(10);
+		assertEquals(Billy.getSpeed(), 10);
+		Billy.setSpeed(5);
+		assertEquals(Billy.getSpeed(), 5);
+		Billy.setSpeed(15);
+		assertEquals(Billy.getSpeed(), 15);
+		
+		User Suzy = new User(10, 0, 10);
+		assertEquals(Suzy.getSpeed(), 10);
+		Suzy.setSpeed(0);
+		assertEquals(Suzy.getSpeed(), 0);
+		Suzy.setSpeed(17);
+		assertEquals(Suzy.getSpeed(), 17);
+		Suzy.setSpeed(0);
+		assertEquals(Suzy.getSpeed(), 0);
 	}
+
+
 
 }
