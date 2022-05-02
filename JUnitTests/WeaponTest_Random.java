@@ -141,14 +141,18 @@ class WeaponTest_Random {
 		names[59] = w59.getName();
 		names[60] = w60.getName();
 		
+		// Check that all Weapon names are one of WeaponNames
+		for(int i = 0; i < 61; i++) {
+			if((names[i] != "Gloves") && (names[i] != "Knife") && (names[i] != "Machette") && (names[i] != "Handgun") && (names[i] != "Sword")) {
+				fail("Weapon name not one of weaponNames");
+			}
+		}
+		
 		
 		// Check how many times a Weapon is named "Gloves"
 		for(int i = 0; i < 61; i++) {
 			if(names[i] == "Gloves") {
 				glovesCount++;
-			}
-			if((names[i] != "Gloves") && (names[i] != "Knife") && (names[i] != "Machette") && (names[i] != "Handgun") && (names[i] != "Sword")) {
-				fail("Weapon name not one of weaponNames");
 			}
 		}
 		
@@ -162,9 +166,6 @@ class WeaponTest_Random {
 		for(int i = 0; i < 61; i++) {
 			if(names[i] == "Knife") {
 				knifeCount++;
-			}
-			if((names[i] != "Gloves") && (names[i] != "Knife") && (names[i] != "Machette") && (names[i] != "Handgun") && (names[i] != "Sword")) {
-				fail("Weapon name not one of weaponNames");
 			}
 		}
 		
@@ -180,9 +181,6 @@ class WeaponTest_Random {
 			if(names[i] == "Machette") {
 				machetteCount++;
 			}
-			if((names[i] != "Gloves") && (names[i] != "Knife") && (names[i] != "Machette") && (names[i] != "Handgun") && (names[i] != "Sword")) {
-				fail("Weapon name not one of weaponNames");
-			}
 		}
 		
 		if(machetteCount==0) {
@@ -195,9 +193,6 @@ class WeaponTest_Random {
 		for(int i = 0; i < 61; i++) {
 			if(names[i] == "Handgun") {
 				handgunCount++;
-			}
-			if((names[i] != "Gloves") && (names[i] != "Knife") && (names[i] != "Machette") && (names[i] != "Handgun") && (names[i] != "Sword")) {
-				fail("Weapon name not one of weaponNames");
 			}
 		}
 		
@@ -212,9 +207,6 @@ class WeaponTest_Random {
 		for(int i = 0; i < 61; i++) {
 			if(names[i] == "Sword") {
 				swordCount++;
-			}
-			if((names[i] != "Gloves") && (names[i] != "Knife") && (names[i] != "Machette") && (names[i] != "Handgun") && (names[i] != "Sword")) {
-				fail("Weapon name not one of weaponNames");
 			}
 		}
 		
