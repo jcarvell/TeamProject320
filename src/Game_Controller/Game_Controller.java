@@ -43,6 +43,121 @@ public class Game_Controller{
 		String choice2 = model.randomRoom();
 	}
 	
+	public int printNPCinteraction(User user) {
+		int R = 0;
+		if(model.getroom_Name() == "Meadow"){
+			System.out.println("There is a tree in the middle of the meadow with a man standing at the base of the tree.");
+			model.setNPC("Sheep Hearder");
+			System.out.println("Would you like to approach the man? ");
+			int choice = in.nextInt();
+			if(choice == 1) {
+				System.out.println(model.getNPC() + " heals you and wishes you luck. ");
+				user.setHealth(100);
+				System.out.println("Your health is now 100.");
+				R = 1;
+			
+			}
+			else {
+				System.out.println();
+				R = 0;
+			}
+		}
+		else if(model.getroom_Name() == "Haunted Forest"){
+				System.out.println("There is an erie looking figure.");
+				model.setNPC("Vampire");
+				System.out.println("Would you like to approach the man? ");
+				int choice = in.nextInt();
+				if(choice == 1) {
+					System.out.println(model.getNPC() + " attacks you sucks out your blood which drains your health.");
+					user.setHealth(user.getHealth() - 10);
+					R = 1;
+				}
+				else {
+					System.out.println();
+					R = 0;
+				}
+		}
+		else if(model.getroom_Name() == "Slithering Stream"){
+			System.out.println("There is an man fishing in the river.");
+			model.setNPC("Fisher");
+			System.out.println("Would you like to approach the man? ");
+			int choice = in.nextInt();
+			if(choice == 1) {
+				System.out.println("Hello how are you today?");
+				System.out.println("Would you like a fish?");
+				int choice2 = in.nextInt();
+				if(choice2 == 1 ) {
+					System.out.println("You enjoy the wonderful fish. ");
+					user.setHealth(user.getHealth() + 20);
+					R = 1;
+				}
+				else {
+					System.out.println();
+					R = 0;
+				}
+			}
+			else {
+				System.out.println();
+				R= 0;
+			}
+	}
+		if(model.getroom_Name() == "Cave"){
+			System.out.println("You look into the Cave and stare into the dark abyss.");
+			model.setNPC("Bats");
+			System.out.println("Would you like to go in the cave? ");
+			int choice = in.nextInt();
+			if(choice == 1) {
+				System.out.println(model.getNPC() + " come flying out of the cave and scare you. ");
+				R = 0;
+			}
+			else {
+				System.out.println();
+				R = 0;
+			}
+		}
+		if(model.getroom_Name() == "Mall"){
+			System.out.println("You walk into an abandon mall");
+			R = 0;
+
+		}
+		if(model.getroom_Name() == "Sewers"){
+			model.setNPC("Alligator");
+			System.out.println("You drop down into the Sewer");
+			System.out.println("You hear a swirlling in the water.");
+			System.out.println("You look down and its an Alligator!");
+			R = 3;
+		}
+		else {
+			
+			if(model.getroom_Name() == "Rooftop"){
+				System.out.println("You look around and feel a cold breeze.");
+				model.setNPC("Heli");
+				System.out.println("You hear the sound of a helicopter coming towards you. ");
+				System.out.println("Would you like to leave this island and be saved? ");
+
+				int choice = in.nextInt();
+				if(choice == 1) {
+					System.out.println("You climb into the helicopter and fly away. " );
+					R = 4;
+				}
+				else {
+					System.out.println();
+					R = 0;
+				}
+			}
+			
+		}
+		return R;
+	}
+	/////////////////////////////////////////////////////////////////////////////////////////////////////
+	
+	
+	
+	
+	
+	
+	
+	
 	public void welcome() {
 		System.out.println("Welcome to the Baby Zombies Game");
 		System.out.println("Would you like to begin the game? ");
@@ -187,13 +302,13 @@ public class Game_Controller{
 							
 						}
 						else if(input == 3) {
-							if(model.getUserSpeed() > choice1.getRoomResources().getEnemy().getSpeed()){
+							if(model.getUserSpeed() > model.get_enemySpeed()){
 								System.out.println("You run away from the enemy. ");
 								choice1.getRoomResources().getEnemy().setHealth(0);
 								continue GAME;
 							}
 							else {
-								System.out.println("The " + choice1.getRoomResources().getEnemy().getName() + " cuts you off. You must fight or DIE.");
+								System.out.println("The " + model.get_enemyName() + " cuts you off. You must fight or DIE.");
 							}
 							
 						}
@@ -204,7 +319,7 @@ public class Game_Controller{
 						
 					}
 				System.out.println("You deafeated the enemy!");
-				System.out.println("You currently have " + model.getUserHealth() + " health and " + choice1.getRoomResources().getnumPotions() + " potions.");
+				System.out.println("You currently have " + model.getUserHealth() + " health and " + model.getnumPotions() + " potions.");
 				choice1.getRoomResources().calculatePoints(model.getUser());
 				System.out.println("");
 			}
