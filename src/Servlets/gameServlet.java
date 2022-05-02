@@ -51,6 +51,7 @@ public class gameServlet extends HttpServlet {
 		// client and the server every time in order to remember them
 		else {
 			// get min and max from the Posted form data
+<<<<<<< HEAD
 			String curInput = req.getParameter("input");
 			if ( curInput == "attack" && model.getEnemy().getHealth() > 0) {
 				//String response = controller.enemyCombat();
@@ -61,6 +62,11 @@ public class gameServlet extends HttpServlet {
 				response = controller.printNPCinteraction(model.getRoom().getName());
 			}
 			
+=======
+			String curInput = req.getParameter(input);
+			Integer curInput = getInteger(req, "input1");
+
+>>>>>>> ORIGINSUCKS
 			// initialize model with the old min, max values
 			// since the data does not persist between posts, we need to
 			// recreate and re-initialize the model each time
