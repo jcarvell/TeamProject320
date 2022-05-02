@@ -14,31 +14,6 @@ class UserTest {
 	}
 
 	@Test
-	void testChooseNextRoom() {
-		fail("Not yet implemented");
-	}
-
-	@Test
-	void testWeaponPickup() {
-		fail("Not yet implemented");
-	}
-
-	@Test
-	void testPotionPickup() {
-		fail("Not yet implemented");
-	}
-
-	@Test
-	void testGetArmory() {
-		fail("Not yet implemented");
-	}
-
-	@Test
-	void testGetStash() {
-		fail("Not yet implemented");
-	}
-
-	@Test
 	void testGetHealth() {
 		User Bob = new User(5, 10, 15);
 		assertEquals(Bob.getHealth(), 5);
@@ -90,17 +65,18 @@ class UserTest {
 
 	@Test
 	void testGetSpeed() {
-		fail("Not yet implemented");
-	}
-
-	@Test
-	void testGetArmoryLength() {
-		fail("Not yet implemented");
-	}
-
-	@Test
-	void testGetStashLength() {
-		fail("Not yet implemented");
+		// public User(health,strength,speed) h
+		User Bob = new User(5, 10, 15);
+		assertEquals(Bob.getSpeed(), 15);
+		
+		User Sally = new User(10, 5, 0);
+		assertEquals(Sally.getSpeed(), 0);
+		
+		User Billy = new User(0, 22, 1);
+		assertEquals(Billy.getSpeed(), 1);
+		
+		User Suzy = new User(10, 0, 10);
+		assertEquals(Suzy.getSpeed(), 10);
 	}
 	
 	@Test
@@ -131,9 +107,139 @@ class UserTest {
 	
 	@Test
 	void testSetSpeed() {
-		fail("Not yet implemented");
+		User Bob = new User(5, 10, 15);
+		assertEquals(Bob.getSpeed(), 15);
+		Bob.setSpeed(9);
+		assertEquals(Bob.getSpeed(), 9);
+		Bob.setSpeed(19);
+		assertEquals(Bob.getSpeed(), 19);
+		
+		User Sally = new User(10, 5, 0);
+		assertEquals(Sally.getSpeed(), 0);
+		Sally.setSpeed(1);
+		assertEquals(Sally.getSpeed(), 1);
+		Sally.setSpeed(2);
+		assertEquals(Sally.getSpeed(), 2);
+		
+		User Billy = new User(0, 22, 1);
+		assertEquals(Billy.getSpeed(), 1);
+		Billy.setSpeed(10);
+		assertEquals(Billy.getSpeed(), 10);
+		Billy.setSpeed(5);
+		assertEquals(Billy.getSpeed(), 5);
+		Billy.setSpeed(15);
+		assertEquals(Billy.getSpeed(), 15);
+		
+		User Suzy = new User(10, 0, 10);
+		assertEquals(Suzy.getSpeed(), 10);
+		Suzy.setSpeed(0);
+		assertEquals(Suzy.getSpeed(), 0);
+		Suzy.setSpeed(17);
+		assertEquals(Suzy.getSpeed(), 17);
+		Suzy.setSpeed(0);
+		assertEquals(Suzy.getSpeed(), 0);
 	}
-
-
-
+	
+	@Test
+	void testGetUserPoints() {
+		User Bob = new User(5, 10, 15);
+		assertEquals(Bob.getUserPoints(), 0);
+		
+		User Sally = new User(10, 5, 0);
+		assertEquals(Sally.getUserPoints(), 0);
+		
+		User Billy = new User(0, 22, 1);
+		assertEquals(Billy.getUserPoints(), 0);
+	}
+	
+	void testSetUserPoints() {
+		User Bob = new User(5, 10, 15);
+		assertEquals(Bob.getUserPoints(), 0);
+		Bob.setPoints(2);
+		assertEquals(Bob.getUserPoints(), 2);
+		Bob.setPoints(4);
+		assertEquals(Bob.getUserPoints(), 4);
+		Bob.setPoints(10);
+		assertEquals(Bob.getUserPoints(), 10);
+		
+		User Sally = new User(10, 5, 0);
+		assertEquals(Sally.getUserPoints(), 0);
+		Sally.setPoints(5);
+		assertEquals(Sally.getUserPoints(), 5);
+		Sally.setPoints(5);
+		assertEquals(Sally.getUserPoints(), 5);
+		Sally.setPoints(15);
+		assertEquals(Sally.getUserPoints(), 15);
+		Sally.setPoints(29);
+		assertEquals(Sally.getUserPoints(), 29);
+		
+		User Billy = new User(0, 22, 1);
+		assertEquals(Billy.getUserPoints(), 0);
+		Billy.setPoints(11);
+		assertEquals(Billy.getUserPoints(), 11);
+		Billy.setPoints(7);
+		assertEquals(Billy.getUserPoints(), 7);
+		Billy.setPoints(0);
+		assertEquals(Billy.getUserPoints(), 0);
+		Billy.setPoints(11);
+		assertEquals(Billy.getUserPoints(), 11);
+		Billy.setPoints(21);
+		assertEquals(Billy.getUserPoints(), 21);
+		Billy.setPoints(100);
+		assertEquals(Billy.getUserPoints(), 100);
+	}
+	
+	@Test
+	void testCurrentWeaponName() {
+		User Bob = new User(5, 10, 15);
+		assertEquals(Bob.currentWeaponName(), null);
+		
+		User Sally = new User(10, 5, 0);
+		assertEquals(Sally.currentWeaponName(), null);
+		
+		User Billy = new User(0, 22, 1);
+		assertEquals(Billy.currentWeaponName(), null);
+		
+		User Suzy = new User(10, 0, 10);
+		assertEquals(Suzy.currentWeaponName(), null);
+	}
+	
+	@Test
+	void testSetCurrentWeapon() {
+		User Bob = new User(5, 10, 15);
+		assertEquals(Bob.currentWeaponName(), null);
+		Bob.setCurrentWeapon("Sword");
+		assertEquals(Bob.currentWeaponName(), "Sword");
+		Bob.setCurrentWeapon("Sword of Evil");
+		assertEquals(Bob.currentWeaponName(), "Sword of Evil");
+		Bob.setCurrentWeapon("Knife");
+		assertEquals(Bob.currentWeaponName(), "Knife");
+		
+		User Sally = new User(10, 5, 0);
+		assertEquals(Sally.currentWeaponName(), null);
+		Sally.setCurrentWeapon("Large rock");
+		assertEquals(Sally.currentWeaponName(), "Large rock");
+		Sally.setCurrentWeapon("Sword");
+		assertEquals(Sally.currentWeaponName(), "Sword");
+		Sally.setCurrentWeapon("Large rock");
+		assertEquals(Sally.currentWeaponName(), "Large rock");
+		
+		User Billy = new User(0, 22, 1);
+		assertEquals(Billy.currentWeaponName(), null);
+		Billy.setCurrentWeapon("Rock");
+		assertEquals(Billy.currentWeaponName(), "Rock");
+		Billy.setCurrentWeapon("Small rock");
+		assertEquals(Billy.currentWeaponName(), "Small rock");
+		Billy.setCurrentWeapon("Medium rock");
+		assertEquals(Billy.currentWeaponName(), "Medium rock");
+		
+		User Suzy = new User(10, 0, 10);
+		assertEquals(Suzy.currentWeaponName(), null);
+		Suzy.setCurrentWeapon("Zzz");
+		assertEquals(Suzy.currentWeaponName(), "Zzz");
+		Suzy.setCurrentWeapon("There are many weapons");
+		assertEquals(Suzy.currentWeaponName(), "There are many weapons");
+		Suzy.setCurrentWeapon("Alligators");
+		assertEquals(Suzy.currentWeaponName(), "Alligators");
+	}
 }
