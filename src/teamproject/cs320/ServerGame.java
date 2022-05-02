@@ -1,10 +1,12 @@
 package teamproject.cs320;
+
 import java.util.Random;
 import java.util.Scanner;
 
-<<<<<<< HEAD:src/ServerGame.java
+<<<<<<<HEAD:src/ServerGame.java
+
 public class ServerGame {
-	
+
 	public ServerGame() {
 =======
 

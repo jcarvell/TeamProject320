@@ -14,7 +14,6 @@ import teamproject.cs320.Potion;
 import teamproject.cs320.Room;
 import teamproject.cs320.Weapon;
 
-
 public class DerbyDatabase implements IDatabase {
 	static {
 		try {
@@ -23,45 +22,46 @@ public class DerbyDatabase implements IDatabase {
 			throw new IllegalStateException("Could not load Derby driver");
 		}
 	}
-	
+
 	private interface Transaction<ResultType> {
 		public ResultType execute(Connection conn) throws SQLException;
 	}
 
 	private static final int MAX_ATTEMPTS = 10;
 
-	
 	// save a new game state
-	public String insertPlayer(String name, int health, int speed, int strength, String weaponName, int weaponStrength, String potionName, int potionHealth, int potionSpeed, String currentRoomName, String enemyName, int enemyHealth, int enemySpeed, int enemyStrength) {
+	public String insertPlayer(String name, int health, int speed, int strength, String weaponName, int weaponStrength,
+			String potionName, int potionHealth, int potionSpeed, String currentRoomName, String enemyName,
+			int enemyHealth, int enemySpeed, int enemyStrength) {
 		return executeTransaction(new Transaction<String>() {
 			@Override
 			public String execute(Connection conn) throws SQLException {
 				PreparedStatement stmt = null;
 				PreparedStatement deleteSmt = null;
 				ResultSet deleteSet = null;
-				
+
 				try {
-					// delete the player's previous saved game (since it is the same game but without their current progress)
-					/*deleteSmt = conn.prepareStatement(
-							"delete from players"
-							+ "where player.name = ?"
-					);
-					deleteSmt.setString(1, name);
-			
-					deleteSet = deleteSmt.executeQuery();
-				*/
-					
+					// delete the player's previous saved game (since it is the same game but
+					// without their current progress)
+					/*
+					 * deleteSmt = conn.prepareStatement( "delete from players" +
+					 * "where player.name = ?" ); deleteSmt.setString(1, name);
+					 * 
+					 * deleteSet = deleteSmt.executeQuery();
+					 */
+
 					// check that it delete correctly
 					// add later, using Ed's find player function
-					
+
 					// insert the player's current game state
 					stmt = conn.prepareStatement(
-							// issue: DerbyDatabase is not initializing the player table (right now called playerList)
+							// issue: DerbyDatabase is not initializing the player table (right now called
+							// playerList)
 							"insert into player (player.name, player.health, player.speed, player.strength, player.weoponName, "
-							+ "player.weoponStrength,player.potionName, player.potionHealth, player.potionSpeed, player.RoomName, "
-							+ "player.enemyName, player.enemyStrength, player.enemySpeed, player.enemyHealth) " 
-							+"  values(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?) " 
-							
+									+ "player.weoponStrength,player.potionName, player.potionHealth, player.potionSpeed, player.RoomName, "
+									+ "player.enemyName, player.enemyStrength, player.enemySpeed, player.enemyHealth) "
+									+ "  values(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?) "
+
 					);
 					stmt.setString(1, name);
 					stmt.setInt(2, health);
@@ -77,14 +77,13 @@ public class DerbyDatabase implements IDatabase {
 					stmt.setInt(12, enemyStrength);
 					stmt.setInt(13, enemySpeed);
 					stmt.setInt(14, enemyHealth);
-					
-					
+
 					stmt.executeUpdate();
-					
-					
-					// I don't think it has anything it needs to return but I couldn't figure out how to get the function return type to be void
+
+					// I don't think it has anything it needs to return but I couldn't figure out
+					// how to get the function return type to be void
 					return name;
-					
+
 				} finally {
 					DBUtil.closeQuietly(deleteSet);
 					DBUtil.closeQuietly(deleteSmt);
@@ -93,7 +92,6 @@ public class DerbyDatabase implements IDatabase {
 			}
 		});
 	}
-	
 
 	private void loadPlayer(Player player, ResultSet resultSet, int index) throws SQLException {
 		player.setPlayerName(resultSet.getString(index++));
@@ -110,11 +108,8 @@ public class DerbyDatabase implements IDatabase {
 		player.setEnemyStrength(resultSet.getInt(index++));
 		player.setEnemySpeed(resultSet.getInt(index++));
 		player.setEnemyHealth(resultSet.getInt(index++));
-		
-		
-	}
-	
 
+	}
 
 	// transaction that deletes Player from Library
 	@Override
@@ -123,51 +118,44 @@ public class DerbyDatabase implements IDatabase {
 			@Override
 			public List<Player> execute(Connection conn) throws SQLException {
 				PreparedStatement stmtDelete = null;
-				PreparedStatement stmt2 = null;					
-						
-				ResultSet resultSet2    = null;
-				
-				try {							
+				PreparedStatement stmt2 = null;
+
+				ResultSet resultSet2 = null;
+
+				try {
 					// delete entries in Player table for this name
-					stmtDelete = conn.prepareStatement(
-							"delete from players " +
-							"  where title = ? "
-					);
-					
+					stmtDelete = conn.prepareStatement("delete from players " + "  where title = ? ");
+
 					// delete the Book entries from the DB for this title
 					stmtDelete.setString(1, name);
 					stmtDelete.executeQuery();
-					
-					System.out.println("Deleted book(s) with title <" + name + "> from DB");									
-					
+
+					System.out.println("Deleted book(s) with title <" + name + "> from DB");
+
 					// look at remaining players
-					stmt2 = conn.prepareStatement(
-							"select * from players "
-					);
-					
+					stmt2 = conn.prepareStatement("select * from players ");
+
 					resultSet2 = stmt2.executeQuery();
-					
+
 					// assemble list of remaining Players from query
-					List<Player> players = new ArrayList<Player>();					
-				
+					List<Player> players = new ArrayList<Player>();
+
 					while (resultSet2.next()) {
 						Player player = new Player();
 						loadPlayer(player, resultSet2, 1);
 						players.add(player);
 					}
-					
-					
+
 					return players;
 				} finally {
-					
+
 					DBUtil.closeQuietly(resultSet2);
 					DBUtil.closeQuietly(stmtDelete);
-					DBUtil.closeQuietly(stmt2);				
+					DBUtil.closeQuietly(stmt2);
 				}
 			}
 		});
 	}
-
 
 	public List<Player> retrieveGameStateByName(final String name) {
 		return executeTransaction(new Transaction<List<Player>>() {
@@ -175,35 +163,34 @@ public class DerbyDatabase implements IDatabase {
 			public List<Player> execute(Connection conn) throws SQLException {
 				PreparedStatement stmt = null;
 				ResultSet resultSet = null;
-				
+
 				try {
-					stmt = conn.prepareStatement(
-							"select * from player "//+
-							//"player.playerName=?"
+					stmt = conn.prepareStatement("select * from player "// +
+					// "player.playerName=?"
 					);
-					//stmt.setString(1, name);
-					
+					// stmt.setString(1, name);
+
 					List<Player> result = new ArrayList<Player>();
-					
+
 					resultSet = stmt.executeQuery();
-					
+
 					// for testing that a result was returned
 					Boolean found = false;
-					
+
 					while (resultSet.next()) {
 						found = true;
-						
+
 						Player player = new Player();
 						loadPlayer(player, resultSet, 1);
-						
+
 						result.add(player);
 					}
-					
+
 					// check if the title was found
 					if (!found) {
 						System.out.println("<" + name + "> was not found in the player table");
 					}
-					
+
 					return result;
 				} finally {
 					DBUtil.closeQuietly(resultSet);
@@ -212,25 +199,27 @@ public class DerbyDatabase implements IDatabase {
 			}
 		});
 	}
-	
-	// wrapper SQL transaction function that calls actual transaction function (which has retries)
-	public<ResultType> ResultType executeTransaction(Transaction<ResultType> txn) {
+
+	// wrapper SQL transaction function that calls actual transaction function
+	// (which has retries)
+	public <ResultType> ResultType executeTransaction(Transaction<ResultType> txn) {
 		try {
 			return doExecuteTransaction(txn);
 		} catch (SQLException e) {
 			throw new PersistenceException("Transaction failed", e);
 		}
 	}
-	
-	// SQL transaction function which retries the transaction MAX_ATTEMPTS times before failing
-	public<ResultType> ResultType doExecuteTransaction(Transaction<ResultType> txn) throws SQLException {
+
+	// SQL transaction function which retries the transaction MAX_ATTEMPTS times
+	// before failing
+	public <ResultType> ResultType doExecuteTransaction(Transaction<ResultType> txn) throws SQLException {
 		Connection conn = connect();
-		
+
 		try {
 			int numAttempts = 0;
 			boolean success = false;
 			ResultType result = null;
-			
+
 			while (!success && numAttempts < MAX_ATTEMPTS) {
 				try {
 					result = txn.execute(conn);
@@ -248,49 +237,50 @@ public class DerbyDatabase implements IDatabase {
 					}
 				}
 			}
-			
+
 			if (!success) {
 				throw new SQLException("Transaction failed (too many retries)");
 			}
-			
+
 			// Success!
 			return result;
 		} finally {
 			DBUtil.closeQuietly(conn);
 		}
 	}
-	
+
 	private Connection connect() throws SQLException {
-		Connection conn = DriverManager.getConnection("jdbc:derby:C:/CS320-2022-LibraryExample-DB/library.db;create=true");		
-		
+		Connection conn = DriverManager
+				.getConnection("jdbc:derby:C:/CS320-2022-LibraryExample-DB/library.db;create=true");
+
 		// Set autocommit() to false to allow the execution of
 		// multiple queries/statements as part of the same transaction.
 		conn.setAutoCommit(false);
-		
+
 		return conn;
 	}
-	//Maybe use to get rid of the table. 
+
+	// Maybe use to get rid of the table.
 	public void showTables() {
 		executeTransaction(new Transaction<Boolean>() {
-			
+
 			@Override
 			public Boolean execute(Connection conn) throws SQLException {
 				PreparedStatement stmt1 = null;
 				try {
-					stmt1= conn.prepareStatement(
-							"select * from players"
-							);
+					stmt1 = conn.prepareStatement("select * from players");
 					return true;
-				}finally{
+				} finally {
 					stmt1.executeUpdate();
-					
+
 					System.out.println("Player table created");
 					DBUtil.closeQuietly(stmt1);
 				}
-				}
-			});}
-	
-	//This is a function
+			}
+		});
+	}
+
+	// This is a function
 	public void createTables() {
 		executeTransaction(new Transaction<Boolean>() {
 			@Override
@@ -347,30 +337,28 @@ public class DerbyDatabase implements IDatabase {
 			}
 		});
 	}
-	
+
 	public void loadInitialData() {
 		executeTransaction(new Transaction<Boolean>() {
 			@Override
 			public Boolean execute(Connection conn) throws SQLException {
 				List<Player> playerList;
-				
-				
+
 				try {
-					playerList     = InitialData.getPlayer();
-									
+					playerList = InitialData.getPlayer();
+
 				} catch (IOException e) {
 					throw new SQLException("Couldn't read initial data", e);
 				}
 
-				PreparedStatement insertPlayer     = null;
-				
+				PreparedStatement insertPlayer = null;
 
 				try {
 					// Populating players table
 					insertPlayer = conn.prepareStatement(
 							"insert into player (player.name, player.health, player.speed, player.strength, player.weaponName, "
 									+ "player.weaponStrength,player.potionName, player.potionHealth, player.potionSpeed, player.currentRoomName, "
-									+ "player.enemyName, player.enemyStrength, player.enemySpeed, player.enemyHealth) " );
+									+ "player.enemyName, player.enemyStrength, player.enemySpeed, player.enemyHealth) ");
 					for (Player player : playerList) {
 						insertPlayer.setString(1, player.getPlayerName());
 						insertPlayer.setInt(2, player.getHealth());
@@ -388,28 +376,27 @@ public class DerbyDatabase implements IDatabase {
 						insertPlayer.setInt(14, player.getEnemyHealth());
 					}
 					insertPlayer.executeBatch();
-					
+
 					System.out.println("Player table populated");
-					
+
 					return true;
 				} finally {
-					DBUtil.closeQuietly(insertPlayer);			
+					DBUtil.closeQuietly(insertPlayer);
 				}
 			}
 		});
 	}
-	
-	
+
 	// The main method creates the database tables and loads the initial data.
 	public static void main(String[] args) throws IOException {
 		System.out.println("Creating tables...");
 		DerbyDatabase db = new DerbyDatabase();
 		// db.dropTables();
 		db.createTables();
-		
+
 		System.out.println("Loading initial data...");
 		db.loadInitialData();
-		
+
 		System.out.println("Library DB successfully initialized!");
 	}
 }

@@ -5,10 +5,10 @@ public class User {
 	private String currentWeaponName;
 
 	public User() {
-		
+
 	}
-	
-	public User(int a,int b,int c) {
+
+	public User(int a, int b, int c) {
 		health = a;
 		strength = b;
 		speed = c;
@@ -17,22 +17,27 @@ public class User {
 	public int getUserChoice1() {
 		return userChoice1;
 	}
+
 	public void setUserChoice1(int choice1) {
 		userChoice1 = choice1;
 	}
-	
+
 	public int getHealth() {
 		return health;
 	}
+
 	public void setHealth(int x) {
-		health=x;
+		health = x;
 	}
+
 	public int getStrength() {
 		return strength;
 	}
+
 	public int getSpeed() {
 		return speed;
 	}
+
 	public void setStrength(int x) {
 		strength = x;
 	}
@@ -44,12 +49,15 @@ public class User {
 	public int getUserPoints() {
 		return userPoints;
 	}
+
 	public void setPoints(int x) {
 		userPoints = x;
 	}
+
 	public String currentWeaponName() {
 		return currentWeaponName;
 	}
+
 	public void setCurrentWeapon(String x) {
 		currentWeaponName = x;
 	}

@@ -33,7 +33,7 @@ class RoomResourcesTest {
 		Enemy e1 = new Enemy();
 		NPCs n1 = new NPCs();
 		RoomResources r1 = new RoomResources(p1, w1, e1, n1);
-		
+
 		Potion retrievedPotion = r1.getPotion();
 		assertEquals(retrievedPotion, p1);
 		assertEquals(retrievedPotion.getHealthIncreaseAmount(), 5);
@@ -48,7 +48,7 @@ class RoomResourcesTest {
 		Enemy e1 = new Enemy();
 		NPCs n1 = new NPCs();
 		RoomResources r1 = new RoomResources(p1, w1, e1, n1);
-		
+
 		Weapon retrievedWeapon = r1.getWeapon();
 		assertEquals(retrievedWeapon.getStrengthBuff(), 10);
 		assertEquals(retrievedWeapon.getName(), "Sword of Terror");
@@ -61,7 +61,7 @@ class RoomResourcesTest {
 		Enemy e1 = new Enemy(3, 6, 9, "Monstrous Lizard");
 		NPCs n1 = new NPCs();
 		RoomResources r1 = new RoomResources(p1, w1, e1, n1);
-		
+
 		Enemy retrievedEnemy = r1.getEnemy();
 		assertEquals(retrievedEnemy.getHealth(), 3);
 		assertEquals(retrievedEnemy.getStrength(), 6);
@@ -76,11 +76,10 @@ class RoomResourcesTest {
 		Enemy e1 = new Enemy();
 		NPCs n1 = new NPCs("You will die a horrible death");
 		RoomResources r1 = new RoomResources(p1, w1, e1, n1);
-		
+
 		NPCs retrievedNPCs = r1.getNPCs();
 		assertEquals(retrievedNPCs.getDialogue(), null);
 		// we don't have a getter for the roomname in NPCs
 	}
-	
 
 }

@@ -1,4 +1,5 @@
 package Servlets;
+
 import java.io.IOException;
 
 import javax.servlet.ServletException;
@@ -12,14 +13,12 @@ public class gameAjaxServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	@Override
-	protected void doGet(HttpServletRequest req, HttpServletResponse resp)
-			throws ServletException, IOException {
+	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		doRequest(req, resp);
 	}
-	
+
 	@Override
-	protected void doPost(HttpServletRequest req, HttpServletResponse resp)
-			throws ServletException, IOException {
+	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		doRequest(req, resp);
 	}
 
@@ -28,19 +27,17 @@ public class gameAjaxServlet extends HttpServlet {
 		Double first = getDouble(req, "first");
 		Double second = getDouble(req, "second");
 		Double third = getDouble(req, "thrid");
-		
+
 		// Check whether parameters are valid
-		if (first == null || second == null ||third==null) {
+		if (first == null || second == null || third == null) {
 			badRequest("Bad parameters", resp);
 			return;
 		}
-		
+
 		// Use a controller to process the request
 		NumbersController controller = new NumbersController();
 		Double result = controller.add(first, second, third);
-		
-		
-		
+
 		// Send back a response
 		resp.setContentType("text/plain");
 		resp.getWriter().println(result.toString());
