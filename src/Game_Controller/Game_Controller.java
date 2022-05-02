@@ -23,147 +23,136 @@ public class Game_Controller{
 	
 	public void startGame() {
 		//Set the user stats for a new game. 
-		userReset();
-		
+		userReset();	
 	}
-	
 	public void setUserChoice1(int x) {
-		model.setUserChoice1(x);
-		
+		model.getUser().setUserChoice1(x);	
 	}
 	public void userReset() {
-		model.setUserHealth(100);
-		model.setUserPoints(0);
-		model.setUserStrength(5);
-		model.setUserSpeed(20);
+		model.getUser().setHealth(100);
+		model.getUser().setPoints(0);
+		model.getUser().setStrength(5);
+		model.getUser().setSpeed(20);
 	}
-	
-	public void newRooms(){
-		String choice1 = model.randomRoom();
-		String choice2 = model.randomRoom();
+	public String printNPCinteraction(String roomName) {
+		String diaolog = null;
+		if(roomName == "Meadow"){
+			model.getNPCs().setNPC("Sheep Hearder");
+			String diaolg = "There is a tree in the middle of the meadow with a man standing at the base of the tree." + model.getNPCs().getNPC() + " heals you and wishes you luck. Your health is now 100.";
+			model.getUser().setHealth(100);
+				
+		}
+		else if(roomName == "Haunted Forest"){
+				diaolog = "There is an erie looking figure. " + model.getNPCs().getNPC() + " attacks you sucks out your blood which drains your health.";
+				model.getNPCs().setNPC("Vampire");
+				model.getUser().setHealth(model.getUser().getHealth() - 10 );
+					return diaolog; 
+				}
+
+		else if(roomName == "Slithering Stream"){
+			diaolog = "There is an man fishing in the river. Hello how are you today? The fisheran gives you a fish. You are healed for 20 health. ";
+			model.getNPCs().setNPC("Fisher");
+			model.getUser().setHealth(model.getUser().getHealth() + 20);
+			return diaolog;
+
 	}
-	
-	public int printNPCinteraction(User user) {
-		int R = 0;
-		if(model.getroom_Name() == "Meadow"){
-			System.out.println("There is a tree in the middle of the meadow with a man standing at the base of the tree.");
-			model.setNPC("Sheep Hearder");
-			System.out.println("Would you like to approach the man? ");
-			int choice = in.nextInt();
-			if(choice == 1) {
-				System.out.println(model.getNPC() + " heals you and wishes you luck. ");
-				user.setHealth(100);
-				System.out.println("Your health is now 100.");
-				R = 1;
-			
-			}
-			else {
-				System.out.println();
-				R = 0;
-			}
-		}
-		else if(model.getroom_Name() == "Haunted Forest"){
-				System.out.println("There is an erie looking figure.");
-				model.setNPC("Vampire");
-				System.out.println("Would you like to approach the man? ");
-				int choice = in.nextInt();
-				if(choice == 1) {
-					System.out.println(model.getNPC() + " attacks you sucks out your blood which drains your health.");
-					user.setHealth(user.getHealth() - 10);
-					R = 1;
-				}
-				else {
-					System.out.println();
-					R = 0;
-				}
-		}
-		else if(model.getroom_Name() == "Slithering Stream"){
-			System.out.println("There is an man fishing in the river.");
-			model.setNPC("Fisher");
-			System.out.println("Would you like to approach the man? ");
-			int choice = in.nextInt();
-			if(choice == 1) {
-				System.out.println("Hello how are you today?");
-				System.out.println("Would you like a fish?");
-				int choice2 = in.nextInt();
-				if(choice2 == 1 ) {
-					System.out.println("You enjoy the wonderful fish. ");
-					user.setHealth(user.getHealth() + 20);
-					R = 1;
-				}
-				else {
-					System.out.println();
-					R = 0;
-				}
-			}
-			else {
-				System.out.println();
-				R= 0;
-			}
-	}
-		if(model.getroom_Name() == "Cave"){
-			System.out.println("You look into the Cave and stare into the dark abyss.");
-			model.setNPC("Bats");
-			System.out.println("Would you like to go in the cave? ");
-			int choice = in.nextInt();
-			if(choice == 1) {
-				System.out.println(model.getNPC() + " come flying out of the cave and scare you. ");
-				R = 0;
-			}
-			else {
-				System.out.println();
-				R = 0;
-			}
-		}
-		if(model.getroom_Name() == "Mall"){
-			System.out.println("You walk into an abandon mall");
-			R = 0;
+		if(roomName == "Cave"){
+			System.out.println("You look into the Cave and stare into the dark abyss." + model.getNPCs().getNPC() + " come flying out of the cave and scare you. ");
+			model.getNPCs().setNPC("Bats");
+			return diaolog;
 
 		}
-		if(model.getroom_Name() == "Sewers"){
-			model.setNPC("Alligator");
-			System.out.println("You drop down into the Sewer");
-			System.out.println("You hear a swirlling in the water.");
-			System.out.println("You look down and its an Alligator!");
-			R = 3;
+		if(roomName == "Mall"){
+			diaolog = "You walk into an abandon mall";
+			return diaolog; 
+
+		}
+		if(roomName == "Sewers"){
+			model.getNPCs().setNPC("Alligator");
+			diaolog = "You drop down into the Sewer. You hear a swirlling in the water. You look down and its an Alligator!";
+			return diaolog; 
 		}
 		else {
 			
-			if(model.getroom_Name() == "Rooftop"){
-				System.out.println("You look around and feel a cold breeze.");
-				model.setNPC("Heli");
-				System.out.println("You hear the sound of a helicopter coming towards you. ");
-				System.out.println("Would you like to leave this island and be saved? ");
-
-				int choice = in.nextInt();
-				if(choice == 1) {
-					System.out.println("You climb into the helicopter and fly away. " );
-					R = 4;
-				}
-				else {
-					System.out.println();
-					R = 0;
-				}
+			if(roomName == "Rooftop"){
+				diaolog = "You look around and feel a cold breeze. You hear the sound of a helicopter coming towards you. You climb into the helicopter and fly away." ;
+				model.getNPCs().setNPC("Heli");
+				return diaolog;
 			}
-			
 		}
-		return R;
+		return diaolog;
 	}
 	/////////////////////////////////////////////////////////////////////////////////////////////////////
 	
-	
-	
-	
-	
-	
-	
-	
 	public void welcome() {
-		System.out.println("Welcome to the Baby Zombies Game");
-		System.out.println("Would you like to begin the game? ");
+		String intro = "Welcome to the Baby Zombies Game Would you like to begin the game? ";
 	}
 	
-	
+	public void enemyCombat() {
+		
+			System.out.println("Your Health is: " + model.getUserHealth());
+			System.out.println(choice1.getRoomResources().getEnemy().getName() + " their current health is " + choice1.getRoomResources().getEnemy().getHealth() );
+			System.out.println("What would you like to do?");
+			System.out.println("1. Attack ");
+			System.out.println("2. Use Potion ");
+			System.out.println("3. Run Away ");
+			
+			// int input = in.nextInt();
+			int input = model.getUserChoice1();
+			if(input == 1) {
+				//Something is wrong here. User can go into the negative health
+				
+				
+				int damageDone = rand.nextInt(model.getUserStrength());				// changed maxWeaponDamage[] to maxWeaponDamage and declared it above
+				int damageTaken = rand.nextInt(choice1.getRoomResources().getEnemy().getStrength());				// changed maxEnemyDamage[] to maxEnemyDamage and declared it above
+				
+				choice1.getRoomResources().getEnemy().setHealth(choice1.getRoomResources().getEnemy().getHealth()-damageDone);
+				model.setUserHealth(model.getUserHealth()- damageTaken);
+				
+				System.out.println("You attack " + choice1.getRoomResources().getEnemy().getName() + " for " + damageDone + " damage.");
+				System.out.println("You have taken " + damageTaken + " from the enemy. ");
+				
+				if(model.getUserHealth() < 1) {
+					System.out.println("You have taken too much damage and you have died. ");
+					break; 
+				}
+			}
+			else if(input == 2) {
+				if(choice1.getRoomResources().getnumPotions() > 0) {
+					model.setUserHealth(model.getUserHealth() +  choice1.getRoomResources().getPotion().getHealthIncreaseAmount());
+					choice1.getRoomResources().setPotion(choice1.getRoomResources().getnumPotions()-1);
+					System.out.println("Your new Health is " + model.getUserHealth() + " you now have " + choice1.getRoomResources().getnumPotions() + " potions.");
+					
+				}
+				else {
+					System.out.println("You have no more potions...... RIP HAHAHA.");
+					
+				}
+				
+			}
+			else if(input == 3) {
+				if(model.getUserSpeed() > model.get_enemySpeed()){
+					System.out.println("You run away from the enemy. ");
+					choice1.getRoomResources().getEnemy().setHealth(0);
+					continue GAME;
+				}
+				else {
+					System.out.println("The " + model.get_enemyName() + " cuts you off. You must fight or DIE.");
+				}
+				
+			}
+			else {
+			
+				System.out.println("Invalid input ");
+			}
+			
+		}
+	System.out.println("You deafeated the enemy!");
+	System.out.println("You currently have " + model.getUserHealth() + " health and " + model.getnumPotions() + " potions.");
+	choice1.getRoomResources().calculatePoints(model.getUser());
+	System.out.println("");
+		
+	}
 	public void runGame(){
 		 {
 			Random rand = new Random(); //instance of random class
@@ -258,70 +247,7 @@ public class Game_Controller{
 					}
 					
 					}
-				//User still needs to be made, this value should call to user for health int
-					while(choice1.getRoomResources().getEnemy().getHealth() > 0) {
-		
-						System.out.println("Your Health is: " + model.getUserHealth());
-						System.out.println(choice1.getRoomResources().getEnemy().getName() + " their current health is " + choice1.getRoomResources().getEnemy().getHealth() );
-						System.out.println("What would you like to do?");
-						System.out.println("1. Attack ");
-						System.out.println("2. Use Potion ");
-						System.out.println("3. Run Away ");
-						
-						// int input = in.nextInt();
-						int input = model.getUserChoice1();
-						if(input == 1) {
-							//Something is wrong here. User can go into the negative health
-							
-							
-							int damageDone = rand.nextInt(model.getUserStrength());				// changed maxWeaponDamage[] to maxWeaponDamage and declared it above
-							int damageTaken = rand.nextInt(choice1.getRoomResources().getEnemy().getStrength());				// changed maxEnemyDamage[] to maxEnemyDamage and declared it above
-							
-							choice1.getRoomResources().getEnemy().setHealth(choice1.getRoomResources().getEnemy().getHealth()-damageDone);
-							model.setUserHealth(model.getUserHealth()- damageTaken);
-							
-							System.out.println("You attack " + choice1.getRoomResources().getEnemy().getName() + " for " + damageDone + " damage.");
-							System.out.println("You have taken " + damageTaken + " from the enemy. ");
-							
-							if(model.getUserHealth() < 1) {
-								System.out.println("You have taken too much damage and you have died. ");
-								break; 
-							}
-						}
-						else if(input == 2) {
-							if(choice1.getRoomResources().getnumPotions() > 0) {
-								model.setUserHealth(model.getUserHealth() +  choice1.getRoomResources().getPotion().getHealthIncreaseAmount());
-								choice1.getRoomResources().setPotion(choice1.getRoomResources().getnumPotions()-1);
-								System.out.println("Your new Health is " + model.getUserHealth() + " you now have " + choice1.getRoomResources().getnumPotions() + " potions.");
-								
-							}
-							else {
-								System.out.println("You have no more potions...... RIP HAHAHA.");
-								
-							}
-							
-						}
-						else if(input == 3) {
-							if(model.getUserSpeed() > model.get_enemySpeed()){
-								System.out.println("You run away from the enemy. ");
-								choice1.getRoomResources().getEnemy().setHealth(0);
-								continue GAME;
-							}
-							else {
-								System.out.println("The " + model.get_enemyName() + " cuts you off. You must fight or DIE.");
-							}
-							
-						}
-						else {
-						
-							System.out.println("Invalid input ");
-						}
-						
-					}
-				System.out.println("You deafeated the enemy!");
-				System.out.println("You currently have " + model.getUserHealth() + " health and " + model.getnumPotions() + " potions.");
-				choice1.getRoomResources().calculatePoints(model.getUser());
-				System.out.println("");
+				//User still needs to be made, this value should call to user for health in
 			}
 		}
 	}

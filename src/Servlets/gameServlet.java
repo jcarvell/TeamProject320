@@ -51,7 +51,7 @@ public class gameServlet extends HttpServlet {
 		// client and the server every time in order to remember them
 		else {
 			// get min and max from the Posted form data
-			
+			String curInput = req.getParameter(input);
 			Integer curInput = getInteger(req, "input1");
 			
 			// initialize model with the old min, max values
