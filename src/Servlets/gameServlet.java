@@ -65,17 +65,20 @@ public class gameServlet extends HttpServlet {
 			// view only reads the model data, it never changes
 			// the model - only the controller can change the model
 			
-			/*Based on which button is clicked what happens
-			 *if (req.getParameter("gotIt") != null) {
-				controller.setNumberFound();
-			} else if (req.getParameter("less") != null) {
-				controller.setNumberIsLessThanGuess();
-			} else if (req.getParameter("more") != null) {
-				controller.setNumberIsGreaterThanGuess();
-			} else {
+		
+			if (req.getParameter("Choice 1") != null)
+			{
+				controller.choiceOne();
+			}
+			else if (req.getParameter("Choice 2") != null)
+			{
+				controller.choiceTwo();
+			}
+			else {
 				throw new ServletException("Unknown command");
 			}
-		}*/
+			
+		}
 		
 		// set "game" attribute to the model reference
 		// the JSP will reference the model elements through "game"
