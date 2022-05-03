@@ -11,7 +11,7 @@ import Game_Controller.Game_Controller;
 import Model.gameModel;
 import teamproject.cs320.*;
 
-public class gameServlet extends HttpServlet {
+public class GameServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	@Override

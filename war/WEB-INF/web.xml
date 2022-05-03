@@ -8,7 +8,12 @@
   <!-- Servlets -->
   <servlet>
     <servlet-name>IndexServlet</servlet-name>
-    <servlet-class>TeamProject320.src.Servlets.indexServlet</servlet-class>
+    <servlet-class>TeamProject320.servlets.IndexServlet</servlet-class>
+  </servlet>
+  
+    <servlet>
+    <servlet-name>GameServlet</servlet-name>
+    <servlet-class>Servlets.GameServlet</servlet-class>
   </servlet>
   
   
@@ -19,5 +24,16 @@
     <url-pattern>/index</url-pattern>
   </servlet-mapping>
   
-</web-app>
+    <servlet-mapping>
+    <servlet-name>GameServlet</servlet-name>
+    <url-pattern>/gameIndex</url-pattern>
+  </servlet-mapping>
+  
   <!-- THIS IS FROM LAB02 WEB.XML -->
+  
+  <welcome-file-list>
+  	<welcome-file>index.html</welcome-file>
+  </welcome-file-list>
+
+</web-app>
+  
