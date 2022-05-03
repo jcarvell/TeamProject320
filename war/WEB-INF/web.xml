@@ -1,5 +1,3 @@
-  <!-- THIS IS FROM LAB02 WEB.XML -->
-
 <?xml version="1.0" encoding="UTF-8"?>
 <web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://java.sun.com/xml/ns/javaee 
@@ -10,7 +8,7 @@
   <!-- Servlets -->
   <servlet>
     <servlet-name>IndexServlet</servlet-name>
-    <servlet-class>TeamProject320.servlets.indexServlet</servlet-class>
+    <servlet-class>TeamProject320.src.Servlets.indexServlet</servlet-class>
   </servlet>
   
   
@@ -22,3 +20,4 @@
   </servlet-mapping>
   
 </web-app>
+  <!-- THIS IS FROM LAB02 WEB.XML -->
