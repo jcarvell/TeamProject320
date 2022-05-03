@@ -30,7 +30,7 @@
  
   <!--  AJAX servlet mappings. -->
   <servlet-mapping>
-    <servlet-name>gmeAjaxServlet</servlet-name>
+    <servlet-name>gameAjaxServlet</servlet-name>
     <url-pattern>/ajax/addNumbers</url-pattern>
   </servlet-mapping>
 
