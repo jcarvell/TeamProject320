@@ -21,7 +21,7 @@ public class gameModel{
 	private Room room = new Room();
 	
 	
-	gameModel(){
+	public gameModel(){
 		
 	}
 	

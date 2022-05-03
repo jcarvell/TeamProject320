@@ -10,7 +10,7 @@ public class InitDatabase {
 		System.out.print("Which database (0=fake, 1=derby): ");
 		int which = Integer.parseInt(keyboard.nextLine());
 		if (which == 0) {
-			// DatabaseProvider.setInstance(new FakeDatabase());
+			//DatabaseProvider.setInstance(new FakeDatabase());
 		} else if (which == 1) {
 			DatabaseProvider.setInstance(new DerbyDatabase());
 		} else {
