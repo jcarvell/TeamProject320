@@ -201,25 +201,24 @@ class RoomResourcesTest {
 	}
 	
 	@Test
-	void testNoEnemyRoom() {
-		// Declare variables
-		int previousWeaponStrength;
-		int previousUserStrength;
-		String previousWeaponName;
-		
+	void testNoEnemyRoom() {		
 		// Declare User, Room, RoomResources
 		User Alice = new User();
 		Room hotel = new Room();
-		//RoomResources r1 = new RoomResources();
 		
-		// Get before values
-		previousWeaponStrength = hotel.getRoomResources().getWeapon().getStrengthBuff();
-		previousUserStrength = Alice.getStrength();
-		previousWeaponName = Alice.currentWeaponName();
 		
 		// Execute noEnemyRoom()
 		hotel.getRoomResources().noEnemyRoom(Alice, hotel);
-		assertEquals(Alice.getStrength(), previousUserStrength+hotel.getRoomResources().getWeapon().getStrengthBuff());
+		assertEquals(Alice.getStrength(), hotel.getRoomResources().getWeapon().getStrengthBuff());
+		assertEquals(Alice.currentWeaponName(), hotel.getRoomResources().getWeapon().getName());
+		
+		//Second room
+		Room hotelBasement = new Room();
+
+		// Execute noEnemyRoom()
+		hotelBasement.getRoomResources().noEnemyRoom(Alice, hotelBasement);
+		assertEquals(Alice.getStrength(), hotelBasement.getRoomResources().getWeapon().getStrengthBuff());
+		assertEquals(Alice.currentWeaponName(), hotelBasement.getRoomResources().getWeapon().getName());		
 	}
 	// other methods mainly print things, not sure how to test that
 }
