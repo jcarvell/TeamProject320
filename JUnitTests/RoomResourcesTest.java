@@ -85,11 +85,43 @@ class RoomResourcesTest {
 	@Test
 	void testSetPotion() {
 		//setPotion(int) changes the number of potions
-		RoomResources r1 = new RoomResources();
-		r1.setPotion(3);
-		assertEquals(r1.getnumPotions(), 3);
-		r1.setPotion(4);
-		assertEquals(r1.getnumPotions(), 4);
+		Potion p1 = new Potion(5, 10, "Soup");
+		Weapon w1 = new Weapon();
+		Enemy e1 = new Enemy();
+		NPCs n1 = new NPCs();
+		RoomResources r1 = new RoomResources(p1, w1, e1, n1);
+		assertEquals(r1.getnumPotions(), 0);
+		r1.setPotion(1);
+		assertEquals(r1.getnumPotions(), 1);
+		r1.setPotion(2);
+		assertEquals(r1.getnumPotions(), 2);
+		r1.setPotion(2);
+		assertEquals(r1.getnumPotions(), 2);
+		r1.setPotion(1);
+		assertEquals(r1.getnumPotions(), 1);
+		
+		RoomResources r2 = new RoomResources();
+		r2.setPotion(3);
+		assertEquals(r2.getnumPotions(), 3);
+		r2.setPotion(4);
+		assertEquals(r2.getnumPotions(), 4);
+	}
+	
+	@Test
+	void testGetNumPotions() {
+		Potion p1 = new Potion(5, 10, "Soup");
+		Weapon w1 = new Weapon();
+		Enemy e1 = new Enemy();
+		NPCs n1 = new NPCs();
+		RoomResources r1 = new RoomResources(p1, w1, e1, n1);
+		assertEquals(r1.getnumPotions(), 0);
+		
+		
+		RoomResources r2 = new RoomResources();
+		r2.setPotion(3);
+		assertEquals(r2.getnumPotions(), 3);
+		r2.setPotion(4);
+		assertEquals(r2.getnumPotions(), 4);
 	}
 
 }
