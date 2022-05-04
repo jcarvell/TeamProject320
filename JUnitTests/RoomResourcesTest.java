@@ -6,6 +6,7 @@ import teamproject.cs320.Enemy;
 import teamproject.cs320.NPCs;
 import teamproject.cs320.Potion;
 import teamproject.cs320.RoomResources;
+import teamproject.cs320.User;
 import teamproject.cs320.Weapon;
 
 class RoomResourcesTest {
@@ -123,5 +124,79 @@ class RoomResourcesTest {
 		r2.setPotion(4);
 		assertEquals(r2.getnumPotions(), 4);
 	}
+	
+	@Test
+	void testCalculatePoints() {
+		// Test CalculatePoints() with RoomResources(Potion, Weapon, Enemy, NPC)
+		// Create fake user, and int variable for to store points before calculatePoints()
+		User fake = new User();
+		int orginalPoints = 0;
+		
+		// Create the first room
+		Potion p1 = new Potion();
+		Weapon w1 = new Weapon();
+		Enemy e1 = new Enemy();
+		NPCs n1 = new NPCs();
+		RoomResources r1 = new RoomResources(p1, w1, e1, n1);
+		
+		// Get points before calculatePoints, calculatePoints(), and compare
+		orginalPoints = fake.getUserPoints();
+		r1.calculatePoints(fake);
+		assertEquals(fake.getUserPoints(), (orginalPoints + e1.getPoints()));
+		
+		// Create a second room
+		Potion p2 = new Potion();
+		Weapon w2 = new Weapon();
+		Enemy e2 = new Enemy();
+		NPCs n2 = new NPCs();
+		RoomResources r2 = new RoomResources(p2, w2, e2, n2);
+		
+		// Get points before calculatePoints, calculatePoints(), and compare
+		orginalPoints = fake.getUserPoints();
+		r2.calculatePoints(fake);
+		assertEquals(fake.getUserPoints(), (orginalPoints + e2.getPoints()));
+		
+		// Create a third room
+		Potion p3 = new Potion();
+		Weapon w3 = new Weapon();
+		Enemy e3 = new Enemy();
+		NPCs n3 = new NPCs();
+		RoomResources r3 = new RoomResources(p3, w3, e3, n3);
+		
+		// Get points before calculatePoints, calculatePoints(), and compare
+		orginalPoints = fake.getUserPoints();
+		r3.calculatePoints(fake);
+		assertEquals(fake.getUserPoints(), (orginalPoints + e3.getPoints()));
+		
+		
+		// Test CalculatePoints() with RoomResources()
+		// Create fake user, and int variable for to store points before calculatePoints() 
+		User scamArtist = new User();
+		int originalScamPoints;
+		
+		// Create first room
+		RoomResources scammerRoom1 = new RoomResources();
+		
+		// Get points before calculatePoints, calculatePoints(), and compare
+		originalScamPoints = scamArtist.getUserPoints();
+		scammerRoom1.calculatePoints(scamArtist);
+		assertEquals(scamArtist.getUserPoints(), (originalScamPoints + scammerRoom1.getEnemy().getPoints()));
 
+		// Create second room
+		RoomResources scammerRoom2 = new RoomResources();
+		
+		// Get points before calculatePoints, calculatePoints(), and compare
+		originalScamPoints = scamArtist.getUserPoints();
+		scammerRoom2.calculatePoints(scamArtist);
+		assertEquals(scamArtist.getUserPoints(), (originalScamPoints + scammerRoom2.getEnemy().getPoints()));
+
+		// Create third room
+		RoomResources scammerRoom3 = new RoomResources();
+		
+		// Get points before calculatePoints, calculatePoints(), and compare
+		originalScamPoints = scamArtist.getUserPoints();
+		scammerRoom3.calculatePoints(scamArtist);
+		assertEquals(scamArtist.getUserPoints(), (originalScamPoints + scammerRoom3.getEnemy().getPoints()));
+	}
+	// other methods mainly print things, not sure how to test that
 }
