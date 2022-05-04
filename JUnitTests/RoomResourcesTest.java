@@ -5,6 +5,7 @@ import org.junit.jupiter.api.Test;
 import teamproject.cs320.Enemy;
 import teamproject.cs320.NPCs;
 import teamproject.cs320.Potion;
+import teamproject.cs320.Room;
 import teamproject.cs320.RoomResources;
 import teamproject.cs320.User;
 import teamproject.cs320.Weapon;
@@ -197,6 +198,28 @@ class RoomResourcesTest {
 		originalScamPoints = scamArtist.getUserPoints();
 		scammerRoom3.calculatePoints(scamArtist);
 		assertEquals(scamArtist.getUserPoints(), (originalScamPoints + scammerRoom3.getEnemy().getPoints()));
+	}
+	
+	@Test
+	void testNoEnemyRoom() {
+		// Declare variables
+		int previousWeaponStrength;
+		int previousUserStrength;
+		String previousWeaponName;
+		
+		// Declare User, Room, RoomResources
+		User Alice = new User();
+		Room hotel = new Room();
+		//RoomResources r1 = new RoomResources();
+		
+		// Get before values
+		previousWeaponStrength = hotel.getRoomResources().getWeapon().getStrengthBuff();
+		previousUserStrength = Alice.getStrength();
+		previousWeaponName = Alice.currentWeaponName();
+		
+		// Execute noEnemyRoom()
+		hotel.getRoomResources().noEnemyRoom(Alice, hotel);
+		assertEquals(Alice.getStrength(), previousUserStrength+hotel.getRoomResources().getWeapon().getStrengthBuff());
 	}
 	// other methods mainly print things, not sure how to test that
 }
