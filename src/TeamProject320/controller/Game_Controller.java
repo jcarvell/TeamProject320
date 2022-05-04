@@ -176,6 +176,7 @@ public class Game_Controller{
 		System.out.println("This is the current input:"+ input);
 		System.out.println("This is the current response:"+ response);
 		// get min and max from the Posted form data
+		// Check attack for damage being so low. 
 		if (input.contains("attack") && model.getEnemy().getHealth() > 0) {
 			//String response = controller.enemyCombat();
 			response = attack();
@@ -188,6 +189,7 @@ public class Game_Controller{
 		else if (input.contains("run away") && model.getEnemy() == null) {
 			response = "There is no enemy to run away from. Duh";
 		}
+		//Check this out because its giving no reponse.
 		else if (input.contains("look for npc")) {
 			response = printNPCinteraction(model.getRoom().getName());
 		}
