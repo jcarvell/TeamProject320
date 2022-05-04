@@ -82,5 +82,14 @@ class RoomResourcesTest {
 		// we don't have a getter for the roomname in NPCs
 	}
 	
+	@Test
+	void testSetPotion() {
+		//setPotion(int) changes the number of potions
+		RoomResources r1 = new RoomResources();
+		r1.setPotion(3);
+		assertEquals(r1.getnumPotions(), 3);
+		r1.setPotion(4);
+		assertEquals(r1.getnumPotions(), 4);
+	}
 
 }

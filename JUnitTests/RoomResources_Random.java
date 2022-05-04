@@ -23,6 +23,8 @@ class RoomResources_Random {
 		for(int i = 0; i < numTests; i++) {
 			enemy[i] = r[i].getEnemy();
 		}
+		
+		fail("Test not implemented yet");
 	}
 
 }
