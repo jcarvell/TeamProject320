@@ -1,13 +1,9 @@
-package Model;
-
-import java.util.Random;
-import java.util.Scanner;
+package TeamProject320.model;
 
 import teamproject.cs320.Enemy;
 import teamproject.cs320.NPCs;
 import teamproject.cs320.Potion;
 import teamproject.cs320.Room;
-import teamproject.cs320.RoomResources;
 import teamproject.cs320.User;
 import teamproject.cs320.Weapon;
 

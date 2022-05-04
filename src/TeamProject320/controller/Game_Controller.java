@@ -1,4 +1,4 @@
-package Game_Controller;
+package TeamProject320.controller;
 
 import java.util.List;
 import java.util.Random;
@@ -8,7 +8,7 @@ import Database.DatabaseProvider;
 import Database.IDatabase;
 import Database_Model.Player;
 import Database_functions.InitDatabase;
-import Model.gameModel;
+import TeamProject320.model.gameModel;
 import edu.ycp.cs320.TeamProject.*;
 import teamproject.cs320.Room;
 import teamproject.cs320.User;
