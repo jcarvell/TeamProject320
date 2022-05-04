@@ -1,4 +1,4 @@
-package Model;
+package TeamProject320.model;
 
 import teamproject.cs320.Enemy;
 import teamproject.cs320.NPCs;

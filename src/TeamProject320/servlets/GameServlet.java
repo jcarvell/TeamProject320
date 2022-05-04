@@ -1,4 +1,4 @@
-package Servlets;
+package TeamProject320.servlets;
 
 import java.io.IOException;
 
@@ -7,8 +7,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import Game_Controller.Game_Controller;
-import Model.gameModel;
+import TeamProject320.controller.Game_Controller;
+import TeamProject320.model.gameModel;
 import teamproject.cs320.*;
 
 public class GameServlet extends HttpServlet {

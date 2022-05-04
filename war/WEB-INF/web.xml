@@ -11,23 +11,12 @@
     <servlet-class>TeamProject320.servlets.IndexServlet</servlet-class>
   </servlet>
   
-    <servlet>
-    <servlet-name>GameServlet</servlet-name>
-    <servlet-class>Servlets.GameServlet</servlet-class>
-  </servlet>
-  
-  
-  
   <!-- Servlet mappings -->
   <servlet-mapping>
     <servlet-name>IndexServlet</servlet-name>
     <url-pattern>/index</url-pattern>
   </servlet-mapping>
   
-    <servlet-mapping>
-    <servlet-name>GameServlet</servlet-name>
-    <url-pattern>/gameIndex</url-pattern>
-  </servlet-mapping>
   
   <!-- THIS IS FROM LAB02 WEB.XML -->
   
