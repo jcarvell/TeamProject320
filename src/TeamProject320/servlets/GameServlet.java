@@ -52,7 +52,43 @@ public class GameServlet extends HttpServlet {
 		// without persistence, we must pass the values back and forth between the
 		// client and the server every time in order to remember them
 		else {
+<<<<<<< HEAD
 			response = controller.webActions(curInput);
+=======
+			System.out.println("This is the current input:"+ curInput);
+			System.out.println("This is the current response:"+ response);
+			// get min and max from the Posted form data
+			if (curInput.contains("attack") && model.getEnemy().getHealth() > 0) {
+				//String response = controller.enemyCombat();
+				response = controller.attack();
+			}else if (curInput.contains("attack") && model.getEnemy() == null ){
+				response = "There is no enemey to attack. ";
+			}
+			else if(curInput.contains("run away") && model.getEnemy().getHealth() > 0) {
+				response = controller.runAway();
+			}
+			else if (curInput.contains("run away") && model.getEnemy() == null) {
+				response = "There is no enemy to run away from. Duh";
+			}
+			else if (curInput.contains("look for npc")) {
+				response = controller.printNPCinteraction(model.getRoom().getName());
+			}
+			else if ( curInput.contains("look around")) {
+				response = controller.lookAround();
+			}
+			else if(curInput.contains("pickup weapon")) {
+				response = controller.pickupWeapon();
+			}
+			else if(curInput.contains("pickup potion")) {
+				response = controller.pickupPotion();
+			}
+			else if(curInput.contains("use potion")) {
+			response = controller.usePotion();
+			}
+			else {
+				response = "Invalid input";
+			}
+>>>>>>> ORIGINSUCKS
 		}
 		System.out.println(controller.lookAround());
 		req.setAttribute("response", response);
