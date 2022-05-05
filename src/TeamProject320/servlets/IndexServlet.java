@@ -15,7 +15,7 @@ public class IndexServlet extends HttpServlet {
 		
 		System.out.println("Index Servlet: doGet");
 		
-		req.getRequestDispatcher("/_view/index.jsp").forward(req, resp);
+		req.getRequestDispatcher("/view/index.jsp").forward(req, resp);
 	}
 	
 	@Override
@@ -25,7 +25,7 @@ public class IndexServlet extends HttpServlet {
 		System.out.println("\nIndexServlet: doPost");		
 		
 		// Forward to view to render the result HTML document
-		req.getRequestDispatcher("/_view/index.jsp").forward(req, resp);
+		req.getRequestDispatcher("/view/index.jsp").forward(req, resp);
 	}
 		
 	
