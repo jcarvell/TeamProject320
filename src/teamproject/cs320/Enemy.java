@@ -20,7 +20,9 @@ public class Enemy {
 		health=hel;
 		strength=str;
 		speed=spe;
-		name = n;		
+		name = n;
+		
+		enemyPoints = hel;
 	}
 	
 	public Enemy() {
