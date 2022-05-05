@@ -34,6 +34,8 @@ class EnemyTest_Random {
 		int count = 0;
 		String nameUnderTest = "No Enemy";
 		int healthUnderTest = 0;
+		int strengthUnderTest = 0;
+		int speedUnderTest = 0;
 		
 		// Create an array of Enemies
 		Enemy enemy[] = new Enemy[numTests];
@@ -50,6 +52,14 @@ class EnemyTest_Random {
 				// Check that the health matches the enemy type
 				if(enemy[i].getHealth() != healthUnderTest) {
 					fail("Enemy " + enemy[i].getName() + " does not have the corresponding health");
+				}
+				// Check that the strength matches the enemy type
+				if(enemy[i].getStrength() != strengthUnderTest) {
+					fail("Enemy " + enemy[i].getName() + " does not have the corresponding strength");
+				}
+				// Check that the speed matches the enemy type
+				if(enemy[i].getSpeed() != speedUnderTest) {
+					fail("Enemy " + enemy[i].getName() + " does not have the corresponding speed");
 				}
 			}
 		}
@@ -69,6 +79,8 @@ class EnemyTest_Random {
 		int count = 0;
 		String nameUnderTest = "Zombie";
 		int healthUnderTest = 50;
+		int strengthUnderTest = 10;
+		int speedUnderTest = 5;
 		
 		// Create an array of Enemies
 		Enemy enemy[] = new Enemy[numTests];
@@ -85,6 +97,14 @@ class EnemyTest_Random {
 				// Check that the health matches the enemy type
 				if(enemy[i].getHealth() != healthUnderTest) {
 					fail("Enemy " + enemy[i].getName() + " does not have the corresponding health");
+				}
+				// Check that the strength matches the enemy type
+				if(enemy[i].getStrength() != strengthUnderTest) {
+					fail("Enemy " + enemy[i].getName() + " does not have the corresponding strength");
+				}
+				// Check that the speed matches the enemy type
+				if(enemy[i].getSpeed() != speedUnderTest) {
+					fail("Enemy " + enemy[i].getName() + " does not have the corresponding speed");
 				}
 			}
 		}
@@ -104,6 +124,8 @@ class EnemyTest_Random {
 		int count = 0;
 		String nameUnderTest = "Alligator";
 		int healthUnderTest = 50;
+		int strengthUnderTest = 50;
+		int speedUnderTest = 1;
 		
 		// Create an array of Enemies
 		Enemy enemy[] = new Enemy[numTests];
@@ -120,6 +142,14 @@ class EnemyTest_Random {
 				// Check that the health matches the enemy type
 				if(enemy[i].getHealth() != healthUnderTest) {
 					fail("Enemy " + enemy[i].getName() + " does not have the corresponding health");
+				}
+				// Check that the strength matches the enemy type
+				if(enemy[i].getStrength() != strengthUnderTest) {
+					fail("Enemy " + enemy[i].getName() + " does not have the corresponding strength");
+				}
+				// Check that the speed matches the enemy type
+				if(enemy[i].getSpeed() != speedUnderTest) {
+					fail("Enemy " + enemy[i].getName() + " does not have the corresponding speed");
 				}
 			}
 		}
@@ -139,6 +169,8 @@ class EnemyTest_Random {
 		int count = 0;
 		String nameUnderTest = "Baby";
 		int healthUnderTest = 5;
+		int strengthUnderTest = 1;
+		int speedUnderTest = 1;
 		
 		// Create an array of Enemies
 		Enemy enemy[] = new Enemy[numTests];
@@ -155,6 +187,14 @@ class EnemyTest_Random {
 				// Check that the health matches the enemy type
 				if(enemy[i].getHealth() != healthUnderTest) {
 					fail("Enemy " + enemy[i].getName() + " does not have the corresponding health");
+				}
+				// Check that the strength matches the enemy type
+				if(enemy[i].getStrength() != strengthUnderTest) {
+					fail("Enemy " + enemy[i].getName() + " does not have the corresponding strength");
+				}
+				// Check that the speed matches the enemy type
+				if(enemy[i].getSpeed() != speedUnderTest) {
+					fail("Enemy " + enemy[i].getName() + " does not have the corresponding speed");
 				}
 			}
 		}
@@ -174,6 +214,8 @@ class EnemyTest_Random {
 		int count = 0;
 		String nameUnderTest = "King Zombie";
 		int healthUnderTest = 100;
+		int strengthUnderTest = 100;
+		int speedUnderTest = 100;
 		
 		// Create an array of Enemies
 		Enemy enemy[] = new Enemy[numTests];
@@ -190,6 +232,14 @@ class EnemyTest_Random {
 				// Check that the health matches the enemy type
 				if(enemy[i].getHealth() != healthUnderTest) {
 					fail("Enemy " + enemy[i].getName() + " does not have the corresponding health");
+				}
+				// Check that the strength matches the enemy type
+				if(enemy[i].getStrength() != strengthUnderTest) {
+					fail("Enemy " + enemy[i].getName() + " does not have the corresponding strength");
+				}
+				// Check that the speed matches the enemy type
+				if(enemy[i].getSpeed() != speedUnderTest) {
+					fail("Enemy " + enemy[i].getName() + " does not have the corresponding speed");
 				}
 			}
 		}
