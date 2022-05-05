@@ -123,7 +123,15 @@ class EnemyTest {
 
 	@Test
 	void testGetStrength() {
-		fail("Not yet implemented");
+		// Declare enemies
+		Enemy monster = new Enemy(5, 7, 9, "Green Monster");
+		Enemy Bob = new Enemy(0, 5, 10, "Bob the Bad Guy");
+		Enemy dragon = new Enemy(10, 10, 0, "Dragon");
+		
+		// Test getStrength()
+		assertEquals(monster.getStrength(), 7);
+		assertEquals(Bob.getStrength(), 5);
+		assertEquals(dragon.getStrength(), 10);
 	}
 
 	@Test
