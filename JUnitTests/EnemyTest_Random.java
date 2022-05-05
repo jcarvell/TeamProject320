@@ -68,6 +68,7 @@ class EnemyTest_Random {
 		int numTests = 200;
 		int count = 0;
 		String nameUnderTest = "Zombie";
+		int healthUnderTest = 50;
 		
 		// Create an array of Enemies
 		Enemy enemy[] = new Enemy[numTests];
@@ -81,6 +82,10 @@ class EnemyTest_Random {
 		for(int i = 0; i < numTests; i++) {
 			if(enemy[i].getName() == nameUnderTest) {
 				count++;
+				// Check that the health matches the enemy type
+				if(enemy[i].getHealth() != healthUnderTest) {
+					fail("Enemy " + enemy[i].getName() + " does not have the corresponding health");
+				}
 			}
 		}
 		
@@ -98,6 +103,7 @@ class EnemyTest_Random {
 		int numTests = 200;
 		int count = 0;
 		String nameUnderTest = "Alligator";
+		int healthUnderTest = 50;
 		
 		// Create an array of Enemies
 		Enemy enemy[] = new Enemy[numTests];
@@ -111,6 +117,10 @@ class EnemyTest_Random {
 		for(int i = 0; i < numTests; i++) {
 			if(enemy[i].getName() == nameUnderTest) {
 				count++;
+				// Check that the health matches the enemy type
+				if(enemy[i].getHealth() != healthUnderTest) {
+					fail("Enemy " + enemy[i].getName() + " does not have the corresponding health");
+				}
 			}
 		}
 		
@@ -128,6 +138,7 @@ class EnemyTest_Random {
 		int numTests = 200;
 		int count = 0;
 		String nameUnderTest = "Baby";
+		int healthUnderTest = 5;
 		
 		// Create an array of Enemies
 		Enemy enemy[] = new Enemy[numTests];
@@ -141,6 +152,10 @@ class EnemyTest_Random {
 		for(int i = 0; i < numTests; i++) {
 			if(enemy[i].getName() == nameUnderTest) {
 				count++;
+				// Check that the health matches the enemy type
+				if(enemy[i].getHealth() != healthUnderTest) {
+					fail("Enemy " + enemy[i].getName() + " does not have the corresponding health");
+				}
 			}
 		}
 		
@@ -158,6 +173,7 @@ class EnemyTest_Random {
 		int numTests = 200;
 		int count = 0;
 		String nameUnderTest = "King Zombie";
+		int healthUnderTest = 100;
 		
 		// Create an array of Enemies
 		Enemy enemy[] = new Enemy[numTests];
@@ -171,6 +187,10 @@ class EnemyTest_Random {
 		for(int i = 0; i < numTests; i++) {
 			if(enemy[i].getName() == nameUnderTest) {
 				count++;
+				// Check that the health matches the enemy type
+				if(enemy[i].getHealth() != healthUnderTest) {
+					fail("Enemy " + enemy[i].getName() + " does not have the corresponding health");
+				}
 			}
 		}
 		
