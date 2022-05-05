@@ -33,4 +33,10 @@ public class Room {
 		return resources;
 	}
 	
+	public void setRoomName(String name) {
+		this.name = name;
+	}
+	
+	
+	
 }
