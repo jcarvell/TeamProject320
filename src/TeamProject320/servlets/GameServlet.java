@@ -13,7 +13,12 @@ import teamproject.cs320.*;
 
 public class GameServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
+	gameModel model = new gameModel();
+	String errorMessage = null;
+	String response = null;
+	String curInput = null;
 
+	
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp)
 			throws ServletException, IOException {
@@ -32,9 +37,7 @@ public class GameServlet extends HttpServlet {
 		
 		// create GuessingGame model - model does not persist between requests
 		// must recreate it each time a Post comes in 
-		gameModel model = new gameModel();
-		String errorMessage = null;
-		String response = null;
+
 
 		// create GuessingGame controller - controller does not persist between requests
 		// must recreate it each time a Post comes in
@@ -42,54 +45,19 @@ public class GameServlet extends HttpServlet {
 		
 		// assign model reference to controller so that controller can access model
 		controller.setModel(model);
-		String curInput = req.getParameter("input");
-		// check if user is starting a new game and call controller method
-		if (req.getParameter("startGame") != null) {
+		
+		if(response == null) {
 			controller.startGame();
 		}
+		
 		// otherwise, user is already playing the game - get the old min and max
 		// from the posted form
 		// without persistence, we must pass the values back and forth between the
 		// client and the server every time in order to remember them
-		else {
-<<<<<<< HEAD
-			response = controller.webActions(curInput);
-=======
-			System.out.println("This is the current input:"+ curInput);
-			System.out.println("This is the current response:"+ response);
-			// get min and max from the Posted form data
-			if (curInput.contains("attack") && model.getEnemy().getHealth() > 0) {
-				//String response = controller.enemyCombat();
-				response = controller.attack();
-			}else if (curInput.contains("attack") && model.getEnemy() == null ){
-				response = "There is no enemey to attack. ";
-			}
-			else if(curInput.contains("run away") && model.getEnemy().getHealth() > 0) {
-				response = controller.runAway();
-			}
-			else if (curInput.contains("run away") && model.getEnemy() == null) {
-				response = "There is no enemy to run away from. Duh";
-			}
-			else if (curInput.contains("look for npc")) {
-				response = controller.printNPCinteraction(model.getRoom().getName());
-			}
-			else if ( curInput.contains("look around")) {
-				response = controller.lookAround();
-			}
-			else if(curInput.contains("pickup weapon")) {
-				response = controller.pickupWeapon();
-			}
-			else if(curInput.contains("pickup potion")) {
-				response = controller.pickupPotion();
-			}
-			else if(curInput.contains("use potion")) {
-			response = controller.usePotion();
-			}
-			else {
-				response = "Invalid input";
-			}
->>>>>>> ORIGINSUCKS
-		}
+		
+		curInput = req.getParameter("input");
+		response = controller.webActions(curInput);
+
 		System.out.println(controller.lookAround());
 		req.setAttribute("response", response);
 		

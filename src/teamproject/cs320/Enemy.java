@@ -16,11 +16,12 @@ public class Enemy {
 	public static final  int [] enemy_Strength = { 0, 10 , 50 , 1, 100 };
 	public static final int [] enemy_Speed = { 0, 5 , 1 , 1, 100 };
 	
-	public Enemy(int hel, int str,int spe, String n) {
+	public Enemy(int hel, int str,int spe, String n, int points){
 		health=hel;
 		strength=str;
 		speed=spe;
 		name = n;		
+		enemyPoints = points;
 	}
 	
 	public Enemy() {
@@ -64,6 +65,25 @@ public class Enemy {
 	}
 	public int getPoints() {
 		return enemyPoints;
+	}
+
+	public void setStrength(int i) {
+		strength = i;
+	}
+
+	public void setSpeed(int i) {
+		speed = i;
+		
+	}
+
+	public void setPoints(int i) {
+		enemyPoints= i;
+		
+	}
+
+	public void setName(String string) {
+		name = string;
+		
 	}
 
 	
