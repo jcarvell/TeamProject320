@@ -7,7 +7,7 @@ public class Potion {
 	private int healthIncreaseAmount;
 	private int speedIncreaseAmount; 
 	private String name;
-	private int numofPotions;
+	private int numPotions;
 	
 
 	
@@ -42,7 +42,13 @@ public class Potion {
 	public int getMaxPotionSpeedIncrease() {
 		return maxPotionSpeed;
 	}
-
+	
+	public int getNumPotions() {
+		return numPotions; 
+	}
+	public void setNumPotions(int numPotions) {
+		this.numPotions = numPotions;
+	}
 }
 	
 	//this is a comment
