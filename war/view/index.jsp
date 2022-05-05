@@ -10,9 +10,18 @@
 		<h1>Welcome to the Baby Zombies TBAG</h1>
 		<p>Press Start Game or Load a saved game</p>
 		
-		<form action="${pageContext.servletContext.contextPath}/" method="post">
+		<form action="${pageContext.servletContext.contextPath}/Game" method="get">
 			<input type="Submit" name="submit" value="Start Game">
 		</form>
+		<br>
+		<form action="${pageContext.servletContext.contextPath}/Game" method="get">
+			<input type="Submit" name="LoadGame" value="Load Game">
+		</form>
+		<br>
+		<form action="${pageContext.servletContext.contextPath}/Login" method="get">
+			<input type="Submit" name="Login" value="Login">
+		</form>
+		
 		
 	</body>
 </html>

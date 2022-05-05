@@ -16,6 +16,12 @@
     <servlet-class>TeamProject320.servlets.GameServlet</servlet-class>
   </servlet>
   
+  <servlet>
+    <servlet-name>LoginServlet</servlet-name>
+    <servlet-class>TeamProject320.servlets.LoginServlet</servlet-class>
+  </servlet>
+  
+
   
   <!-- Servlet mappings -->
   <servlet-mapping>
@@ -27,6 +33,12 @@
     <servlet-name>GameServlet</servlet-name>
     <url-pattern>/Game</url-pattern>
   </servlet-mapping>
+  
+   <servlet-mapping>
+    <servlet-name>LoginServlet</servlet-name>
+    <url-pattern>/login</url-pattern>
+  </servlet-mapping>
+  
   
   <!-- THIS IS FROM LAB02 WEB.XML -->
   

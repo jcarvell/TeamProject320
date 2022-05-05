@@ -26,6 +26,7 @@ public class IndexServlet extends HttpServlet {
 		
 		// Forward to view to render the result HTML document
 		req.getRequestDispatcher("/view/index.jsp").forward(req, resp);
+		
 	}
 		
 	

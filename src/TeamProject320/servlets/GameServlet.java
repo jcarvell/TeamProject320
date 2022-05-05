@@ -52,9 +52,9 @@ public class GameServlet extends HttpServlet {
 		// without persistence, we must pass the values back and forth between the
 		// client and the server every time in order to remember them
 		else {
-<<<<<<< HEAD
+
 			response = controller.webActions(curInput);
-=======
+
 			System.out.println("This is the current input:"+ curInput);
 			System.out.println("This is the current response:"+ response);
 			// get min and max from the Posted form data
@@ -88,7 +88,6 @@ public class GameServlet extends HttpServlet {
 			else {
 				response = "Invalid input";
 			}
->>>>>>> ORIGINSUCKS
 		}
 		System.out.println(controller.lookAround());
 		req.setAttribute("response", response);
