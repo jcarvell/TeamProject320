@@ -10,6 +10,7 @@ import Database_Model.Player;
 import Database_functions.InitDatabase;
 import TeamProject320.model.gameModel;
 import edu.ycp.cs320.TeamProject.*;
+import teamproject.cs320.Enemy;
 import teamproject.cs320.Room;
 import teamproject.cs320.User;
 
@@ -73,6 +74,11 @@ public class Game_Controller{
 		if(roomName == "Sewers"){
 			model.getNPCs().setNPC("Alligator");
 			diaolog = "You drop down into the Sewer. You hear a swirlling in the water. You look down and its an Alligator!";
+			model.getEnemy().setHealth(50);
+			model.getEnemy().setStrength(50);
+			model.getEnemy().setSpeed(1);
+			model.getEnemy().setName("Alligator");
+			model.getEnemy().setPoints(50);
 			return diaolog; 
 		}
 		else {
@@ -103,6 +109,9 @@ public class Game_Controller{
 			if(model.getUser().getHealth() < 1) {
 				response = "You have taken too much damage and you have died. ";
 			}
+			else if(model.getEnemy().getHealth() <= 0 ) {
+				response = enemyDefeated();
+			}
 			return response;
 		}
 	
@@ -132,7 +141,11 @@ public class Game_Controller{
 	
 	public String lookAround() {
 	response = "You find some items." +  model.getRoom().getRoomResources().getWeapon().getName() + " and "  + model.getRoom().getRoomResources().getPotion().getName() +" Would you like to take either of the items or would you like to leave?";
+	if(!model.getEnemy().getName().contains("No Enemy")) {
+		response = response + " there is also an enemy in the room " + model.getEnemy().getName();
+	}
 	return response;
+	
 	}
 	
 	public String pickupWeapon() {
@@ -168,14 +181,18 @@ public class Game_Controller{
 	model.getUser().setPoints(x + y);
 	response = "You deafeated the enemy. You currently have" + model.getUser().getHealth() + " health and " + model.getPotion().getNumPotions() + " potions. Your points before the battle where: " + y +
 			" the enemy awarded you" + x + " points your new total is: " + model.getUser().getUserPoints();
+	model.getEnemy().setName("No Enemy");
 	return response; 
 	}
+	
+	
 
 	public String webActions(String input) {
 
 		System.out.println("This is the current input:"+ input);
 		System.out.println("This is the current response:"+ response);
 		// get min and max from the Posted form data
+		// Check attack for damage being so low. 
 		if (input.contains("attack") && model.getEnemy().getHealth() > 0) {
 			//String response = controller.enemyCombat();
 			response = attack();
@@ -188,6 +205,7 @@ public class Game_Controller{
 		else if (input.contains("run away") && model.getEnemy() == null) {
 			response = "There is no enemy to run away from. Duh";
 		}
+		//Check this out because its giving no reponse.
 		else if (input.contains("look for npc")) {
 			response = printNPCinteraction(model.getRoom().getName());
 		}
@@ -202,6 +220,24 @@ public class Game_Controller{
 		}
 		else if(input.contains("use potion")) {
 		response = usePotion();
+		}
+		else if( input.contains("new room")) {
+			//Saving room name to check if the new room 
+			if(model.getEnemy().getHealth() <= 0) {
+				String temp_name = model.getRoom().getName();
+				Room new_room = new Room();
+				model.setRoom(new_room);
+				if(temp_name.contains(model.getRoom().getName())) {
+					new_room = new Room();
+					model.setRoom(new_room);
+				}
+				response = "You have entered the new room: " + model.getRoom().getName() + " " + model.getEnemy().getName() + " appeared.";
+			}
+			else {
+				response = "You have an enemy in the room to fight before leaving the room.";
+			}
+
+			
 		}
 		else {
 			response = "Invalid input";
