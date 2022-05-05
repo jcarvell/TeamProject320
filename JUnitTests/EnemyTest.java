@@ -23,7 +23,28 @@ class EnemyTest {
 
 	@Test
 	void testDealDamage() {
-		fail("Not yet implemented");
+		// Declare enemies
+		Enemy monster = new Enemy(5, 7, 9, "Green Monster");
+		Enemy Bob = new Enemy(0, 5, 10, "Bob the Bad Guy");
+		Enemy dragon = new Enemy(10, 10, 0, "Dragon");
+		
+		// Check that dealDamage returns the enemy's strength
+		assertEquals(monster.dealDamage(), monster.getStrength());
+		assertEquals(monster.dealDamage(), 7);
+		assertEquals(Bob.dealDamage(), Bob.getStrength());
+		assertEquals(Bob.dealDamage(), 5);
+		assertEquals(dragon.dealDamage(), dragon.getStrength());
+		assertEquals(dragon.dealDamage(), 10);
+
+		// Declare enemies using Enemy()
+		Enemy snake = new Enemy();
+		Enemy lizard = new Enemy();
+		Enemy newt = new Enemy();
+		
+		// Check that dealDamage returns the enemy's strength
+		assertEquals(snake.dealDamage(), snake.getStrength());
+		assertEquals(lizard.dealDamage(), lizard.getStrength());
+		assertEquals(newt.dealDamage(), newt.getStrength());
 	}
 
 	@Test
