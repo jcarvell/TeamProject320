@@ -126,17 +126,25 @@ class EnemyTest {
 		// Declare enemies
 		Enemy monster = new Enemy(5, 7, 9, "Green Monster");
 		Enemy Bob = new Enemy(0, 5, 10, "Bob the Bad Guy");
-		Enemy dragon = new Enemy(10, 10, 0, "Dragon");
+		Enemy dragon = new Enemy(10, 103, 0, "Dragon");
 		
 		// Test getStrength()
 		assertEquals(monster.getStrength(), 7);
 		assertEquals(Bob.getStrength(), 5);
-		assertEquals(dragon.getStrength(), 10);
+		assertEquals(dragon.getStrength(), 103);
 	}
 
 	@Test
 	void testGetSpeed() {
-		fail("Not yet implemented");
+		// Declare enemies
+		Enemy monster = new Enemy(5, 7, 9, "Green Monster");
+		Enemy Bob = new Enemy(0, 5, 10, "Bob the Bad Guy");
+		Enemy dragon = new Enemy(10, 10, 101, "Dragon");
+		
+		// Test getSpeed()
+		assertEquals(monster.getSpeed(), 9);
+		assertEquals(Bob.getSpeed(), 10);
+		assertEquals(dragon.getSpeed(), 101);
 	}
 
 	@Test
