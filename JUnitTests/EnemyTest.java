@@ -149,7 +149,29 @@ class EnemyTest {
 
 	@Test
 	void testGetPoints() {
-		fail("Not yet implemented");
+		// Declare enemies
+		Enemy monster = new Enemy(5, 7, 9, "Green Monster");
+		Enemy Bob = new Enemy(111, 5, 10, "Bob the Bad Guy");
+		Enemy dragon = new Enemy(10, 10, 0, "Dragon");
+		
+		// Test getPoints; that the enemy's points is the same as its inital health
+		assertEquals(monster.getPoints(), monster.getHealth());
+		assertEquals(monster.getPoints(), 5);
+		assertEquals(Bob.getPoints(), Bob.getHealth());
+		assertEquals(Bob.getPoints(), 111);
+		assertEquals(dragon.getPoints(), dragon.getHealth());
+		assertEquals(dragon.getPoints(), 10);
+		
+		// Declare enemies using Enemy()
+		Enemy snake = new Enemy();
+		Enemy lizard = new Enemy();
+		Enemy newt = new Enemy();
+		
+		// Test getPoints; that the enemy's points is the same as its intial health
+		assertEquals(snake.getPoints(), snake.getHealth());
+		assertEquals(lizard.getPoints(), lizard.getHealth());
+		assertEquals(newt.getPoints(), newt.getHealth());
+		
 	}
 
 }
