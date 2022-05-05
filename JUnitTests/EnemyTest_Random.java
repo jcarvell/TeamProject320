@@ -19,16 +19,10 @@ class EnemyTest_Random {
 			enemy[i] = new Enemy();
 		}
 		
-		// Create an array of the names of the Enemies
-		String name[] = new String[numTests];
-		for(int i = 0; i < numTests; i++) {
-			name[i] = enemy[i].getName();
-		}
-		
 		// Check that all names are one of the RandomEnemy names
 		for(int i = 0; i < numTests; i++) {
-			if((name[i] != "No Enemy") && (name[i] != "Zombie") && (name[i] != "Alligator") && (name[i] != "Baby") && (name[i] != "King Zombie")) {
-				fail("The enemy has an unapproved name: " + name[i]);
+			if((enemy[i].getName() != "No Enemy") && (enemy[i].getName() != "Zombie") && (enemy[i].getName() != "Alligator") && (enemy[i].getName() != "Baby") && (enemy[i].getName() != "King Zombie")) {
+				fail("The enemy has an unapproved name: " + enemy[i].getName());
 			}
 		}
 	}
@@ -39,6 +33,7 @@ class EnemyTest_Random {
 		int numTests = 200;
 		int count = 0;
 		String nameUnderTest = "No Enemy";
+		int healthUnderTest = 0;
 		
 		// Create an array of Enemies
 		Enemy enemy[] = new Enemy[numTests];
@@ -47,17 +42,15 @@ class EnemyTest_Random {
 		for(int i = 0; i < numTests; i++) {
 			enemy[i] = new Enemy();
 		}
-
-		// Create an array of the names of the Enemies
-		String name[] = new String[numTests];
-		for(int i = 0; i < numTests; i++) {
-			name[i] = enemy[i].getName();
-		}
 		
 		// Check how many Enemies are named "No Enemy"
 		for(int i = 0; i < numTests; i++) {
-			if(name[i] == nameUnderTest) {
+			if(enemy[i].getName() == nameUnderTest) {
 				count++;
+				// Check that the health matches the enemy type
+				if(enemy[i].getHealth() != healthUnderTest) {
+					fail("Enemy " + enemy[i].getName() + " does not have the corresponding health");
+				}
 			}
 		}
 		
@@ -83,16 +76,10 @@ class EnemyTest_Random {
 		for(int i = 0; i < numTests; i++) {
 			enemy[i] = new Enemy();
 		}
-
-		// Create an array of the names of the Enemies
-		String name[] = new String[numTests];
-		for(int i = 0; i < numTests; i++) {
-			name[i] = enemy[i].getName();
-		}
 		
 		// Check how many Enemies are named "Zombie"
 		for(int i = 0; i < numTests; i++) {
-			if(name[i] == nameUnderTest) {
+			if(enemy[i].getName() == nameUnderTest) {
 				count++;
 			}
 		}
@@ -119,16 +106,10 @@ class EnemyTest_Random {
 		for(int i = 0; i < numTests; i++) {
 			enemy[i] = new Enemy();
 		}
-
-		// Create an array of the names of the Enemies
-		String name[] = new String[numTests];
-		for(int i = 0; i < numTests; i++) {
-			name[i] = enemy[i].getName();
-		}
 		
 		// Check how many Enemies are named "Alligator"
 		for(int i = 0; i < numTests; i++) {
-			if(name[i] == nameUnderTest) {
+			if(enemy[i].getName() == nameUnderTest) {
 				count++;
 			}
 		}
@@ -155,16 +136,10 @@ class EnemyTest_Random {
 		for(int i = 0; i < numTests; i++) {
 			enemy[i] = new Enemy();
 		}
-
-		// Create an array of the names of the Enemies
-		String name[] = new String[numTests];
-		for(int i = 0; i < numTests; i++) {
-			name[i] = enemy[i].getName();
-		}
 		
 		// Check how many Enemies are named "Baby"
 		for(int i = 0; i < numTests; i++) {
-			if(name[i] == nameUnderTest) {
+			if(enemy[i].getName() == nameUnderTest) {
 				count++;
 			}
 		}
@@ -191,17 +166,10 @@ class EnemyTest_Random {
 		for(int i = 0; i < numTests; i++) {
 			enemy[i] = new Enemy();
 		}
-
-		// Create an array of the names of the Enemies
-		String name[] = new String[numTests];
-		for(int i = 0; i < numTests; i++) {
-			name[i] = enemy[i].getName();
-			System.out.print(name[i]);
-		}
 		
 		// Check how many Enemies are named "King Zombie"
 		for(int i = 0; i < numTests; i++) {
-			if(name[i] == nameUnderTest) {
+			if(enemy[i].getName() == nameUnderTest) {
 				count++;
 			}
 		}
