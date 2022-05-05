@@ -18,17 +18,23 @@
 	<body>
 
 <h1 class="label">Baby Zombies Game</h1>
-			<input type="Submit" name="submit" value="Enter">
+
+
 		
 	<form action="${pageContext.servletContext.contextPath}/Game" method = "post">
-		  
-		  <td class="label">input:</td>
-			<td><input type="text" name="input" size="50" value="${input}" /></td>
-
-
-
-		<td class ="label"> Response: </td>
+	<table>
+	<tr>
+		<td class ="label"> Health:  ${Health}  </td>
+	</tr>
+	<tr>
+		<td class ="label"> EnemyHealth:  ${EnemyHealth}  </td>
+	</tr>
+	
+	</table>	
 			<p> "${response}" </p>
+			
+			<td class="label">input:</td>
+			<td><input type="text" name="input" size="50" value="${input}" /></td>
 	</form>
 		
 		<form action="${pageContext.servletContext.contextPath}/index" method="post">
