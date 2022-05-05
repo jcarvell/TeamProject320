@@ -93,7 +93,7 @@ public class Game_Controller{
 	
 	
 	public String attack() {
-
+			
 			int damageDone = rand.nextInt(model.getUser().getStrength());
 			int damageTaken = rand.nextInt(model.getEnemy().getStrength());
 			model.getUser().setHealth(model.getUser().getHealth() - damageTaken);
@@ -171,4 +171,42 @@ public class Game_Controller{
 	return response; 
 	}
 
-}
+	public String webActions(String input) {
+
+		System.out.println("This is the current input:"+ input);
+		System.out.println("This is the current response:"+ response);
+		// get min and max from the Posted form data
+		if (input.contains("attack") && model.getEnemy().getHealth() > 0) {
+			//String response = controller.enemyCombat();
+			response = attack();
+		}else if (input.contains("attack") && model.getEnemy() == null ){
+			response = "There is no enemey to attack. ";
+		}
+		else if(input.contains("run away") && model.getEnemy().getHealth() > 0) {
+			response = runAway();
+		}
+		else if (input.contains("run away") && model.getEnemy() == null) {
+			response = "There is no enemy to run away from. Duh";
+		}
+		else if (input.contains("look for npc")) {
+			response = printNPCinteraction(model.getRoom().getName());
+		}
+		else if ( input.contains("look around")) {
+			response = lookAround();
+		}
+		else if(input.contains("pickup weapon")) {
+			response = pickupWeapon();
+		}
+		else if(input.contains("pickup potion")) {
+			response = pickupPotion();
+		}
+		else if(input.contains("use potion")) {
+		response = usePotion();
+		}
+		else {
+			response = "Invalid input";
+		}
+		return response;
+	}
+	
+	}
