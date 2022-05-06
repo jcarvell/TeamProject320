@@ -116,5 +116,14 @@ class RoomResources_Random {
 			
 		}
 	}
-
+	
+	@Test
+	void testWeapons() {
+		int numTests = 200;
+		int count = 0;
+		boolean nameNotOnList = true;
+		// Note: "No weeapon" only occurs when RoomResources randomly decides there are no potions in the room
+		String nameUnderTest[] = {"No weapon", "Gloves" , "Knife", "Machette" , "Handgun" , "Sword" };
+		
+	}
 }
