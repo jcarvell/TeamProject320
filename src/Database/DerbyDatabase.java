@@ -112,6 +112,7 @@ public class DerbyDatabase implements IDatabase {
 		player.setEnemyHealth(resultSet.getInt(index++));
 		
 		
+		
 	}
 	
 
@@ -299,25 +300,9 @@ public class DerbyDatabase implements IDatabase {
 			
 				try {
 					stmt1 = conn.prepareStatement(
-<<<<<<< HEAD
+						"create table player (" 	 +
+						"	name varchar(15), "		 +
 
-						"create table player (" 	 +
-						"	name varchar(15), "		 +
-=======
-<<<<<<< HEAD
-							
-						" create table player(" 	 +
-						"	name varchar(15), "		 +
-=======
-<<<<<<< HEAD
-						"create table players (" 	 +
-						"	name varchar(15) primary key, "		 +
-=======
-						"create table player (" 	 +
-						"	name varchar(15), "		 +
->>>>>>> ORIGINSUCKS
->>>>>>> ORIGINSUCKS
->>>>>>> ORIGINSUCKS
 						//Primary might break since there is no incrementing of id since the key is a string -Ed			
 						"	health integer," 		 +
 						"	speed integer," 		 +

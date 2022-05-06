@@ -36,7 +36,7 @@
   
    <servlet-mapping>
     <servlet-name>LoginServlet</servlet-name>
-    <url-pattern>/login</url-pattern>
+    <url-pattern>/Login</url-pattern>
   </servlet-mapping>
   
   

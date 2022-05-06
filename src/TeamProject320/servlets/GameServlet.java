@@ -25,6 +25,10 @@ public class GameServlet extends HttpServlet {
 		
 		System.out.println("Team Project320 : doGet");	
 		
+		Game_Controller controller = new Game_Controller();
+		response = controller.welcome();
+		req.setAttribute("response", response);
+		
 		// call JSP to generate empty form
 		req.getRequestDispatcher("/view/babyZombies.jsp").forward(req, resp);
 	}
@@ -48,15 +52,17 @@ public class GameServlet extends HttpServlet {
 		
 		if(response == null) {
 			controller.startGame();
+			response = controller.welcome();
+			System.out.println("It does go in here.");
+		}else {
+			curInput = req.getParameter("input");
+			response = controller.webActions(curInput);
 		}
 		
 		// otherwise, user is already playing the game - get the old min and max
 		// from the posted form
 		// without persistence, we must pass the values back and forth between the
 		// client and the server every time in order to remember them
-		
-		curInput = req.getParameter("input");
-		response = controller.webActions(curInput);
 
 		System.out.println(controller.lookAround());
 		req.setAttribute("response", response);
