@@ -37,6 +37,7 @@ class RoomResources_Random {
 		}
 		
 		for(int i = 0; i < nameUnderTest.length; i++) {
+			count = 0;
 			// Check how many Enemies are named the nameUnderTest
 			for(int j = 0; j < numTests; j++) {
 				if(enemy[j].getName() == nameUnderTest[i]) {
@@ -55,6 +56,64 @@ class RoomResources_Random {
 					}
 				}
 			}
+			// Check that the nameUnderTest is used at least once, but not always
+			if(count == 0) {
+				fail("The name " + nameUnderTest + " is never used");
+			} else if(count == numTests) {
+				fail("The name " + nameUnderTest + " is always used");
+			}
+		}
+	}
+	
+	@Test
+	void testPotions() {
+		int numTests = 200;
+		int count = 0;
+		boolean nameNotOnList = true;
+		// Note: "No potion" only occurs when RoomResources randomly decides there are no potions in the room
+		String nameUnderTest[] = {"No potion", "Witch's Brew", "Slug Trouble", "Spooky Scary Potion", "Green Vial", "Blue Vial", "Red potion", "Orange Juice"};
+		
+		// Initialize array of RoomResources
+		RoomResources r[] = new RoomResources[numTests];
+		for(int i = 0; i < numTests; i++) {
+			r[i] = new RoomResources();
+		}
+		
+		// Initialize array of Potions
+		Potion potions[] = new Potion[numTests];
+		for(int i = 0; i < numTests; i++) {
+			potions[i] = r[i].getPotion();
+		}
+		
+		// Check that all Potion names are one of the potionNames
+		for(int i = 0; i < numTests; i++) {
+			nameNotOnList = true;
+			for(int j = 0; j < nameUnderTest.length; j++) {
+				count++;
+				if(potions[i].getName() == nameUnderTest[j]) {
+					nameNotOnList = false;
+				}
+			}
+			if(nameNotOnList) {
+				fail(potions[i].getName() + " is not an approved name");
+			}
+		}
+
+		for(int i = 0; i < nameUnderTest.length; i++) {
+			count = 0;
+			// Check how many Potions are named the nameUnderTest
+			for(int j = 0; j < numTests; j++) {
+				if(potions[j].getName() == nameUnderTest[i]) {
+					count++;
+				}
+			}
+			// The name under test should be used at least once, but not always
+			if(count == 0) {
+				fail("The name " + nameUnderTest + " is never used");
+			} else if(count == numTests) {
+				fail("All potions are named " + nameUnderTest);
+			}
+			
 		}
 	}
 
