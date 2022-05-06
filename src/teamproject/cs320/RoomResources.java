@@ -30,8 +30,8 @@ public class RoomResources {
 		// create an array of instances of Enemy
 		if(numEnemies != 0) {
 			enemy = new Enemy();
-		} else {
-			enemy = new Enemy(0, 0, 0, "No enemy");
+		} else { // this system means "No Enemy" has a greater chance of occuring than any one specific enemy
+			enemy = new Enemy(0, 0, 0, "No Enemy");
 		}
 		
 		// create an array of instances of NPCs1
