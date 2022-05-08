@@ -13,12 +13,22 @@ import edu.ycp.cs320.TeamProject.*;
 import teamproject.cs320.Enemy;
 import teamproject.cs320.Room;
 import teamproject.cs320.User;
+import Database.DatabaseProvider;
+import Database.DerbyDatabase;
+import Database.IDatabase;
 
 public class Game_Controller{
 	private gameModel model;
 	Scanner in = new Scanner (System.in);
 	Random rand = new Random();
 	private String response = null;
+	private IDatabase db = null;
+	
+	
+	public Game_Controller() {
+		DatabaseProvider.setInstance(new DerbyDatabase());
+		db = DatabaseProvider.getInstance();
+	}
 	
 	public void setModel(gameModel model) {
 		this.model = model;
@@ -93,8 +103,9 @@ public class Game_Controller{
 	}
 	/////////////////////////////////////////////////////////////////////////////////////////////////////
 	
-	public void welcome() {
+	public String welcome() {
 		String intro = "Welcome to the Baby Zombies Game Would you like to begin the game? ";
+		return intro;
 	}
 	
 	
@@ -188,7 +199,9 @@ public class Game_Controller{
 	
 
 	public String webActions(String input) {
-
+		if(input == null) {
+			input = "No input.";
+		}
 		System.out.println("This is the current input:"+ input);
 		System.out.println("This is the current response:"+ response);
 		// get min and max from the Posted form data
@@ -239,9 +252,55 @@ public class Game_Controller{
 
 			
 		}
+		else if(input.contains("save game")){
+			response = savePlayer();
+		}
+		else if(input.contains("load game")){
+			response = loadPlayer();
+		}
+		else if(input.contains("get stats")) {
+			response = "working";
+		}
 		else {
 			response = "Invalid input";
 		}
+		return response;
+	}
+	
+	public String savePlayer() {
+		db.insertPlayer("Jordan" , model.getUser().getHealth(), model.getUser().getStrength(),
+				model.getUser().getStrength(), model.getUser().currentWeaponName(), model.getUser().getStrength(), "health" , 10, 10,
+				model.getRoom().getName(), model.getEnemy().getName(), model.getEnemy().getHealth(), model.getEnemy().getSpeed(), model.getEnemy().getStrength());
+	response = "Game has been saved.";
+		return response;
+	}
+	
+	public String loadPlayer() {
+		
+		List<Player> player1 = db.retrieveGameStateByName("Jordan");
+		if (player1.isEmpty()) {
+			response = "No name found for player <" + "Jordan" + ">";
+		}
+		else {
+			//need to add player points
+			model.getUser().setHealth(player1.get(player1.size()-1).getHealth());
+			model.getUser().setStrength(player1.get(player1.size()-1).getStrength());
+			model.getUser().setSpeed(player1.get(player1.size()-1).getSpeed());
+			model.getUser().setCurrentWeapon(player1.get(player1.size()-1).getWeaponName());
+			// model.getUser().getStrength()
+			// "health"
+			//  10, 
+			//  10,
+			model.getRoom().setRoomName(player1.get(player1.size()-1).getCurrentRoomName());
+			model.getEnemy().setName(player1.get(player1.size()-1).getEnemyName());
+			model.getEnemy().setHealth(player1.get(player1.size()-1).getEnemyHealth());
+			model.getEnemy().setStrength(player1.get(player1.size()-1).getEnemyStrength());
+			model.getEnemy().setSpeed(player1.get(player1.size()-1).getEnemySpeed());
+			
+			
+			response = "The game has been loaded.";
+		}
+		
 		return response;
 	}
 	
