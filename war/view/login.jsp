@@ -6,6 +6,12 @@
 	<head>
 		<title>CS320 Library Login</title>
 		<style type="text/css">
+		body{
+		background-color: black;
+		color: red; 
+		font-size: 20px;
+		
+		}
 		.error {
 			color: red;
 		}
