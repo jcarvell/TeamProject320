@@ -122,8 +122,50 @@ class RoomResources_Random {
 		int numTests = 200;
 		int count = 0;
 		boolean nameNotOnList = true;
-		// Note: "No weeapon" only occurs when RoomResources randomly decides there are no potions in the room
+		// Note: "No weapon" only occurs when RoomResources randomly decides there are no weapons in the room
 		String nameUnderTest[] = {"No weapon", "Gloves" , "Knife", "Machette" , "Handgun" , "Sword" };
 		
+		RoomResources r[] = new RoomResources[numTests];
+		// Initialize array of RoomResources
+		for(int i = 0; i < numTests; i++) {
+			r[i] = new RoomResources();
+		}
+		
+		// Initialize array of enemies
+		Weapon weapon[] = new Weapon[numTests];
+		for(int i = 0; i < numTests; i++) {
+			weapon[i] = r[i].getWeapon();
+		}
+
+		// Check that all Weapon names are one of the weaponNames
+		for(int i = 0; i < numTests; i++) {
+			nameNotOnList = true;
+			for(int j = 0; j < nameUnderTest.length; j++) {
+				count++;
+				if(weapon[i].getName() == nameUnderTest[j]) {
+					nameNotOnList = false;
+				}
+			}
+			if(nameNotOnList) {
+				fail(weapon[i].getName() + " is not an approved name");
+			}
+		}
+
+		for(int i = 0; i < nameUnderTest.length; i++) {
+			count = 0;
+			// Check how many Weapons are named the nameUnderTest
+			for(int j = 0; j < numTests; j++) {
+				if(weapon[j].getName() == nameUnderTest[i]) {
+					count++;
+				}
+			}
+			// The name under test should be used at least once, but not always
+			if(count == 0) {
+				fail("The name " + nameUnderTest + " is never used");
+			} else if(count == numTests) {
+				fail("All weapons are named " + nameUnderTest);
+			}
+			
+		}		
 	}
 }
