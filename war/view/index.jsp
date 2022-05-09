@@ -32,8 +32,8 @@
 			<input type="Submit" name="submit" value="Start Game">
 
 		<br>
-		<form action="${pageContext.servletContext.contextPath}/Login" method="get">
-			<input type="Submit" name="Login" value="Login">
+		<form action="${pageContext.servletContext.contextPath}/Login" method="post">
+			<input type="Submit" name="submit" value="Login">
 		</form>
 		
 		
