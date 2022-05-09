@@ -19,23 +19,33 @@
 		font-size: 25px;
 		text-align: center;
 		}
-		
+
+		input{
+			font-family:monospace;
+			padding:"200px"
+			font-color:white;
+			background-color:lightgreen;
+			padding:50px; 
+			font-size:25px; 
+			font-color:green;
+			border-radius:25%;
+			
+		}
+
 		
 		</style>
 	</head>
 
 	<body>
 		<h1>Welcome to the Baby Zombies TBAG</h1>
-		<p>Press Start Game or return to login</p>
+		<p>Press Start Game to begin</p>
 		
 		<form action="${pageContext.servletContext.contextPath}/Game" method="get">
 			<input type="Submit" name="submit" value="Start Game">
 
-		<br>
-		<form action="${pageContext.servletContext.contextPath}/Login" method="post">
-			<input type="Submit" name="submit" value="Login">
-		</form>
 		
+		
+
 		
 	</body>
 </html>

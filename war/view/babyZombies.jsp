@@ -47,7 +47,7 @@
 			<p> "${response}" </p>
 	</form>
 		
-		<form action="${pageContext.servletContext.contextPath}/index" method="post">
+		<form action="${pageContext.servletContext.contextPath}/index" method="get">
 			<input type="Submit" name="submithome" value="Home">
 		</form>	
 	</body>

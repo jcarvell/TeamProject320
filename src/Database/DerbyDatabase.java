@@ -36,7 +36,10 @@ public class DerbyDatabase implements IDatabase {
 		return executeTransaction(new Transaction<String>() {
 			@Override
 			public String execute(Connection conn) throws SQLException {
-				PreparedStatement stmt = null;
+				PreparedStatement stmt1 = null;
+				PreparedStatement stmt2 = null;
+				PreparedStatement stmt3 = null;
+
 				PreparedStatement deleteSmt = null;
 				ResultSet deleteSet = null;
 				
@@ -55,32 +58,46 @@ public class DerbyDatabase implements IDatabase {
 					// add later, using Ed's find player function
 					
 					// insert the player's current game state
-					stmt = conn.prepareStatement(
+					stmt1 = conn.prepareStatement(
 							// issue: DerbyDatabase is not initializing the player table (right now called playerList)
-							"insert into player (player.name, player.health, player.speed, player.strength, player.weoponName, "
-							+ "player.weoponStrength,player.potionName, player.potionHealth, player.potionSpeed, player.RoomName, "
-							+ "player.enemyName, player.enemyStrength, player.enemySpeed, player.enemyHealth) " 
-							+"  values(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?) " 
-							
+							"insert into players (players.name, players.health, players.speed, players.strength)"
+							+ "values(?,?,?,?)"
+							);
+					System.out.println(name + " " + health + " " + speed + " " + strength + "");
+					stmt1.setString(1, name);
+					stmt1.setInt(2, health);
+					stmt1.setInt(3, speed);
+					stmt1.setInt(4, strength);
+	
+					stmt1.executeUpdate();
+
+					stmt2 = conn.prepareStatement(
+							 " insert into item( item.weaponName, item.weaponStrength ,item.potionName , item.potionHealth, item.potionSpeed)"
+							+ "values(?,?,?,?,?)"
+							);
+					System.out.println(weaponName + "" + weaponStrength + "" + potionName + "" + potionHealth + ""  + potionSpeed + "");				
+					
+					
+					stmt2.setString(1, weaponName);
+					stmt2.setInt(2, weaponStrength);
+					stmt2.setString(3, potionName);
+					stmt2.setInt(4, potionHealth);
+					stmt2.setInt(5, potionSpeed);	
+					stmt2.executeUpdate();
+				
+					stmt3 = conn.prepareStatement(
+							"insert into enemy(enemy.roomName, enemy.enemyName, enemy.enemyStrength, enemy.enemySpeed, enemy.enemyHealth) " 
+							+"  values(?, ?, ?, ?, ?) " 
 					);
-					stmt.setString(1, name);
-					stmt.setInt(2, health);
-					stmt.setInt(3, speed);
-					stmt.setInt(4, strength);
-					stmt.setString(5, weaponName);
-					stmt.setInt(6, weaponStrength);
-					stmt.setString(7, potionName);
-					stmt.setInt(8, potionHealth);
-					stmt.setInt(9, potionSpeed);
-					stmt.setString(10, currentRoomName);
-					stmt.setString(11, enemyName);
-					stmt.setInt(12, enemyStrength);
-					stmt.setInt(13, enemySpeed);
-					stmt.setInt(14, enemyHealth);
 					
-					
-					stmt.executeUpdate();
-					
+					stmt3.setString(1, currentRoomName);
+					stmt3.setString(2, enemyName);
+					stmt3.setInt(3, enemyStrength);
+					stmt3.setInt(4, enemySpeed);
+					stmt3.setInt(5, enemyHealth);
+					stmt3.executeUpdate();
+
+
 					
 					// I don't think it has anything it needs to return but I couldn't figure out how to get the function return type to be void
 					return name;
@@ -88,7 +105,9 @@ public class DerbyDatabase implements IDatabase {
 				} finally {
 					DBUtil.closeQuietly(deleteSet);
 					DBUtil.closeQuietly(deleteSmt);
-					DBUtil.closeQuietly(stmt);
+					DBUtil.closeQuietly(stmt1);
+					DBUtil.closeQuietly(stmt2);
+					DBUtil.closeQuietly(stmt3);
 				}
 			}
 		});
@@ -96,15 +115,26 @@ public class DerbyDatabase implements IDatabase {
 	
 
 	private void loadPlayer(Player player, ResultSet resultSet, int index) throws SQLException {
+		System.out.println("Starting printing here: ");
+
+
+		player.setplayerID(resultSet.getInt(index++));
 		player.setPlayerName(resultSet.getString(index++));
 		player.setHealth(resultSet.getInt(index++));
 		player.setSpeed(resultSet.getInt(index++));
 		player.setStrength(resultSet.getInt(index++));
+		player.setitemID(resultSet.getInt(index++));
+		
+		System.out.println(resultSet.getInt(index++));
+		
 		player.setWeaponName(resultSet.getString(index++));
 		player.setWeaponStrength(resultSet.getInt(index++));
 		player.setPotionName(resultSet.getString(index++));
 		player.setPotionHealth(resultSet.getInt(index++));
 		player.setPotionSpeed(resultSet.getInt(index++));
+		
+		player.setenemyID(resultSet.getInt(index++));
+		
 		player.setCurrentRoomName(resultSet.getString(index++));
 		player.setEnemyName(resultSet.getString(index++));
 		player.setEnemyStrength(resultSet.getInt(index++));
@@ -130,15 +160,15 @@ public class DerbyDatabase implements IDatabase {
 				try {							
 					// delete entries in Player table for this name
 					stmtDelete = conn.prepareStatement(
-							"delete from players " +
-							"  where title = ? "
+							"delete players.* , item.*, enemy.*"
+							+"  where players.name = ? "
 					);
 					
 					// delete the Book entries from the DB for this title
 					stmtDelete.setString(1, name);
 					stmtDelete.executeQuery();
 					
-					System.out.println("Deleted book(s) with title <" + name + "> from DB");									
+					System.out.println("Deleted players with name <" + name + "> from DB");									
 					
 					// look at remaining players
 					stmt2 = conn.prepareStatement(
@@ -178,10 +208,19 @@ public class DerbyDatabase implements IDatabase {
 				
 				try {
 					stmt = conn.prepareStatement(
-							"select * from player "//+
-							//"player.playerName=?"
+							/*
+							"select player.name, player.health, player.speed, player.strength, player.weoponName, "
+							+ "player.weoponStrength,player.potionName, player.potionHealth, player.potionSpeed, player.RoomName,"
+							+ "player.enemyName, player.enemyStrength, player.enemySpeed, player.enemyHealth"
+							+ "where player.name = ?"
+							*/
+							
+							"select players.*, item.*, enemy.*"
+							+ "from players, item, enemy "
+							//+ "where players.player_id = item.player_id and item.item_id = enemy.item_id and "
+							+ " where players.name = ?"
 					);
-					//stmt.setString(1, name);
+					stmt.setString(1, name);
 					
 					List<Player> result = new ArrayList<Player>();
 					
@@ -234,7 +273,6 @@ public class DerbyDatabase implements IDatabase {
 			while (!success && numAttempts < MAX_ATTEMPTS) {
 				try {
 					result = txn.execute(conn);
-					System.out.println("This is where it is happening. ");
 					conn.commit();
 					success = true;
 
@@ -284,7 +322,7 @@ public class DerbyDatabase implements IDatabase {
 				}finally{
 					stmt1.executeUpdate();
 					
-					System.out.println("Player table created");
+					System.out.println("Players table created");
 					DBUtil.closeQuietly(stmt1);
 				}
 				}
@@ -296,53 +334,69 @@ public class DerbyDatabase implements IDatabase {
 			@Override
 			public Boolean execute(Connection conn) throws SQLException {
 				PreparedStatement stmt1 = null;		
+				PreparedStatement stmt2 = null;	
+				PreparedStatement stmt3 = null;	
 			
 				try {
 					stmt1 = conn.prepareStatement(
-<<<<<<< HEAD
-
-						"create table player (" 	 +
+						" create table players(" 	 +
+						"	player_id integer primary key " +
+						"		generated always as identity (start with 1, increment by 1), " +
 						"	name varchar(15), "		 +
-=======
-<<<<<<< HEAD
-							
-						" create table player(" 	 +
-						"	name varchar(15), "		 +
-=======
-<<<<<<< HEAD
-						"create table players (" 	 +
-						"	name varchar(15) primary key, "		 +
-=======
-						"create table player (" 	 +
-						"	name varchar(15), "		 +
->>>>>>> ORIGINSUCKS
->>>>>>> ORIGINSUCKS
->>>>>>> ORIGINSUCKS
-						//Primary might break since there is no incrementing of id since the key is a string -Ed			
 						"	health integer," 		 +
 						"	speed integer," 		 +
-						"	strength integer," 		 +
-						"	weaponName varchar(30)," +
-						"	weaponStrength integer," +
-						"	potionName varchar(15)," +
-						"	potionHealth integer,"   +
-						"	potionSpeed integer,"    +
-						"	roomName varchar(30),"   +
-						"	enemyName varchar(15),"  +
-						"	enemyStrength integer,"  +
-						"	enemySpeed integer," 	 +
-						"	enemyHealth integer" 	 +	
+						"	strength integer" 		 +
 						")"
 					);	
 					
 					stmt1.executeUpdate();
 					
-					System.out.println("Player table created");
+					System.out.println("Players table created");
 									
-										
+					stmt2 = conn.prepareStatement(
+							
+							" create table item (" 	 +
+							"	item_id integer primary key " +
+							"		generated always as identity (start with 1, increment by 1), " +
+							"	player_id integer constraint player_id references players, " +
+				
+							"	weaponName varchar(30)," +
+							"	weaponStrength integer," +
+							"	potionName varchar(30)," +
+							"	potionHealth integer,"   +
+							"	potionSpeed integer"    +
+							")"
+						);	
+						
+						stmt2.executeUpdate();
+						
+						System.out.println("Item table created");
+						
+						stmt3 = conn.prepareStatement(
+								
+								" create table enemy(" 	 +
+								"	enemy_id integer primary key " +
+								"		generated always as identity (start with 1, increment by 1), " +
+								"	item_id integer constraint item_id references item, " +
+								
+								"	roomName varchar(30),"   +
+								"	enemyName varchar(15),"  +
+								"	enemyStrength integer,"  +
+								"	enemySpeed integer," 	 +
+								"	enemyHealth integer" 	 +	
+								")"
+							);	
+
+
+							stmt3.executeUpdate();
+							
+							System.out.println("Enemy table created");
 					return true;
 				} finally {
 					DBUtil.closeQuietly(stmt1);
+					DBUtil.closeQuietly(stmt2);
+					DBUtil.closeQuietly(stmt3);
+
 				}
 			}
 		});

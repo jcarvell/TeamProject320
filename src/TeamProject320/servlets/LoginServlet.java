@@ -20,6 +20,8 @@ public class LoginServlet extends HttpServlet {
 			throws ServletException, IOException {
 
 		System.out.println("\nLoginServlet: doGet");
+		
+				 req.getSession(false);
 
 		req.getRequestDispatcher("/view/login.jsp").forward(req, resp);
 	}

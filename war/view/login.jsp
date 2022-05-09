@@ -10,6 +10,15 @@
 		background-color: black;
 		color: red; 
 		font-size: 20px;
+<<<<<<< HEAD
+=======
+		padding: 50px;
+		
+		}
+		h1.header{
+		color: red; 
+		font-size: 40px;
+>>>>>>> Pleasework
 		
 		}
 		.error {
@@ -23,6 +32,9 @@
 	</head>
 
 	<body>
+	
+		<h1 class="header">Login</h1>
+	
 		<c:if test="${! empty errorMessage}">
 			<div class="error">${errorMessage}</div>
 		</c:if>
@@ -38,7 +50,7 @@
 					<td><input type="text" name="password" size="12" value="${password}" /></td>
 				</tr>
 			</table>
-			<input type="Submit" name="submit" value="Login">
+			<br><input type="Submit" name="submit" value="Login">
 		</form>
 	</body>
 </html>
