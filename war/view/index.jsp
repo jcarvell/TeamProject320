@@ -19,6 +19,21 @@
 		font-size: 25px;
 		text-align: center;
 		}
+<<<<<<< HEAD
+=======
+		input{
+			font-family:monospace;
+			padding:"200px"
+			font-color:white;
+			background-color:lightgreen;
+			padding:50px; 
+			font-size:25px; 
+			font-color:green;
+			border-radius:25%;
+			
+		}
+		
+>>>>>>> Pleasework
 		
 		
 		</style>
@@ -36,6 +51,14 @@
 			<input type="Submit" name="submit" value="Login">
 		</form>
 		
+<<<<<<< HEAD
+=======
+		<br><br><form action="${pageContext.servletContext.contextPath}/Game" method="get">
+			<input class="button" type="Submit" name="submit" value="Start Game">
+		</form>
+		
+		
+>>>>>>> Pleasework
 		
 	</body>
 </html>

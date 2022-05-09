@@ -15,11 +15,21 @@ public class Library {
 		passwords = new ArrayList<String>();
 		credentials = new TreeMap<String, String>();
 		
+<<<<<<< HEAD
 		usernames.add("Jordan");
+=======
+		usernames.add("student");
+		usernames.add("Ed");
+>>>>>>> Pleasework
 		usernames.add("faculty");
 		usernames.add("Ed");
 		
+<<<<<<< HEAD
 		passwords.add("jcc");
+=======
+		passwords.add("ycp");
+		passwords.add("anxiety");
+>>>>>>> Pleasework
 		passwords.add("E&CS");
 		passwords.add("CSS");
 
