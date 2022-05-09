@@ -27,7 +27,7 @@
     <url-pattern>/index</url-pattern>
   </servlet-mapping>
   
-    <servlet-mapping>
+   <servlet-mapping>
     <servlet-name>GameServlet</servlet-name>
     <url-pattern>/Game</url-pattern>
   </servlet-mapping>

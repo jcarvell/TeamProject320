@@ -20,7 +20,7 @@ public class IndexServlet extends HttpServlet {
 			System.out.println("   User: <" + user + "> not logged in or session timed out");
 			
 			// user is not logged in, or the session expired
-			resp.sendRedirect(req.getContextPath() + "/login");
+			resp.sendRedirect(req.getContextPath() + "/Login");
 			return;
 		}
 		req.getRequestDispatcher("/view/index.jsp").forward(req, resp);

@@ -16,9 +16,11 @@ public class Library {
 		credentials = new TreeMap<String, String>();
 		
 		usernames.add("student");
+		usernames.add("Ed");
 		usernames.add("faculty");
 		
 		passwords.add("ycp");
+		passwords.add("anxiety");
 		passwords.add("E&CS");
 		
 		for (int i = 0; i < usernames.size(); i++) {
