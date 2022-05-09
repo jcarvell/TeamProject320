@@ -13,12 +13,23 @@ import edu.ycp.cs320.TeamProject.*;
 import teamproject.cs320.Enemy;
 import teamproject.cs320.Room;
 import teamproject.cs320.User;
+import Database.DatabaseProvider;
+import Database.DerbyDatabase;
+import Database.IDatabase;
 
 public class Game_Controller{
 	private gameModel model;
 	Scanner in = new Scanner (System.in);
 	Random rand = new Random();
 	private String response = null;
+	private IDatabase db = null;
+	
+	
+	public Game_Controller() {
+		DatabaseProvider.setInstance(new DerbyDatabase());
+		db = DatabaseProvider.getInstance();
+		
+	}
 	
 	public void setModel(gameModel model) {
 		this.model = model;
@@ -37,6 +48,12 @@ public class Game_Controller{
 		model.getUser().setStrength(5);
 		model.getUser().setSpeed(20);
 		model.getPotion().setNumPotions(3);
+		model.getUser().setCurrentWeapon("No Weapon");
+		model.getEnemy().setName("No Enemy");
+		model.getEnemy().setHealth(0);
+		model.getEnemy().setPoints(0);
+		model.getEnemy().setSpeed(0);
+		model.getEnemy().setStrength(0);
 	}
 	public String printNPCinteraction(String roomName) {
 		String diaolog = null;
@@ -47,13 +64,13 @@ public class Game_Controller{
 				
 		}
 		else if(roomName == "Haunted Forest"){
-				diaolog = "There is an erie looking figure. " + model.getNPCs().getNPC() + " attacks you sucks out your blood which drains your health.";
 				model.getNPCs().setNPC("Vampire");
+				diaolog = "There is an erie looking figure. Its a Vampire and he attacks you sucks out your blood which drains your health.";
 				model.getUser().setHealth(model.getUser().getHealth() - 10 );
 					return diaolog; 
 				}
 
-		else if(roomName == "Slithering Stream"){
+		else if(roomName == "River"){
 			diaolog = "There is an man fishing in the river. Hello how are you today? The fisheran gives you a fish. You are healed for 20 health. ";
 			model.getNPCs().setNPC("Fisher");
 			model.getUser().setHealth(model.getUser().getHealth() + 20);
@@ -93,8 +110,9 @@ public class Game_Controller{
 	}
 	/////////////////////////////////////////////////////////////////////////////////////////////////////
 	
-	public void welcome() {
+	public String welcome() {
 		String intro = "Welcome to the Baby Zombies Game Would you like to begin the game? ";
+		return intro;
 	}
 	
 	
@@ -155,6 +173,7 @@ public class Game_Controller{
 			String roomWeapon = model.getRoom().getRoomResources().getWeapon().getName();
 			model.getUser().setStrength(model.getRoom().getRoomResources().getWeapon().getStrengthBuff());
 			response = "Your strength was: " + tempStrength + " now your new strength is: " + model.getUser().getStrength() + " your weapon was " + model.getUser().currentWeaponName() + " your new weapon is now " + roomWeapon;
+			model.getRoom().getRoomResources().getWeapon().setName("No Weapon");
 			model.getUser().setCurrentWeapon(roomWeapon);
 		}
 		else {
@@ -164,10 +183,11 @@ public class Game_Controller{
 	}
 		
 	public String pickupPotion() {
-		if(model.getRoom().getRoomResources().getPotion().getName() != "No Potion") {
+		if(model.getRoom().getRoomResources().getPotion().getNumPotions() != 0) {
 			int tempPotions = model.getPotion().getNumPotions();
 			model.getPotion().setNumPotions(model.getPotion().getNumPotions() +1);
 			response = "You had " + tempPotions + " and you now have " + model.getPotion().getNumPotions();
+			model.getRoom().getRoomResources().getPotion().setNumPotions(0);
 		}
 		else {
 			response = "No Potions to pickup. ";
@@ -176,11 +196,11 @@ public class Game_Controller{
 	}
 	
 	public String enemyDefeated() {
-	int x = model.getEnemy().getHealth();
+	int x = model.getEnemy().getPoints();
 	int y = model.getUser().getUserPoints();
 	model.getUser().setPoints(x + y);
-	response = "You deafeated the enemy. You currently have" + model.getUser().getHealth() + " health and " + model.getPotion().getNumPotions() + " potions. Your points before the battle where: " + y +
-			" the enemy awarded you" + x + " points your new total is: " + model.getUser().getUserPoints();
+	response = "You deafeated the enemy. You currently have " + model.getUser().getHealth() + " health and " + model.getPotion().getNumPotions() + " potions. Your points before the battle were: " + y +
+			" the enemy awarded you " + x + " points your new total is: " + model.getUser().getUserPoints();
 	model.getEnemy().setName("No Enemy");
 	return response; 
 	}
@@ -188,7 +208,9 @@ public class Game_Controller{
 	
 
 	public String webActions(String input) {
-
+		if(input == null) {
+			input = "No input.";
+		}
 		System.out.println("This is the current input:"+ input);
 		System.out.println("This is the current response:"+ response);
 		// get min and max from the Posted form data
@@ -235,14 +257,66 @@ public class Game_Controller{
 			}
 			else {
 				response = "You have an enemy in the room to fight before leaving the room.";
-			}
-
-			
+			}	
+		}
+		else if(input.contains("get stats")) {
+			response = "working";
+		}
+		else if(input.contains("yes")) {
+			response = "working";
 		}
 		else {
 			response = "Invalid input";
 		}
 		return response;
 	}
+	
+	public String savePlayer(String user) {
+		db.insertPlayer(user , model.getUser().getHealth(), model.getUser().getStrength(),
+				model.getUser().getStrength(), model.getUser().currentWeaponName(), model.getUser().getStrength(), "health" , 10, 10,
+				model.getRoom().getName(), model.getEnemy().getName(), model.getEnemy().getHealth(), model.getEnemy().getSpeed(), model.getEnemy().getStrength());
+		
+		response = "Game has been saved.";
+		return response;
+	}
+	
+	public String loadPlayer(String user) {
+		
+		List<Player> player1 = db.retrieveGameStateByName(user);
+		if (player1.isEmpty()) {
+			response = "No name found for player <" + user + ">";
+			System.out.println(response);
+		}
+		else {
+			
+			//need to add player points
+			model.getUser().setHealth(player1.get(player1.size()-1).getHealth());
+			model.getUser().setStrength(player1.get(player1.size()-1).getStrength());
+			model.getUser().setSpeed(player1.get(player1.size()-1).getSpeed());
+			model.getUser().setCurrentWeapon(player1.get(player1.size()-1).getWeaponName());
+			
+			// model.getUser().getStrength()
+			// "health"
+			//  10, 
+			//  10,
+			model.getRoom().setRoomName(player1.get(player1.size()-1).getCurrentRoomName());
+			model.getEnemy().setName(player1.get(player1.size()-1).getEnemyName());
+			model.getEnemy().setHealth(player1.get(player1.size()-1).getEnemyHealth());
+			model.getEnemy().setStrength(player1.get(player1.size()-1).getEnemyStrength());
+			model.getEnemy().setSpeed(player1.get(player1.size()-1).getEnemySpeed());
+			
+			
+			response = "The game has been loaded.";
+		}
+		
+		return response;
+	}
+	public String resetPlayer(String user) {
+		List<Player> player1 = db.removePlayer(user);
+		response = "Deleted player. ";
+		
+		return response;
+	}
+	
 	
 	}

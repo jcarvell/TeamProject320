@@ -16,6 +16,9 @@ public class Player {
 	private int enemySpeed;
 	private int enemyHealth;
 	private String currentRoomName;
+	private int player_id;
+	private int item_id;
+	private int enemy_id;
 	
 	public Player() {
 		
@@ -139,6 +142,25 @@ public class Player {
 	
 	public String getCurrentRoomName() {
 		return currentRoomName;
+	}
+	public int getplayerID() {
+		return player_id;
+	}
+	public void setplayerID(int player_id) {
+		this.player_id = player_id;
+	}
+	
+	public int getitemID() {
+		return item_id;
+	}
+	public void setitemID(int item_id) {
+		this.item_id = item_id;
+	}
+	public int getenemyID() {
+		return enemy_id;
+	}
+	public void setenemyID(int enemy_id) {
+		this.enemy_id = enemy_id;
 	}
 	
 }

@@ -4,7 +4,7 @@ import java.util.Random;
 public class Room {
 
 	private String name;
-	private String[] nameArray = {"Haunted Forest", "Meadow", "Slithering", "Cave", "Mall", "Sewers", "Rooftop"};
+	private String[] nameArray = {"Haunted Forest", "Meadow", "River", "Cave", "Mall", "Sewers", "Rooftop"};
 
 	private RoomResources resources;
 	
@@ -32,5 +32,11 @@ public class Room {
 	public RoomResources getRoomResources() {
 		return resources;
 	}
+	
+	public void setRoomName(String name) {
+		this.name = name;
+	}
+	
+	
 	
 }

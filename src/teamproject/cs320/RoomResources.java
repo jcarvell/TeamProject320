@@ -31,7 +31,7 @@ public class RoomResources {
 		if(numEnemies != 0) {
 			enemy = new Enemy();
 		} else { // this system means "No Enemy" has a greater chance of occuring than any one specific enemy
-			enemy = new Enemy(0, 0, 0, "No Enemy");
+			enemy = new Enemy(0, 0, 0, "No Enemy", numEnemies);
 		}
 		
 		// create an array of instances of NPCs1
@@ -66,6 +66,7 @@ public class RoomResources {
 	public Potion getPotion() {
 		return potion;
 	}
+
 	public Weapon getWeapon() {
 		return weapon;
 	}
@@ -89,7 +90,7 @@ public class RoomResources {
 	}
 	
 	
-	public void noEnemyRoom(User user, Room choice1) {
+	/*public void noEnemyRoom(User user, Room choice1) {
 		System.out.println("There is no enemy in this room");
 		// System.out.println("This room is called: " + choice1.getName());
 		//need to change dialogue. Pass variable choice. 
@@ -144,5 +145,5 @@ public class RoomResources {
 		System.out.println("Your new points total is: " + user.getUserPoints());
 		
 	}
-	
+	*/
 }

@@ -3,6 +3,7 @@
 <html>
 	<head>
 		<title>Baby Zombie Adventure Game</title>
+		
 		<head>
 		<title>Add Numbers</title>
 		<style type="text/css">
@@ -28,8 +29,17 @@
 			
 		
 	<form action="${pageContext.servletContext.contextPath}/Game" method = "post">
-		  
-		  <td class="label">input:</td>
+	<table>
+	<tr>
+		<td class ="label"> Health:  ${Health}  </td>
+	</tr>
+	<tr>
+		<td class ="label"> EnemyHealth:  ${EnemyHealth}  </td>
+	</tr>
+	
+	</table>	
+			
+			<td class="label">input:</td>
 			<td><input type="text" name="input" size="50" value="${input}" /></td>
 			<input type="Submit" name="submit" value="Enter">
 
