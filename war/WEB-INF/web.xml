@@ -16,7 +16,7 @@
     <servlet-class>TeamProject320.servlets.GameServlet</servlet-class>
   </servlet>
   
-  <servlet>
+    <servlet>
     <servlet-name>LoginServlet</servlet-name>
     <servlet-class>TeamProject320.servlets.LoginServlet</servlet-class>
   </servlet>
@@ -39,11 +39,10 @@
     <url-pattern>/Login</url-pattern>
   </servlet-mapping>
   
-  
   <!-- THIS IS FROM LAB02 WEB.XML -->
   
   <welcome-file-list>
-  	<welcome-file>./_view/index.jsp</welcome-file>
+  	<welcome-file>./view/index.jsp</welcome-file>
   </welcome-file-list>
 
 </web-app>

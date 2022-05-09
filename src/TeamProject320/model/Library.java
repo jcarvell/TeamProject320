@@ -17,9 +17,17 @@ public class Library {
 		
 		usernames.add("student");
 		usernames.add("faculty");
+<<<<<<< HEAD
+		usernames.add("Ed");
 		
 		passwords.add("ycp");
 		passwords.add("E&CS");
+		passwords.add("ECE KING");
+=======
+		
+		passwords.add("ycp");
+		passwords.add("E&CS");
+>>>>>>> Pleasework
 		
 		for (int i = 0; i < usernames.size(); i++) {
 			credentials.put(usernames.get(i), passwords.get(i));
