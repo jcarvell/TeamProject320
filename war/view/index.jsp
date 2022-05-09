@@ -19,7 +19,12 @@
 		font-size: 25px;
 		text-align: center;
 		}
+<<<<<<< HEAD
 
+=======
+<<<<<<< HEAD
+=======
+>>>>>>> Pleasework
 		input{
 			font-family:monospace;
 			padding:"200px"
@@ -31,7 +36,13 @@
 			border-radius:25%;
 			
 		}
+<<<<<<< HEAD
 
+=======
+		
+>>>>>>> Pleasework
+		
+>>>>>>> Pleasework
 		
 		</style>
 	</head>
@@ -43,9 +54,25 @@
 		<form action="${pageContext.servletContext.contextPath}/Game" method="get">
 			<input type="Submit" name="submit" value="Start Game">
 
+<<<<<<< HEAD
 		
 		
 
+=======
+		<br>
+		<form action="${pageContext.servletContext.contextPath}/Login" method="post">
+			<input type="Submit" name="submit" value="Login">
+		</form>
+		
+<<<<<<< HEAD
+=======
+		<br><br><form action="${pageContext.servletContext.contextPath}/Game" method="get">
+			<input class="button" type="Submit" name="submit" value="Start Game">
+		</form>
+		
+		
+>>>>>>> Pleasework
+>>>>>>> Pleasework
 		
 	</body>
 </html>
