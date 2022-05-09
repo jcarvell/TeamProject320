@@ -21,6 +21,13 @@ public class User {
 		userChoice1 = choice1;
 	}
 	
+	public int getUserChoice2() {
+		return userChoice2;
+	}
+	public void setUserChoice2(int choice2) {
+		userChoice2 = choice2;
+	}
+	
 	public int getHealth() {
 		return health;
 	}

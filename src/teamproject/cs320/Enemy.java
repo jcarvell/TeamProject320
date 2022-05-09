@@ -12,7 +12,7 @@ public class Enemy {
 	
 	public static final Random RANDOM = new Random();
 	public static final String[] names = {"No Enemy","Zombie" , "Alligator" , "Baby" , "King Zombie"};
-	public static final int [] enemy_Health = { 0, 50 , 50, 5, 100000 };
+	public static final int [] enemy_Health = { 0, 50 , 50, 5, 100 };
 	public static final  int [] enemy_Strength = { 0, 10 , 50 , 1, 100 };
 	public static final int [] enemy_Speed = { 0, 5 , 1 , 1, 100 };
 	
@@ -20,14 +20,15 @@ public class Enemy {
 		health=hel;
 		strength=str;
 		speed=spe;
-		name = n;		
-		enemyPoints = points;
+		name = n;
+		
+		enemyPoints = hel;
 	}
 	
 	public Enemy() {
 		
 		
-		int randomEnemy = RANDOM.nextInt(7);
+		int randomEnemy = RANDOM.nextInt(8);
 		if(randomEnemy <= 3) {
 			randomEnemy = 0;
 		}else {

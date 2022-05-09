@@ -7,7 +7,7 @@ import teamproject.cs320.User;
 class UserTest {
 
 	@Test
-	void testUser() {
+	void testUserIntIntInt() {
 		User Bob = new User(5, 10, 15);
 		User Sally = new User(10, 5, 0);
 		User Billy = new User(0, 22, 1);
@@ -152,7 +152,8 @@ class UserTest {
 		assertEquals(Billy.getUserPoints(), 0);
 	}
 	
-	void testSetUserPoints() {
+	@Test
+	void testSetPoints() {
 		User Bob = new User(5, 10, 15);
 		assertEquals(Bob.getUserPoints(), 0);
 		Bob.setPoints(2);
@@ -241,5 +242,105 @@ class UserTest {
 		assertEquals(Suzy.currentWeaponName(), "There are many weapons");
 		Suzy.setCurrentWeapon("Alligators");
 		assertEquals(Suzy.currentWeaponName(), "Alligators");
+	}
+	
+	@Test
+	void testGetUserChoice1() {
+		User Bob = new User(5, 10, 15);
+		assertEquals(Bob.getUserChoice1(), 0);
+		
+		User Sally = new User(10, 5, 0);
+		assertEquals(Sally.getUserChoice1(), 0);
+		
+		User Billy = new User(0, 22, 1);
+		assertEquals(Billy.getUserChoice1(), 0);
+	}
+	
+	@Test
+	void testSetUserChoice1() {
+		User Bob = new User(5, 10, 15);
+		assertEquals(Bob.getUserChoice1(), 0);
+		Bob.setUserChoice1(2);
+		assertEquals(Bob.getUserChoice1(), 2);
+		Bob.setUserChoice1(4);
+		assertEquals(Bob.getUserChoice1(), 4);
+		Bob.setUserChoice1(10);
+		assertEquals(Bob.getUserChoice1(), 10);
+		
+		User Sally = new User(10, 5, 0);
+		assertEquals(Sally.getUserChoice1(), 0);
+		Sally.setUserChoice1(5);
+		assertEquals(Sally.getUserChoice1(), 5);
+		Sally.setUserChoice1(5);
+		assertEquals(Sally.getUserChoice1(), 5);
+		Sally.setUserChoice1(15);
+		assertEquals(Sally.getUserChoice1(), 15);
+		Sally.setUserChoice1(29);
+		assertEquals(Sally.getUserChoice1(), 29);
+		
+		User Billy = new User(0, 22, 1);
+		assertEquals(Billy.getUserChoice1(), 0);
+		Billy.setUserChoice1(11);
+		assertEquals(Billy.getUserChoice1(), 11);
+		Billy.setUserChoice1(7);
+		assertEquals(Billy.getUserChoice1(), 7);
+		Billy.setUserChoice1(0);
+		assertEquals(Billy.getUserChoice1(), 0);
+		Billy.setUserChoice1(11);
+		assertEquals(Billy.getUserChoice1(), 11);
+		Billy.setUserChoice1(21);
+		assertEquals(Billy.getUserChoice1(), 21);
+		Billy.setUserChoice1(100);
+		assertEquals(Billy.getUserChoice1(), 100);
+	}
+	
+	@Test
+	void testGetUserChoice2() {
+		User Bob = new User(5, 10, 15);
+		assertEquals(Bob.getUserChoice2(), 0);
+		
+		User Sally = new User(10, 5, 0);
+		assertEquals(Sally.getUserChoice2(), 0);
+		
+		User Billy = new User(0, 22, 1);
+		assertEquals(Billy.getUserChoice2(), 0);
+	}
+	
+	@Test
+	void testSetUserChoice2() {
+		User Bob = new User(5, 10, 15);
+		assertEquals(Bob.getUserChoice2(), 0);
+		Bob.setUserChoice2(2);
+		assertEquals(Bob.getUserChoice2(), 2);
+		Bob.setUserChoice2(4);
+		assertEquals(Bob.getUserChoice2(), 4);
+		Bob.setUserChoice2(10);
+		assertEquals(Bob.getUserChoice2(), 10);
+		
+		User Sally = new User(10, 5, 0);
+		assertEquals(Sally.getUserChoice2(), 0);
+		Sally.setUserChoice2(5);
+		assertEquals(Sally.getUserChoice2(), 5);
+		Sally.setUserChoice2(5);
+		assertEquals(Sally.getUserChoice2(), 5);
+		Sally.setUserChoice2(15);
+		assertEquals(Sally.getUserChoice2(), 15);
+		Sally.setUserChoice2(29);
+		assertEquals(Sally.getUserChoice2(), 29);
+		
+		User Billy = new User(0, 22, 1);
+		assertEquals(Billy.getUserChoice2(), 0);
+		Billy.setUserChoice2(11);
+		assertEquals(Billy.getUserChoice2(), 11);
+		Billy.setUserChoice2(7);
+		assertEquals(Billy.getUserChoice2(), 7);
+		Billy.setUserChoice2(0);
+		assertEquals(Billy.getUserChoice2(), 0);
+		Billy.setUserChoice2(11);
+		assertEquals(Billy.getUserChoice2(), 11);
+		Billy.setUserChoice2(21);
+		assertEquals(Billy.getUserChoice2(), 21);
+		Billy.setUserChoice2(100);
+		assertEquals(Billy.getUserChoice2(), 100);
 	}
 }

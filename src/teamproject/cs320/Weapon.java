@@ -17,7 +17,7 @@ public class Weapon {
 		
 		Random rand = new Random(); //instance of random class
 		
-	    int upperbound = 4;			// corresponding to 0-4 (five elements) of weaponNames
+	    int upperbound = 5;			// corresponding to 0-4 (five elements) of weaponNames
 	        //generate random values from 0-4
 	    //rand.nextInt(n) gets a random number between 0(inclusive) and the number passed in this argument(n), exclusive
 	    int random1 = rand.nextInt(upperbound); 	// random number between 1 and 5, so it excludes "unarmed" as a weapon name
