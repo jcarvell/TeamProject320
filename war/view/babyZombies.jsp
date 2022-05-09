@@ -37,8 +37,7 @@
 		<td class ="label"> EnemyHealth:  ${EnemyHealth}  </td>
 	</tr>
 	
-	</table>	
-			
+	</table>		
 			<td class="label">input:</td>
 			<td><input type="text" name="input" size="50" value="${input}" /></td>
 			<input type="Submit" name="submit" value="Enter">
